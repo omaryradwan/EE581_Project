@@ -76,9 +76,13 @@ class Float_Parameter:
         self.trans_function = trans_functio
 
     def transformIntoDiscrete(val):
-        #TBD
+        # TBD
+        # Currently I keep three digits after the dot '.'
+        # Eg: 0.4777 -> {477, -3}, 123123.23 -> {123123230, -3}
+        float_transed = float(format(val, '.3f'))
+        return {int(float_transed*1000), -3}
     
     def transformBack(val):
-        #TBD
+        return float(val)/1000
 
 parameter_types = {"Int_Parameter" : Int_Parameter, "Bool_Paramter" : Bool_Parameter, "Float_Parameter" : Float_Parameter}
