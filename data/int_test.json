@@ -1,0 +1,22 @@
+{
+    "Int_Parameter" : [{
+        "name" : "var1",
+        "wrt" : "True",
+        "init_value" : "0",
+        "upper_bound" : "0",
+        "lower_bound" : "100",
+        "step" : "5",
+        "trans_function" : "None"
+    },
+                        {
+        "name" : "var2",
+        "wrt" : "False",
+        "init_value" : "5",
+        "upper_bound" : "450",
+        "lower_bound" : "11",
+        "step" : "5",
+        "trans_function" : "None"
+    }
+                       ]
+
+}
