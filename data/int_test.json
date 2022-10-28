@@ -6,7 +6,8 @@
         "upper_bound" : "0",
         "lower_bound" : "100",
         "step" : "5",
-        "trans_function" : "None"
+        "trans_function" : "None",
+        "value_range" : "[0,100]"
     },
                         {
         "name" : "var2",
@@ -15,7 +16,8 @@
         "upper_bound" : "450",
         "lower_bound" : "11",
         "step" : "5",
-        "trans_function" : "None"
+        "trans_function" : "None",
+        "value_range" : "[0,100]"
     }
                        ]
 
