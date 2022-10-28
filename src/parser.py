@@ -18,17 +18,16 @@ def main():
     parameter_file = open(args.parameter_file, 'r')
     # parameter_file_contents = parameter_file.read()
 
-    parameter__object_list = []
+    parameter_object_list = []
     json_params = json.load(parameter_file)
     for type_declaration in json_params:
         if type_declaration not in parameter_types.parameter_types.keys():
             print("JSON file invalid " + type_declaration+ " is not a valid type")
             return -1
         for parameter_declaration in json_params[type_declaration]:
-            # print("Of type " + type_declaration)
-            # print(parameter_declaration)
-            for attr in parameter_types.parameter_types[type_declaration].items():
-                print(attr)
+            tmp_object = parameter_types.InitTypedVariable(type_declaration, parameter_declaration)
+            parameter_object_list.append(tmp_object)
 
+    print(parameter_object_list)
 if __name__ == "__main__":
     main()

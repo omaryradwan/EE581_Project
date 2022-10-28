@@ -19,14 +19,14 @@
 
 
 class Int_Parameter:
-    self.name = name
-    self.wrt = wrt
-    self.init_value = init_value
-    self.value_range = value_range
-    self.upper_bound = upper_bound
-    self.lower_bound = lower_bound
-    self.step = step
-    self.trans_function = trans_function
+    # self.name = name
+    # self.wrt = wrt
+    # self.init_value = init_value
+    # self.value_range = value_range
+    # self.upper_bound = upper_bound
+    # self.lower_bound = lower_bound
+    # self.step = step
+    # self.trans_function = trans_function
     def __init__(self, name, value_range, upper_bound, lower_bound,step,trans_function, init_value = None, wrt = False):
         self.name = name
         self.wrt = wrt
@@ -39,8 +39,8 @@ class Int_Parameter:
         self.trans_function = trans_function
         self.discrete_val = 0
 
-    def items():
-        return __dict__
+    # def items():
+    #     return __dict__
 
     def TransformIntoDiscrete(val):
         return val
@@ -124,3 +124,19 @@ parameter_types = {"Int_Parameter" : Int_Parameter, "Bool_Paramter" : Bool_Param
 #
 #   Inside the UpdateVariables function, we call TransformBack() to get typed val and measure the cost function
 #   We call UpdatediscVal() to update the discrete value of variables 
+
+def InitTypedVariable(type_name, parameters):
+    if type_name == 'Int_Parameter':
+        var = Int_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
+                             parameters['lower_bound'], parameters['step'], parameters['trans_function'],
+                             parameters['init_value'], parameters['wrt'])
+        return var
+    elif type_name == 'Bool_Paramter':
+        return Bool_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
+                             parameters['lower_bound'], parameters['step'], parameters['trans_function'],
+                             parameters['init_value'], parameters['wrt'])
+    elif type_name == 'Float_Parameter':
+        return Float_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
+                             parameters['lower_bound'], parameters['step'], parameters['trans_function'],
+                             parameters['init_value'], parameters['wrt'])
+    print("Error: " + type_name + " type does not exist, exiting")
