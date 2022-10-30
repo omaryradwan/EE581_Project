@@ -48,7 +48,7 @@ class Int_Parameter:
         self.temporary_val = val
 
     def GenRandomNeighbors(self, neighbor_num):
-        neighbor_list = []
+        neighbor_list = [self]
         for i in range(neighbor_num - 1):
             new_name = self.name + "_next_" + str(i)
             new_val = random.randint(self.lower_bound, self.upper_bound)
