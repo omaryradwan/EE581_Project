@@ -16,6 +16,7 @@
 #       TransformBack()                 --          Transform a given discrete value into tyoed field, return the typed value
 #       UpdatediscVal()                 --          Update discrete value by given value
 #       UpdatetmpVal()                  --          Update tmporary value by given value
+#       GenRandomNeighbors()            --          Generate N random neighbors
 
 
 class Int_Parameter:
@@ -42,17 +43,21 @@ class Int_Parameter:
     # def items():
     #     return __dict__
 
-    def TransformIntoDiscrete(val):
+    def TransformIntoDiscrete(self, val):
         return val
     
-    def TransformBack(val):
+    def TransformBack(self, val):
         return val
 
-    def UpdatediscVal(val):
+    def UpdatediscVal(self, val):
         self.discrete_val = val
     
-    def UpdatetmpVal(val):
+    def UpdatetmpVal(self, val):
         self.temporary_val = val 
+
+    def GenRandomNeighbors(self):
+        neighbor_list = []
+        
 
 class Bool_Parameter:
     def __init__(self, name, value_range, upper_bound, lower_bound,step,trans_function, init_value = None, wrt = False):
@@ -67,20 +72,20 @@ class Bool_Parameter:
         self.trans_function = trans_function
         self.discrete_val = 0
     
-    def TransformIntoDiscrete(val):
+    def TransformIntoDiscrete(self, val):
         if val:
             return 1
         return 0
     
-    def TransformBack(val):
+    def TransformBack(self, val):
         if val == 1:
             return True
         return False
 
-    def UpdatediscVal(val):
+    def UpdatediscVal(self, val):
         self.discrete_val = val
 
-    def UpdatetmpVal(val):
+    def UpdatetmpVal(self, val):
         self.temporary_val = val 
 
 class Float_Parameter:
@@ -96,20 +101,20 @@ class Float_Parameter:
         self.trans_function = trans_functio
         self.discrete_val = 0
 
-    def TransformIntoDiscrete(val):
+    def TransformIntoDiscrete(self, val):
         # TBD
         # Currently I keep three digits after the dot '.'
         # Eg: 0.4777 -> {477, -3}, 123123.23 -> {123123230, -3}
         float_transed = float(format(val, '.3f'))
         return {int(float_transed*1000), -3}
     
-    def TransformBack(val):
+    def TransformBack(self, val):
         return float(val)/1000
 
-    def UpdatediscVal(val):
+    def UpdatediscVal(self, val):
         self.discrete_val = val
 
-    def UpdatetmpVal(val):
+    def UpdatetmpVal(self, val):
         self.temporary_val = val 
 
 parameter_types = {"Int_Parameter" : Int_Parameter, "Bool_Paramter" : Bool_Parameter, "Float_Parameter" : Float_Parameter}
