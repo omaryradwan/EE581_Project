@@ -31,7 +31,7 @@ class Algorithm:
 
 
 class SlefDefinedAlgorithm(Algorithm):
-    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc)
+    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
         super()..__init__(variable_list, initIterator)
 
     def UpdateVariables(self):
@@ -40,7 +40,7 @@ class SlefDefinedAlgorithm(Algorithm):
 
 
 class SimulatedAnnealing(Algorithm):
-    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc)
+    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
         super()..__init__(variable_list, initIterator)
 
     def UpdateVariables(self):
@@ -48,7 +48,7 @@ class SimulatedAnnealing(Algorithm):
         return self.variables
 
 class ParticleSwarm(Algorithm):
-    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc)
+    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
         super()..__init__(variable_list, initIterator)
 
     def UpdateVariables(self):
@@ -56,7 +56,7 @@ class ParticleSwarm(Algorithm):
         return self.variables
 
 class GeneticEvo(Algorithm):
-    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc)
+    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function)
         super()..__init__(variable_list, initIterator)
 
     def UpdateVariables(self):
