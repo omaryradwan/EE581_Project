@@ -28,6 +28,8 @@ class Algorithm:
     def CreateVariableDict(self):
         pass
 
+    def Solve(self):
+        pass
 
 
 class SlefDefinedAlgorithm(Algorithm):
@@ -37,6 +39,9 @@ class SlefDefinedAlgorithm(Algorithm):
     def UpdateVariables(self):
         #TBD
         return self.variables
+    
+    def Solve(self):
+        #TBD
 
 
 class SimulatedAnnealing(Algorithm):
@@ -46,6 +51,9 @@ class SimulatedAnnealing(Algorithm):
     def UpdateVariables(self):
         #TBD
         return self.variables
+    
+    def Solve(self):
+        #TBD
 
 class ParticleSwarm(Algorithm):
     def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
@@ -55,6 +63,9 @@ class ParticleSwarm(Algorithm):
         #TBD
         return self.variables
 
+    def Solve(self):
+        #TBD
+
 class GeneticEvo(Algorithm):
     def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function)
         super()..__init__(variable_list, initIterator)
@@ -62,3 +73,6 @@ class GeneticEvo(Algorithm):
     def UpdateVariables(self):
         #TBD
         return self.variables
+
+    def Solve(self):
+        #TBD

@@ -2,6 +2,7 @@ import json
 import parameter_types
 import argparse
 import os
+# import Algorithm
 
 
 def main():
@@ -28,6 +29,11 @@ def main():
             tmp_object = parameter_types.InitTypedVariable(type_declaration, parameter_declaration)
             parameter_object_list.append(tmp_object)
 
-    print(parameter_object_list)
+    # print(parameter_object_list)
+    # solve_algorithm = Algorithm(parameter_object_list, initIterator, initStepSize, initItBound, initItFunc, cost_function)
+    # local_optimal_list = solve_algorithm.Solve()
+    # print(local_optimal_list)
+
+
 if __name__ == "__main__":
     main()
