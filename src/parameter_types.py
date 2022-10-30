@@ -17,17 +17,9 @@
 #       UpdatediscVal()                 --          Update discrete value by given value
 #       UpdatetmpVal()                  --          Update tmporary value by given value
 #       GenRandomNeighbors()            --          Generate N random neighbors
-
+import random
 
 class Int_Parameter:
-    # self.name = name
-    # self.wrt = wrt
-    # self.init_value = init_value
-    # self.value_range = value_range
-    # self.upper_bound = upper_bound
-    # self.lower_bound = lower_bound
-    # self.step = step
-    # self.trans_function = trans_function
     def __init__(self, name, value_range, upper_bound, lower_bound,step,trans_function, init_value = None, wrt = False):
         self.name = name
         self.wrt = wrt
@@ -40,8 +32,6 @@ class Int_Parameter:
         self.trans_function = trans_function
         self.discrete_val = 0
 
-    # def items():
-    #     return __dict__
 
     def TransformIntoDiscrete(self, val):
         return val
@@ -53,10 +43,17 @@ class Int_Parameter:
         self.discrete_val = val
     
     def UpdatetmpVal(self, val):
-        self.temporary_val = val 
+        self.temporary_val = val
 
-    def GenRandomNeighbors(self):
+    def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
+        for i in range(neighbor_num - 1):
+            new_name = self.name + "_next_" + str(i)
+            new_val = random.randint(self.lower_bound, self.upper_bound)
+            neighbor_list.append(Int_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
+                                                self.step, self.trans_function, new_val, self.wrt))
+        
+        return neighbor_list
         
 
 class Bool_Parameter:
@@ -86,7 +83,17 @@ class Bool_Parameter:
         self.discrete_val = val
 
     def UpdatetmpVal(self, val):
-        self.temporary_val = val 
+        self.temporary_val = val
+
+    def GenRandomNeighbors(self, neighbor_num):
+        neighbor_list = []
+        for i in range(neighbor_num - 1):
+            new_name = self.name + "_next_" + str(i)
+            new_val = random.choice([True, False])
+            neighbor_list.append(Int_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
+                                                self.step, self.trans_function, new_val, self.wrt))
+        
+        return neighbor_list
 
 class Float_Parameter:
     def __init__(self, name, value_range, upper_bound, lower_bound,step,trans_function, init_value = None, wrt = False):
@@ -115,7 +122,17 @@ class Float_Parameter:
         self.discrete_val = val
 
     def UpdatetmpVal(self, val):
-        self.temporary_val = val 
+        self.temporary_val = val
+    
+    def GenRandomNeighbors(self, neighbor_num):
+        neighbor_list = []
+        for i in range(neighbor_num - 1):
+            new_name = self.name + "_next_" + str(i)
+            new_val = random.uniform(self.lower_bound, self.upper_bound)
+            neighbor_list.append(Int_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
+                                                self.step, self.trans_function, new_val, self.wrt))
+        
+        return neighbor_list
 
 parameter_types = {"Int_Parameter" : Int_Parameter, "Bool_Paramter" : Bool_Parameter, "Float_Parameter" : Float_Parameter}
 
