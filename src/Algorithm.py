@@ -8,6 +8,9 @@
 #       initItBound         --          The bound of iterator parameter                 eg: [0, 100]
 #       initItFunc          --          The function of step size, default 0.01x        eg: x^2+2x
 #       cost_function       --          Then costfunction of variables                  eg: x^2+y^2
+#       variable_num        --          The number of variables                         eg: 3
+#       search_neighbor_num --          The number of neighbors to check                eg: 10
+#       end_requirements    --          The ending requirements of algorithms           eg: 
 #
 # The algorithm should contain the following functions:
 #       UpdateVariables     --          The function used to update variables in one step, return variables
@@ -21,11 +24,22 @@ class Algorithm:
         self.initItBound = initItBound
         self.initItFunc = initItFunc
         self.cost_function = cost_function
+        self.variable_num = len(variable_list)
+        self.search_neighbor_num = 10   # TO DO: Set the number 10 to a parameter in __init__
+        # TO DO: ADD attribute end_requirements
+
 
     def UpdateVariables(self):
         pass
 
     def CreateVariableDict(self):
+        new_variable_list = []      #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
+        for tmp_variable in range(self.variable_list):
+            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
+            new_variable_list.append(tmp_new_list)
+        return new_variable_list
+
+    def CheckEndRequirements(self):
         pass
 
     def Solve(self):
@@ -37,11 +51,31 @@ class SlefDefinedAlgorithm(Algorithm):
         super()..__init__(variable_list, initIterator)
 
     def UpdateVariables(self):
-        #TBD
-        return self.variables
+        new_variable_list = self.CreateVariableDict()
+        cost_val_list = []
+        possible_val_list = []      #[[1,7,10],[1.4,7.3,10.1],[1.6,7.7,10.6]]
+        for i in range(self.search_neighbor_num - 1):
+            tmp_variable_list = []
+            for j in range(self.variable_num - 1):
+                tmp_variable_list.append(new_variable_list[j][i])
+            cost_val_list.append(cost_function.Evaluate(tmp_variable_list))
+            possible_val_list.append(tmp_variable_list)
+
+        return possible_val_list[cost_val_list.index(min(cost_val_list))]
     
-    def Solve(self):
+    def CreateVariableDict(self):
+        super().CreateVariableDict(self)
+
+    def CheckEndRequirements(self):
         #TBD
+        return True
+
+    def Solve(self):
+        while ~self.CheckEndRequirements():
+            # print(self.variable_list)
+            # self.variable_list.Print()
+            self.variable_list = self.UpdateVariables()
+        #self.variable_list.Print()  
 
 
 class SimulatedAnnealing(Algorithm):
@@ -51,7 +85,14 @@ class SimulatedAnnealing(Algorithm):
     def UpdateVariables(self):
         #TBD
         return self.variables
-    
+
+    def CreateVariableDict(self):
+        super().CreateVariableDict(self)
+
+    def CheckEndRequirements(self):
+        #TBD
+        return True
+
     def Solve(self):
         #TBD
 
@@ -63,6 +104,13 @@ class ParticleSwarm(Algorithm):
         #TBD
         return self.variables
 
+    def CreateVariableDict(self):
+        super().CreateVariableDict(self)
+
+    def CheckEndRequirements(self):
+        #TBD
+        return True
+
     def Solve(self):
         #TBD
 
@@ -73,6 +121,13 @@ class GeneticEvo(Algorithm):
     def UpdateVariables(self):
         #TBD
         return self.variables
+
+    def CreateVariableDict(self):
+        super().CreateVariableDict(self)
+
+    def CheckEndRequirements(self):
+        #TBD
+        return True
 
     def Solve(self):
         #TBD
