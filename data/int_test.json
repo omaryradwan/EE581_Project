@@ -17,7 +17,7 @@
         "lower_bound" : "11",
         "step" : "5",
         "trans_function" : "None",
-        "value_range" : "[0,100]"
+        "value_range" : "[11,450]"
     }
                        ]
 
