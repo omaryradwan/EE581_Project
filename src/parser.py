@@ -28,7 +28,6 @@ def main():
         for parameter_declaration in json_params[type_declaration]:
             tmp_object = parameter_types.InitTypedVariable(type_declaration, parameter_declaration)
             parameter_object_list.append(tmp_object)
-
     # print(parameter_object_list)
     # solve_algorithm = Algorithm(parameter_object_list, initIterator, initStepSize, initItBound, initItFunc, cost_function)
     # local_optimal_list = solve_algorithm.Solve()

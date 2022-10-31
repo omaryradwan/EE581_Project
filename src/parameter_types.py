@@ -28,8 +28,8 @@ class Int_Parameter:
         self.init_value = init_value
         self.temporary_val = init_value
         self.value_range = value_range
-        self.upper_bound = upper_bound
-        self.lower_bound = lower_bound
+        self.upper_bound = int(upper_bound)
+        self.lower_bound = int(lower_bound)
         self.step = step
         self.trans_function = trans_function
         self.discrete_val = 0
