@@ -1,0 +1,32 @@
+{
+  "param_A" :
+    {
+      "type" : "float",
+      "conversion_back" : "exp2"
+    },
+  "param_B" :
+    {
+      "type" : "uint"
+    },
+  "param_C" :
+    {
+      "type" : "composite",
+      "values" : [
+        {
+          "x" : {
+          "type" : "bool"
+          }
+        },
+        {
+          "y": {
+            "type" : "string",
+            "values" : [ "first", "second", "third"]
+          },
+          "z" : {
+            "type" : "float",
+            "conversion_back" : "log2"
+          }
+        }
+      ]
+    }
+}
