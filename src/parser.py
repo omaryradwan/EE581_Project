@@ -21,13 +21,13 @@ def main():
 
     parameter_object_list = []
     json_params = json.load(parameter_file)
-    for type_declaration in json_params:
-        if type_declaration not in parameter_types.parameter_types.keys():
-            print("JSON file invalid " + type_declaration+ " is not a valid type")
+    for para_declaration in json_params:
+        if para_declaration["type"] not in parameter_types.parameter_types.keys():
+            print("JSON file invalid " + para_declaration["type"]+ " is not a valid type")
             return -1
-        for parameter_declaration in json_params[type_declaration]:
-            tmp_object = parameter_types.InitTypedVariable(type_declaration, parameter_declaration)
-            parameter_object_list.append(tmp_object)
+        tmp_object = parameter_types.InitTypedVariable(para_declaration)
+        parameter_object_list.append(tmp_object)
+
     # print(parameter_object_list)
     # solve_algorithm = Algorithm(parameter_object_list, initIterator, initStepSize, initItBound, initItFunc, cost_function)
     # local_optimal_list = solve_algorithm.Solve()

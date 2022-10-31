@@ -185,12 +185,9 @@ parameter_types = {"Int_Parameter" : Int_Parameter,
 #       var3 = Float_Parameter('motor_three', [-180, 180], ...)
 #       var4 = Float_Parameter('motor_four', [-180, 180], ...)
 #       vars = [var1, var2, var3, var4]
-#       Algorithm.UpdateVariables(vars, iterator, stepsize, trans_function, cost_function)
-#
-#   Inside the UpdateVariables function, we call TransformBack() to get typed val and measure the cost function
-#   We call UpdatediscVal() to update the discrete value of variables 
 
-def InitTypedVariable(type_name, parameters):
+def InitTypedVariable(parameters):
+    type_name = parameters["type"]
     if type_name == 'Int_Parameter':
         var = Int_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
                              parameters['lower_bound'], parameters['step'], parameters['trans_function'],
