@@ -1,7 +1,5 @@
 Issue 1:
-	Rewrite Parse to support tree structure JSON input
-	The Composite Variable
-	Maybe we need to implement a DFS/BFS algorithm to construct the objects
+	Add one more type called composite
 
 Issue 2:
 	Add attribute "conservation of variable" to Typed class
