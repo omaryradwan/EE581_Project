@@ -136,7 +136,29 @@ class Float_Parameter:
         
         return neighbor_list
 
-parameter_types = {"Int_Parameter" : Int_Parameter, "Bool_Paramter" : Bool_Parameter, "Float_Parameter" : Float_Parameter}
+class Composite_Parameter:
+    def __init__(self, name, children_json):
+        self.name = name
+        self.children_list = self.GetChildrenFromJson(children_json)
+
+    def GetChildrenFromJson(self, children_json):
+        children_list = []
+        for children in children_json:
+            tmp_children_group = []
+            for child in children:
+                tmp_children_group.append(InitTypedVariable(child.type, child))
+            children_list.append(tmp_children_group)
+        return children_list
+
+    def GenRandomNeighbors(self, neighbor_num):
+        #TBD
+        return neighbor_list
+
+
+parameter_types = {"Int_Parameter" : Int_Parameter,
+                    "Bool_Paramter" : Bool_Parameter,
+                    "Float_Parameter" : Float_Parameter,
+                    "Composite_Parameter": Composite_Parameter}
 
 #   Example Coding:
 #       var1 = Float_Parameter('motor_one', [-180, 180], ...)
@@ -163,4 +185,6 @@ def InitTypedVariable(type_name, parameters):
         return Float_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
                              parameters['lower_bound'], parameters['step'], parameters['trans_function'],
                              parameters['init_value'], parameters['wrt'])
+    elif type_name == 'Composite_Parameter':
+        return Composite_Parameter(parameters['name'], parameters['values'])
     print("Error: " + type_name + " type does not exist, exiting")
