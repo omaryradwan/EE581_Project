@@ -47,14 +47,16 @@ class Int_Parameter:
     def UpdatetmpVal(self, val):
         self.temporary_val = val
 
+    def GenRandomNeighbor(self, name):
+        new_val = random.randint(self.lower_bound, self.upper_bound)
+        return Int_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
+                                                self.step, self.trans_function, new_val, self.wrt)
+
     def GenRandomNeighbors(self, neighbor_num):
-        neighbor_list = [self]
+        neighbor_list = []
         for i in range(neighbor_num - 1):
             new_name = self.name + "_next_" + str(i)
-            new_val = random.randint(self.lower_bound, self.upper_bound)
-            neighbor_list.append(Int_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
-                                                self.step, self.trans_function, new_val, self.wrt))
-        
+            neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
         
 
@@ -87,14 +89,16 @@ class Bool_Parameter:
     def UpdatetmpVal(self, val):
         self.temporary_val = val
 
+    def GenRandomNeighbor(self, name):
+        new_val = random.choice([True, False])
+        return Bool_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
+                                                self.step, self.trans_function, new_val, self.wrt)
+
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
         for i in range(neighbor_num - 1):
             new_name = self.name + "_next_" + str(i)
-            new_val = random.choice([True, False])
-            neighbor_list.append(Int_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
-                                                self.step, self.trans_function, new_val, self.wrt))
-        
+            neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
 
 class Float_Parameter:
@@ -126,20 +130,32 @@ class Float_Parameter:
     def UpdatetmpVal(self, val):
         self.temporary_val = val
     
+    def GenRandomNeighbor(self, name):
+        new_val = random.uniform(self.lower_bound, self.upper_bound)
+        return Float_Parameter(name, self.value_range, self.upper_bound, self.lower_bound,
+                                                self.step, self.trans_function, new_val, self.wrt)
+
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
         for i in range(neighbor_num - 1):
             new_name = self.name + "_next_" + str(i)
-            new_val = random.uniform(self.lower_bound, self.upper_bound)
-            neighbor_list.append(Int_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
-                                                self.step, self.trans_function, new_val, self.wrt))
-        
+            neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
 
 class Composite_Parameter:
-    def __init__(self, name, children_json):
+    def __init__(self, name, children_json=None, children_list=None):
         self.name = name
-        self.children_list = self.GetChildrenFromJson(children_json)
+        if children_json != None:
+            self.children_list = self.GetChildrenFromJson(children_json)
+        else:
+            self.children_list = children_list
+
+    def GenRandomNeighbor(self, name):
+        new_child_list = []
+        for child in self.children_list:
+            new_child_list.append(child.GenRandomNeighbor())
+        return Composite_Parameter(name, children_list = new_child_list)
+
 
     def GetChildrenFromJson(self, children_json):
         children_list = []
@@ -151,12 +167,15 @@ class Composite_Parameter:
         return children_list
 
     def GenRandomNeighbors(self, neighbor_num):
-        #TBD
+        neighbor_list = []
+        for i in range(neighbor_num - 1):
+            new_name = self.name + "_next_" + str(i)
+            neighbor_list.append(self.GenRandomNeighbor(name))
         return neighbor_list
 
 
 parameter_types = {"Int_Parameter" : Int_Parameter,
-                    "Bool_Paramter" : Bool_Parameter,
+                    "Bool_Parameter" : Bool_Parameter,
                     "Float_Parameter" : Float_Parameter,
                     "Composite_Parameter": Composite_Parameter}
 
@@ -177,7 +196,7 @@ def InitTypedVariable(type_name, parameters):
                              parameters['lower_bound'], parameters['step'], parameters['trans_function'],
                              parameters['init_value'], parameters['wrt'])
         return var
-    elif type_name == 'Bool_Paramter':
+    elif type_name == 'Bool_Parameter':
         return Bool_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
                              parameters['lower_bound'], parameters['step'], parameters['trans_function'],
                              parameters['init_value'], parameters['wrt'])
