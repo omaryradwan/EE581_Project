@@ -68,6 +68,6 @@
       ]
     },
     "cost_function":{
-      "formula" : "param_A^2 + param_B^2 + param_C_x^2"
+      "formula" : "param_A**2 + param_B**2 + param_C_x**2"
     }
 }
