@@ -1,32 +1,73 @@
 {
   "param_A" :
     {
-      "type" : "float",
-      "conversion_back" : "exp2"
+      "name" : "param_A",
+      "type" : "bool",
+      "init_value" : "True",
+      "upper_bound" : "None",
+      "lower_bound" : "None",
+      "step" : "None",
+      "trans_function" : "None",
+      "value_range" : "None",
+      "wrt" : "True"
     },
   "param_B" :
     {
-      "type" : "uint"
+      "name" : "param_B",
+      "type" : "int",
+      "init_value" : "0",
+      "upper_bound" : "100",
+      "lower_bound" : "0",
+      "step" : "5",
+      "trans_function" : "None",
+      "value_range" : "[0,100]",
+      "wrt" : "True"
     },
   "param_C" :
     {
+      "name" : "param_C",
       "type" : "composite",
       "values" : [
         {
           "x" : {
-          "type" : "bool"
+            "name" : "param_C_x",
+            "type" : "bool",
+            "init_value" : "True",
+            "upper_bound" : "None",
+            "lower_bound" : "None",
+            "step" : "None",
+            "trans_function" : "None",
+            "value_range" : "None",
+            "wrt" : "True"
           }
         },
         {
           "y": {
-            "type" : "string",
-            "values" : [ "first", "second", "third"]
+            "name" : "param_C_y",
+            "type" : "float",
+            "init_value" : "4.5",
+            "upper_bound" : "100.0",
+            "lower_bound" : "0.0",
+            "step" : "5",
+            "trans_function" : "None",
+            "value_range" : "[0.0,100.0]",
+            "wrt" : "True"
           },
           "z" : {
-            "type" : "float",
-            "conversion_back" : "log2"
+            "name" : "param_C_z",
+            "type" : "int",
+            "init_value" : "0",
+            "upper_bound" : "100",
+            "lower_bound" : "0",
+            "step" : "5",
+            "trans_function" : "None",
+            "value_range" : "[0,100]",
+            "wrt" : "True"
           }
         }
       ]
+    },
+    "cost_function":{
+      "formula" : "param_A^2 + param_B^2 + param_C_x^2"
     }
 }

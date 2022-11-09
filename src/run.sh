@@ -1,1 +1,1 @@
-python3 parser.py -p ../data/int_test.json
+python3 parser.py -p ../data/sample_from_luca.json

@@ -17,15 +17,16 @@
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
 
 class Algorithm:
-    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
+    def __init__(self, variable_list, cost_function):
         self.variable_list = variable_list
-        self.initIterator = initIterator
-        self.initStepSize = initStepSize
-        self.initItBound = initItBound
-        self.initItFunc = initItFunc
+        # self.initIterator = initIterator
+        # self.initStepSize = initStepSize
+        # self.initItBound = initItBound
+        # self.initItFunc = initItFunc
         self.cost_function = cost_function
         self.variable_num = len(variable_list)
         self.search_neighbor_num = 10   # TO DO: Set the number 10 to a parameter in __init__
+        self.name = ''
         # TO DO: ADD attribute end_requirements
 
 
@@ -46,9 +47,10 @@ class Algorithm:
         pass
 
 
-class SlefDefinedAlgorithm(Algorithm):
-    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
-        super()..__init__(variable_list, initIterator)
+class SelfDefinedAlgorithm(Algorithm):
+    def __init__(self, variable_list, cost_function):
+        super().__init__(variable_list, cost_function)
+        self.name = 'Self Defined Algorithm'
 
     def UpdateVariables(self):
         new_variable_list = self.CreateVariableDict()
@@ -75,12 +77,13 @@ class SlefDefinedAlgorithm(Algorithm):
             # print(self.variable_list)
             # self.variable_list.Print()
             self.variable_list = self.UpdateVariables()
-        #self.variable_list.Print()  
+        #self.variable_list.Print() 
+        return 
 
 
 class SimulatedAnnealing(Algorithm):
     def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
-        super()..__init__(variable_list, initIterator)
+        super().__init__(variable_list, initIterator)
 
     def UpdateVariables(self):
         #TBD
@@ -95,10 +98,12 @@ class SimulatedAnnealing(Algorithm):
 
     def Solve(self):
         #TBD
+        return
+
 
 class ParticleSwarm(Algorithm):
     def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
-        super()..__init__(variable_list, initIterator)
+        super().__init__(variable_list, initIterator)
 
     def UpdateVariables(self):
         #TBD
@@ -113,10 +118,11 @@ class ParticleSwarm(Algorithm):
 
     def Solve(self):
         #TBD
+        return
 
 class GeneticEvo(Algorithm):
-    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function)
-        super()..__init__(variable_list, initIterator)
+    def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
+        super().__init__(variable_list, initIterator)
 
     def UpdateVariables(self):
         #TBD
@@ -131,3 +137,14 @@ class GeneticEvo(Algorithm):
 
     def Solve(self):
         #TBD
+        return
+
+
+def InitAlgorithm(name, variable_list, cost_function):
+    if name == 'sa':
+        return SimulatedAnnealing(variable_list, cost_function)
+    elif name == 'ps':
+        return ParticleSwarm(variable_list, cost_function)
+    elif name == 'ge':
+        return GeneticEvo(variable_list, cost_function)
+    return SelfDefinedAlgorithm(variable_list, cost_function)

@@ -111,7 +111,7 @@ class Float_Parameter:
         self.upper_bound = upper_bound
         self.lower_bound = lower_bound
         self.step = step
-        self.trans_function = trans_functio
+        self.trans_function = trans_function
         self.discrete_val = 0
 
     def TransformIntoDiscrete(self, val):
@@ -160,9 +160,13 @@ class Composite_Parameter:
     def GetChildrenFromJson(self, children_json):
         children_list = []
         for children in children_json:
+            # print("tmp children are:", children)
             tmp_children_group = []
             for child in children:
-                tmp_children_group.append(InitTypedVariable(child.type, child))
+                # print("tmp child is", child)
+                child_json = children[child]
+                # print(child_json)
+                tmp_children_group.append(InitTypedVariable(child_json))
             children_list.append(tmp_children_group)
         return children_list
 
@@ -174,33 +178,28 @@ class Composite_Parameter:
         return neighbor_list
 
 
-parameter_types = {"Int_Parameter" : Int_Parameter,
-                    "Bool_Parameter" : Bool_Parameter,
-                    "Float_Parameter" : Float_Parameter,
-                    "Composite_Parameter": Composite_Parameter}
+parameter_types = {"int" : Int_Parameter,
+                    "bool" : Bool_Parameter,
+                    "float" : Float_Parameter,
+                    "composite": Composite_Parameter}
 
-#   Example Coding:
-#       var1 = Float_Parameter('motor_one', [-180, 180], ...)
-#       var2 = Float_Parameter('motor_two', [-180, 180], ...)
-#       var3 = Float_Parameter('motor_three', [-180, 180], ...)
-#       var4 = Float_Parameter('motor_four', [-180, 180], ...)
-#       vars = [var1, var2, var3, var4]
 
 def InitTypedVariable(parameters):
-    type_name = parameters["type"]
-    if type_name == 'Int_Parameter':
+    # print(parameters)
+    type_name = parameters['type']
+    if type_name == 'int':
         var = Int_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
                              parameters['lower_bound'], parameters['step'], parameters['trans_function'],
                              parameters['init_value'], parameters['wrt'])
         return var
-    elif type_name == 'Bool_Parameter':
+    elif type_name == 'bool':
         return Bool_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
                              parameters['lower_bound'], parameters['step'], parameters['trans_function'],
                              parameters['init_value'], parameters['wrt'])
-    elif type_name == 'Float_Parameter':
+    elif type_name == 'float':
         return Float_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
                              parameters['lower_bound'], parameters['step'], parameters['trans_function'],
                              parameters['init_value'], parameters['wrt'])
-    elif type_name == 'Composite_Parameter':
+    elif type_name == 'composite':
         return Composite_Parameter(parameters['name'], parameters['values'])
     print("Error: " + type_name + " type does not exist, exiting")
