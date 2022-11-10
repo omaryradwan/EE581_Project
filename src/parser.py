@@ -60,11 +60,11 @@ def main():
     print("Assertions Loaded Successfully")
 
     print("Algorithm Initializing...")
-    solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function)
+    solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function, iterating_parameter)
     print("Algorithm Initialized\n"+solve_algorithm.name + " Selected")
 
     print("Algorithm Starts...")
-    # solve_algorithm.Solve()
+    solve_algorithm.Solve()
     print("Algorithm Ends")
 
 if __name__ == "__main__":
