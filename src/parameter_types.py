@@ -188,6 +188,15 @@ class Iterating_Parameter:
         # self.tmpvalue = ast_calculate(self.step_function, step)
         return
 
+class Assertions:
+    def __init__(self, assertion_list):
+        self.assertion_list = assertion_list
+
+    def AreAssertionsSatisfied():
+        # TBD
+        # Evaluate every assertion value and if any violated, return false.
+        return true
+
 parameter_types = {"int" : Int_Parameter,
                     "bool" : Bool_Parameter,
                     "float" : Float_Parameter,
@@ -214,3 +223,6 @@ def InitTypedVariable(parameters):
 def InitIteratingVariable(parameters):
     return Iterating_Parameter(parameters['name'], parameters['init_value'], parameters['bound'],
                                 parameters['step'], parameters['step_function'])
+
+def InitAssertions(parameters):
+    return Assertions(parameters['values'])

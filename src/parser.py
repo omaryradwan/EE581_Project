@@ -56,7 +56,7 @@ def main():
 
     print("Assertions Loading...")
     assertions_json = json_params['assertions']
-    # assertions =
+    assertions = parameter_types.InitAssertions(assertions_json)
     print("Assertions Loaded Successfully")
 
     print("Algorithm Initializing...")
