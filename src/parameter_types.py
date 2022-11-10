@@ -26,8 +26,8 @@ class Int_Parameter:
     def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
         self.type = 'int'
         self.name = name
-        self.init_value = init_value
-        self.temporary_val = init_value
+        self.init_value = int(init_value)
+        self.temporary_val = int(init_value)
         self.value_range = value_range
         self.upper_bound = int(upper_bound)
         self.lower_bound = int(lower_bound)
@@ -48,8 +48,7 @@ class Int_Parameter:
 
     def GenRandomNeighbor(self, name):
         new_val = random.randint(self.lower_bound, self.upper_bound)
-        return Int_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
-                                                self.step, self.trans_function, new_val, self.wrt)
+        return Int_Parameter(name, self.value_range, self.upper_bound, self.lower_bound, new_val)
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
@@ -90,7 +89,8 @@ class Bool_Parameter:
 
     def GenRandomNeighbor(self, name):
         new_val = random.choice([True, False])
-        return Bool_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound, self.true_weight, self.false_weight, self.step, self.trans_function, new_val, self.wrt)
+        return Bool_Parameter(name, self.value_range, self.upper_bound, self.lower_bound, self.true_weight, self.false_weight,new_val)
+
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
@@ -103,11 +103,11 @@ class Float_Parameter:
     def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
         self.type = 'float'
         self.name = name
-        self.init_value = init_value
-        self.temporary_val = init_value
+        self.init_value = float(init_value)
+        self.temporary_val = float(init_value)
         self.value_range = value_range
-        self.upper_bound = upper_bound
-        self.lower_bound = lower_bound
+        self.upper_bound = float(upper_bound)
+        self.lower_bound = float(lower_bound)
         self.discrete_val = 0
 
     def TransformIntoDiscrete(self, val):
@@ -128,8 +128,7 @@ class Float_Parameter:
     
     def GenRandomNeighbor(self, name):
         new_val = random.uniform(self.lower_bound, self.upper_bound)
-        return Float_Parameter(name, self.value_range, self.upper_bound, self.lower_bound,
-                                                self.step, self.trans_function, new_val, self.wrt)
+        return Float_Parameter(name, self.value_range, self.upper_bound, self.lower_bound, new_val)
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
@@ -150,8 +149,11 @@ class Composite_Parameter:
 
     def GenRandomNeighbor(self, name):
         new_child_list = []
-        for child in self.children_list:
-            new_child_list.append(child.GenRandomNeighbor())
+        for child_group in self.children_list:
+            new_child_group = []
+            for child in child_group:
+                new_child_group.append(child.GenRandomNeighbor(name + child.name))
+            new_child_list.append(new_child_group)
         return Composite_Parameter(name, children_list = new_child_list)
 
 
@@ -172,7 +174,7 @@ class Composite_Parameter:
         neighbor_list = []
         for i in range(neighbor_num - 1):
             new_name = self.name + "_next_" + str(i)
-            neighbor_list.append(self.GenRandomNeighbor(name))
+            neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
 
 
@@ -180,19 +182,21 @@ class Iterating_Parameter:
     def __init__(self, name, init_value, bound, step, step_function):
         self.type = 'iterating'
         self.name = name
-        self.init_value = init_value
-        self.bound = bound
-        self.step = step
+        self.init_value = float(init_value)
+        self.bound = float(bound)
+        self.step = float(step)
         self.step_function = step_function
         self.temporary_val = init_value
+        self.tmpvalue = float(init_value)
 
     def IsOverBound(self):
-        if self.temporary_val > bound:
-            return False
-        return True
+        if self.tmpvalue > self.bound:
+            return True
+        return False
 
     def Iterate(self):
-        # self.temporary_val = ast_calculate(self.step_function, step)
+        # TODO: Inplement  self.tmpvalue = ast_calculate(self.step_function, step)
+        self.tmpvalue = self.tmpvalue + self.step
         return
 
 class Assertions:

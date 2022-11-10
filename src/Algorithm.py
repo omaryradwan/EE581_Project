@@ -17,12 +17,9 @@
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
 
 class Algorithm:
-    def __init__(self, variable_list, cost_function):
+    def __init__(self, variable_list, cost_function, iterating_parameter):
         self.variable_list = variable_list
-        # self.initIterator = initIterator
-        # self.initStepSize = initStepSize
-        # self.initItBound = initItBound
-        # self.initItFunc = initItFunc
+        self.iterating_parameter = iterating_parameter
         self.cost_function = cost_function
         self.variable_num = len(variable_list)
         self.search_neighbor_num = 10   # TO DO: Set the number 10 to a parameter in __init__
@@ -35,7 +32,7 @@ class Algorithm:
 
     def CreateVariableDict(self):
         new_variable_list = []      #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
-        for tmp_variable in range(self.variable_list):
+        for tmp_variable in self.variable_list:
             tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
             new_variable_list.append(tmp_new_list)
         return new_variable_list
@@ -48,36 +45,47 @@ class Algorithm:
 
 
 class SelfDefinedAlgorithm(Algorithm):
-    def __init__(self, variable_list, cost_function):
-        super().__init__(variable_list, cost_function)
+    def __init__(self, variable_list, cost_function, iterating_parameter):
+        super().__init__(variable_list, cost_function, iterating_parameter)
         self.name = 'Self Defined Algorithm'
 
-    def UpdateVariables(self):
+    def GetLocalOptimalValLists(self):
         new_variable_list = self.CreateVariableDict()
         cost_val_list = []
         possible_val_list = []      #[[1,7,10],[1.4,7.3,10.1],[1.6,7.7,10.6]]
         for i in range(self.search_neighbor_num - 1):
             tmp_variable_list = []
-            for j in range(self.variable_num - 1):
+            for j in range(self.variable_num):
                 tmp_variable_list.append(new_variable_list[j][i])
-            cost_val_list.append(cost_function.Evaluate(tmp_variable_list))
+                cost_val_list.append(1)
+            # TODO: cost_val_list.append(cost_function.Evaluate(tmp_variable_list))
             possible_val_list.append(tmp_variable_list)
-
+        self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
         return possible_val_list[cost_val_list.index(min(cost_val_list))]
     
     def CreateVariableDict(self):
-        super().CreateVariableDict(self)
+        new_variable_list = []      #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
+        for i in range(len(self.variable_list)):
+            tmp_variable = self.variable_list[i]
+        # for tmp_variable in self.variable_list:
+            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
+            new_variable_list.append(tmp_new_list)
+        return new_variable_list
 
     def CheckEndRequirements(self):
-        #TBD
-        return True
+        return self.iterating_parameter.IsOverBound()
 
     def Solve(self):
-        while ~self.CheckEndRequirements():
+        iteration_number = 0
+        while not self.CheckEndRequirements():
+            print('Iteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_number, self.iterating_parameter.tmpvalue,
+                    self.iterating_parameter.bound,self.iterating_parameter.tmpvalue/self.iterating_parameter.bound))
+            iteration_number += 1
+            self.iterating_parameter.Iterate()
             # print(self.variable_list)
-            # self.variable_list.Print()
-            self.variable_list = self.UpdateVariables()
-        #self.variable_list.Print() 
+            self.variable_list = self.GetLocalOptimalValLists()
+            # print("variable_list", self.variable_list)
+            # TODO: print out local optimal variable list self.variable_list
         return 
 
 
@@ -140,11 +148,11 @@ class GeneticEvo(Algorithm):
         return
 
 
-def InitAlgorithm(name, variable_list, cost_function):
+def InitAlgorithm(name, variable_list, cost_function, iterating_parameter):
     if name == 'sa':
-        return SimulatedAnnealing(variable_list, cost_function)
+        return SimulatedAnnealing(variable_list, cost_function, iterating_parameter)
     elif name == 'ps':
-        return ParticleSwarm(variable_list, cost_function)
+        return ParticleSwarm(variable_list, cost_function, iterating_parameter)
     elif name == 'ge':
-        return GeneticEvo(variable_list, cost_function)
-    return SelfDefinedAlgorithm(variable_list, cost_function)
+        return GeneticEvo(variable_list, cost_function, iterating_parameter)
+    return SelfDefinedAlgorithm(variable_list, cost_function, iterating_parameter)

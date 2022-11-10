@@ -84,11 +84,13 @@ def main():
     is_assert_list_valid = check_assertions.verify_assertions();
 
     print("Algorithm Initializing...")
-    solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function) #yilin we shuold probably add VerifyAssertions to this list as well
+
+    solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function, iterating_parameter)
+
     print("Algorithm Initialized\n"+solve_algorithm.name + " Selected")
 
     print("Algorithm Starts...")
-    # solve_algorithm.Solve()
+    solve_algorithm.Solve()
     print("Algorithm Ends")
 
 if __name__ == "__main__":
