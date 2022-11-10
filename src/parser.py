@@ -2,7 +2,7 @@ import os
 import json
 import argparse
 import Algorithm
-import CostFunction
+import EvalSpace
 import parameter_types
 import ast
 
@@ -47,20 +47,44 @@ def main():
     iterating_parameter = parameter_types.InitIteratingVariable(iterating_parameter_json)
     print("Iterating Parameter Loaded Successfylly")
 
-    print("Cost Function Loading...")    
+
+    ###### yilin, I combined the assertions and cost functions, simply because at the beginning of each iteration, we should only have to calculate and realize the variables for both the cost and the assertions at once from the parameters and iterating_parameter, and we call EvalSpace constructor to give the object everything it needs, then we run construct_parameter_space to go through during every iteration and populate the dictionary of parameters to current values. If we were to split them into two classes, we would be doing 2x the paramater resolution work for no reason, since these are very related computations. If this is not optimal for you and you like the way you did it, or you have a better solution, please let me know
+    # print("Cost Function Loading...")
     cost_function_json = json_params['cost_function']
-    cost_function = CostFunction.CostFunction(cost_function_json['formula'])
-    print("Cost Function Loaded Successfully\nCost Function is:")
-    print(cost_function.formula)
-    # print(ast.dump(ast.parse(cost_function.formula)))
+    # cost_function = EvalSpace.EvalSpace(cost_function_json['formula'], assertions)
+    # print("Cost Function Loaded Successfully\nCost Function is:")
+    # print("Cost function used is as follows:", cost_function.cost_formula)
+
+    # #always run cost_function.construct_parameter_space before cost function and eval assertions during each step 1..k
+
+    # print("At initial time, cost is ", cost_function.eval(iterating_parameter, parameter_object_list))
+    # # print(ast.dump(ast.parse(cost_function.formula)))
+
+    print("Cost Function Loading...")
+    cost_function_json = json_params['cost_function']
 
     print("Assertions Loading...")
     assertions_json = json_params['assertions']
     assertions = parameter_types.InitAssertions(assertions_json)
     print("Assertions Loaded Successfully")
 
+    print("Creating instance parameter computation environment")
+
+    cost_function = EvalSpace.EvalCost(cost_function_json['formula'])
+    print("Populating parameter dictionary for assertion and cost function resolution")
+    cost_function.construct_parameter_space(iterating_parameter,parameter_object_list)
+
+    print("Running cost function")
+    inst_cost = cost_function.get_cost();
+    print("Total cost of initial state is", inst_cost)
+
+    print("Verifying assertions")
+    check_assertions = EvalSpace.VerifyAssertions(assertions)
+    check_assertions.construct_parameter_space(iterating_parameter,parameter_object_list)
+    is_assert_list_valid = check_assertions.verify_assertions();
+
     print("Algorithm Initializing...")
-    solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function)
+    solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function) #yilin we shuold probably add VerifyAssertions to this list as well
     print("Algorithm Initialized\n"+solve_algorithm.name + " Selected")
 
     print("Algorithm Starts...")

@@ -24,6 +24,7 @@ import ast
 
 class Int_Parameter:
     def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
+        self.type = 'int'
         self.name = name
         self.init_value = init_value
         self.temporary_val = init_value
@@ -59,7 +60,8 @@ class Int_Parameter:
         
 
 class Bool_Parameter:
-    def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
+    def __init__(self, name, value_range, upper_bound, lower_bound, true_weight, false_weight, init_value = None):
+        self.type = 'bool'
         self.name = name
         self.init_value = init_value
         self.temporary_val = init_value
@@ -67,6 +69,8 @@ class Bool_Parameter:
         self.upper_bound = upper_bound
         self.lower_bound = lower_bound
         self.discrete_val = 0
+        self.true_weight = true_weight
+        self.false_weight = false_weight
     
     def TransformIntoDiscrete(self, val):
         if val:
@@ -86,8 +90,7 @@ class Bool_Parameter:
 
     def GenRandomNeighbor(self, name):
         new_val = random.choice([True, False])
-        return Bool_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound,
-                                                self.step, self.trans_function, new_val, self.wrt)
+        return Bool_Parameter(new_name, self.value_range, self.upper_bound, self.lower_bound, self.true_weight, self.false_weight, self.step, self.trans_function, new_val, self.wrt)
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
@@ -98,6 +101,7 @@ class Bool_Parameter:
 
 class Float_Parameter:
     def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
+        self.type = 'float'
         self.name = name
         self.init_value = init_value
         self.temporary_val = init_value
@@ -133,14 +137,16 @@ class Float_Parameter:
             new_name = self.name + "_next_" + str(i)
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
-
 class Composite_Parameter:
     def __init__(self, name, children_json=None, children_list=None):
+        self.type = 'composite'
         self.name = name
         if children_json != None:
             self.children_list = self.GetChildrenFromJson(children_json)
+            self.temporary_val = self.children_list
         else:
             self.children_list = children_list
+            self.temporary_val = self.children_list
 
     def GenRandomNeighbor(self, name):
         new_child_list = []
@@ -172,20 +178,21 @@ class Composite_Parameter:
 
 class Iterating_Parameter:
     def __init__(self, name, init_value, bound, step, step_function):
+        self.type = 'iterating'
         self.name = name
         self.init_value = init_value
         self.bound = bound
         self.step = step
         self.step_function = step_function
-        self.tmpvalue = init_value
+        self.temporary_val = init_value
 
     def IsOverBound(self):
-        if self.tmpvalue > bound:
+        if self.temporary_val > bound:
             return False
         return True
 
     def Iterate(self):
-        # self.tmpvalue = ast_calculate(self.step_function, step)
+        # self.temporary_val = ast_calculate(self.step_function, step)
         return
 
 class Assertions:
@@ -211,8 +218,8 @@ def InitTypedVariable(parameters):
                              parameters['lower_bound'], parameters['init_value'])
         return var
     elif type_name == 'bool':
-        return Bool_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
-                             parameters['lower_bound'], parameters['init_value'])
+        return Bool_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'], parameters['lower_bound'],parameters['true_weight'],parameters['false_weight'],
+                               parameters['init_value'])
     elif type_name == 'float':
         return Float_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
                              parameters['lower_bound'], parameters['init_value'])
