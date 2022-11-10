@@ -6,8 +6,6 @@
       "init_value" : "True",
       "upper_bound" : "None",
       "lower_bound" : "None",
-      "step" : "None",
-      "trans_function" : "None",
       "value_range" : "None"
     },
   "param_B" :
@@ -17,8 +15,6 @@
       "init_value" : "0",
       "upper_bound" : "100",
       "lower_bound" : "0",
-      "step" : "5",
-      "trans_function" : "None",
       "value_range" : "[0,100]"
     },
   "param_C" :
@@ -33,8 +29,6 @@
             "init_value" : "True",
             "upper_bound" : "None",
             "lower_bound" : "None",
-            "step" : "None",
-            "trans_function" : "None",
             "value_range" : "None"
           }
         },
@@ -45,8 +39,6 @@
             "init_value" : "4.5",
             "upper_bound" : "100.0",
             "lower_bound" : "0.0",
-            "step" : "5",
-            "trans_function" : "None",
             "value_range" : "[0.0,100.0]"
           },
           "z" : {
@@ -55,22 +47,20 @@
             "init_value" : "0",
             "upper_bound" : "100",
             "lower_bound" : "0",
-            "step" : "5",
-            "trans_function" : "None",
             "value_range" : "[0,100]"
           }
         }
       ]
     },
-    "cost_function":{
-      "formula" : "param_A**2 + param_B**2 + param_C_x**2"
-    },
-    "Iterating_variable":{
+    "iterating_variable":{
       "name" : "time",
       "init_value" : "1",
       "bound" : "50",
       "step" : "2",
       "step_function" : "x^2"
+    },
+    "cost_function":{
+      "formula" : "param_A**2 + param_B**2 + param_C_x**2"
     },
     "assertions" : {
       "values" : ["param_A > param_B", "param_C_y >= 100"]

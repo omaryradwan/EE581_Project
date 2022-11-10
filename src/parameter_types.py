@@ -20,18 +20,16 @@
 
 
 import random
+import ast
 
 class Int_Parameter:
-    def __init__(self, name, value_range, upper_bound, lower_bound,step,trans_function, init_value = None, wrt = False):
+    def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
         self.name = name
-        self.wrt = wrt
         self.init_value = init_value
         self.temporary_val = init_value
         self.value_range = value_range
         self.upper_bound = int(upper_bound)
         self.lower_bound = int(lower_bound)
-        self.step = step
-        self.trans_function = trans_function
         self.discrete_val = 0
 
 
@@ -61,16 +59,13 @@ class Int_Parameter:
         
 
 class Bool_Parameter:
-    def __init__(self, name, value_range, upper_bound, lower_bound,step,trans_function, init_value = None, wrt = False):
+    def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
         self.name = name
-        self.wrt = wrt
         self.init_value = init_value
         self.temporary_val = init_value
         self.value_range = value_range
         self.upper_bound = upper_bound
         self.lower_bound = lower_bound
-        self.step = step
-        self.trans_function = trans_function
         self.discrete_val = 0
     
     def TransformIntoDiscrete(self, val):
@@ -102,16 +97,13 @@ class Bool_Parameter:
         return neighbor_list
 
 class Float_Parameter:
-    def __init__(self, name, value_range, upper_bound, lower_bound,step,trans_function, init_value = None, wrt = False):
+    def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
         self.name = name
-        self.wrt = wrt
         self.init_value = init_value
         self.temporary_val = init_value
         self.value_range = value_range
         self.upper_bound = upper_bound
         self.lower_bound = lower_bound
-        self.step = step
-        self.trans_function = trans_function
         self.discrete_val = 0
 
     def TransformIntoDiscrete(self, val):
@@ -178,6 +170,24 @@ class Composite_Parameter:
         return neighbor_list
 
 
+class Iterating_Parameter:
+    def __init__(self, name, init_value, bound, step, step_function):
+        self.name = name
+        self.init_value = init_value
+        self.bound = bound
+        self.step = step
+        self.step_function = step_function
+        self.tmpvalue = init_value
+
+    def IsOverBound(self):
+        if self.tmpvalue > bound:
+            return False
+        return True
+
+    def Iterate(self):
+        # self.tmpvalue = ast_calculate(self.step_function, step)
+        return
+
 parameter_types = {"int" : Int_Parameter,
                     "bool" : Bool_Parameter,
                     "float" : Float_Parameter,
@@ -189,17 +199,18 @@ def InitTypedVariable(parameters):
     type_name = parameters['type']
     if type_name == 'int':
         var = Int_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
-                             parameters['lower_bound'], parameters['step'], parameters['trans_function'],
-                             parameters['init_value'], parameters['wrt'])
+                             parameters['lower_bound'], parameters['init_value'])
         return var
     elif type_name == 'bool':
         return Bool_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
-                             parameters['lower_bound'], parameters['step'], parameters['trans_function'],
-                             parameters['init_value'], parameters['wrt'])
+                             parameters['lower_bound'], parameters['init_value'])
     elif type_name == 'float':
         return Float_Parameter(parameters['name'], parameters['value_range'], parameters['upper_bound'],
-                             parameters['lower_bound'], parameters['step'], parameters['trans_function'],
-                             parameters['init_value'], parameters['wrt'])
+                             parameters['lower_bound'], parameters['init_value'])
     elif type_name == 'composite':
         return Composite_Parameter(parameters['name'], parameters['values'])
     print("Error: " + type_name + " type does not exist, exiting")
+
+def InitIteratingVariable(parameters):
+    return Iterating_Parameter(parameters['name'], parameters['init_value'], parameters['bound'],
+                                parameters['step'], parameters['step_function'])

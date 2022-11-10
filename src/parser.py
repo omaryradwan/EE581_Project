@@ -26,10 +26,10 @@ def main():
     parameter_check_map = {}
     json_params = json.load(parameter_file)
 
-    print("Parameter Loading...")
+    print("Typed Parameter Loading...")
     for para_declaration in json_params:
-        if para_declaration == 'cost_function':
-            continue
+        if para_declaration == 'iterating_variable':
+            break
         # print(para_declaration)
         # print(json_params[para_declaration])
         para_json = json_params[para_declaration]
@@ -42,12 +42,22 @@ def main():
     print("Parameter Loaded Successfully\nAll Loaded Parameters are:")
     print(parameter_check_map)
 
+    print("Iterating Parameter Loading...")
+    iterating_parameter_json = json_params['iterating_variable']
+    iterating_parameter = parameter_types.InitIteratingVariable(iterating_parameter_json)
+    print("Iterating Parameter Loaded Successfylly")
+
     print("Cost Function Loading...")    
     cost_function_json = json_params['cost_function']
     cost_function = CostFunction.CostFunction(cost_function_json['formula'])
     print("Cost Function Loaded Successfully\nCost Function is:")
     print(cost_function.formula)
     # print(ast.dump(ast.parse(cost_function.formula)))
+
+    print("Assertions Loading...")
+    assertions_json = json_params['assertions']
+    # assertions =
+    print("Assertions Loaded Successfully")
 
     print("Algorithm Initializing...")
     solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function)
