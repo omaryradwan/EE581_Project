@@ -2,9 +2,10 @@ import ast
 import asteval
 
 class EvalCost:
-    def __init__(self, cost_formula):
+    def __init__(self, cost_formula, iterating_parameter, parameter_list):
         self.cost_formula = cost_formula
         self.defined_vals = dict()
+        self.construct_parameter_space(iterating_parameter, parameter_list)
     def construct_parameter_space(self,iterating_parameter,parameter_list):
         # add cost values for all parameters in the parameter space
         self.parameter_list = parameter_list
@@ -38,9 +39,10 @@ class EvalCost:
         self.tot_cost = self.evaluator(self.cost_formula)
         return self.tot_cost
 class VerifyAssertions:
-    def __init__(self, assertions_formulas):
+    def __init__(self, assertions_formulas, iterating_parameter, parameter_list):
         self.assertions = assertions_formulas
         self.defined_vals = dict()
+        self.construct_parameter_space(iterating_parameter, parameter_list)
     def construct_parameter_space(self,iterating_parameter,parameter_list):
         # add cost values for all parameters in the parameter space
         self.parameter_list = parameter_list

@@ -70,17 +70,14 @@ def main():
 
     print("Creating instance parameter computation environment")
 
-    cost_function = EvalSpace.EvalCost(cost_function_json['formula'])
+    cost_function = EvalSpace.EvalCost(cost_function_json['formula'], iterating_parameter, parameter_object_list)
     print("Populating parameter dictionary for assertion and cost function resolution")
-    cost_function.construct_parameter_space(iterating_parameter,parameter_object_list)
-
     print("Running cost function")
     inst_cost = cost_function.get_cost();
     print("Total cost of initial state is", inst_cost)
 
     print("Verifying assertions")
-    check_assertions = EvalSpace.VerifyAssertions(assertions)
-    check_assertions.construct_parameter_space(iterating_parameter,parameter_object_list)
+    check_assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, parameter_object_list)
     is_assert_list_valid = check_assertions.verify_assertions();
 
     print("Algorithm Initializing...")
