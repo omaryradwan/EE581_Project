@@ -1,0 +1,15 @@
+Issue 1:
+	Add one more type called composite fixed
+
+Issue 2:
+	Add attribute "conservation of variable" to Typed class -> iterating variable
+
+Issue 3:
+	Inplement the algorithm WIP
+
+Issue 4:
+	AST tree: iterating variable, cost function, step function
+	AST calculate, AST verify
+
+Issue 5:
+	Add class iterating variable, assertions and corresponding parser

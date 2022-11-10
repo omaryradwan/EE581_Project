@@ -4,7 +4,7 @@ import argparse
 import Algorithm
 import CostFunction
 import parameter_types
-
+import ast
 
 def main():
     parser = argparse.ArgumentParser()
@@ -47,6 +47,7 @@ def main():
     cost_function = CostFunction.CostFunction(cost_function_json['formula'])
     print("Cost Function Loaded Successfully\nCost Function is:")
     print(cost_function.formula)
+    # print(ast.dump(ast.parse(cost_function.formula)))
 
     print("Algorithm Initializing...")
     solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function)
