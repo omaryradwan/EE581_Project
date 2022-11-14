@@ -50,27 +50,34 @@ class SelfDefinedAlgorithm(Algorithm):
         self.name = 'Self Defined Algorithm'
 
     def GetLocalOptimalValLists(self):
-        new_variable_list = self.CreateVariableDict()
+        new_variable_list_list = self.CreateVariableListList() #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
         cost_val_list = []
-        possible_val_list = []      #[[1,7,10],[1.4,7.3,10.1],[1.6,7.7,10.6]]
+        possible_val_list = [] #[[1,7,10],[1.4,7.3,10.1],[1.6,7.7,10.6]]
+        
+        cost_val_list.append(self.cost_function.get_cost())
+        possible_val_list.append(self.variable_list)
+
         for i in range(self.search_neighbor_num - 1):
             tmp_variable_list = []
             for j in range(self.variable_num):
-                tmp_variable_list.append(new_variable_list[j][i])
-                cost_val_list.append(1)
-            # TODO: cost_val_list.append(cost_function.Evaluate(tmp_variable_list))
+                tmp_variable_list.append(new_variable_list_list[j][i])
+            # print(tmp_variable_list) 
+            self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_variable_list)
+            cost_val_list.append(self.cost_function.get_cost())
             possible_val_list.append(tmp_variable_list)
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
+        print("Local Cost List is: ", cost_val_list)
+        print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
         return possible_val_list[cost_val_list.index(min(cost_val_list))]
     
-    def CreateVariableDict(self):
-        new_variable_list = []      #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
-        for i in range(len(self.variable_list)):
+    def CreateVariableListList(self):
+        new_variable_list_list = []      
+        for i in range(self.variable_num):
             tmp_variable = self.variable_list[i]
         # for tmp_variable in self.variable_list:
             tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
-            new_variable_list.append(tmp_new_list)
-        return new_variable_list
+            new_variable_list_list.append(tmp_new_list)
+        return new_variable_list_list
 
     def CheckEndRequirements(self):
         return self.iterating_parameter.IsOverBound()
@@ -78,13 +85,14 @@ class SelfDefinedAlgorithm(Algorithm):
     def Solve(self):
         iteration_number = 0
         while not self.CheckEndRequirements():
-            print('Iteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_number, self.iterating_parameter.tmpvalue,
+            print('\nIteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_number, self.iterating_parameter.tmpvalue,
                     self.iterating_parameter.bound,self.iterating_parameter.tmpvalue/self.iterating_parameter.bound))
             iteration_number += 1
             self.iterating_parameter.Iterate()
             # print(self.variable_list)
+            print('Current Parameter Values are: ')
             self.variable_list = self.GetLocalOptimalValLists()
-            # print("variable_list", self.variable_list)
+            self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
             # TODO: print out local optimal variable list self.variable_list
         return 
 

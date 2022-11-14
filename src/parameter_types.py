@@ -53,7 +53,7 @@ class Int_Parameter:
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
         for i in range(neighbor_num - 1):
-            new_name = self.name + "_next_" + str(i)
+            new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
         
@@ -95,7 +95,7 @@ class Bool_Parameter:
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
         for i in range(neighbor_num - 1):
-            new_name = self.name + "_next_" + str(i)
+            new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
 
@@ -133,7 +133,7 @@ class Float_Parameter:
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
         for i in range(neighbor_num - 1):
-            new_name = self.name + "_next_" + str(i)
+            new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
 class Composite_Parameter:
@@ -152,7 +152,7 @@ class Composite_Parameter:
         for child_group in self.children_list:
             new_child_group = []
             for child in child_group:
-                new_child_group.append(child.GenRandomNeighbor(name + child.name))
+                new_child_group.append(child.GenRandomNeighbor(child.name))
             new_child_list.append(new_child_group)
         return Composite_Parameter(name, children_list = new_child_list)
 
@@ -173,7 +173,7 @@ class Composite_Parameter:
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
         for i in range(neighbor_num - 1):
-            new_name = self.name + "_next_" + str(i)
+            new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
 

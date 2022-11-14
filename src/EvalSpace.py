@@ -6,6 +6,7 @@ class EvalCost:
         self.cost_formula = cost_formula
         self.defined_vals = dict()
         self.construct_parameter_space(iterating_parameter, parameter_list)
+
     def construct_parameter_space(self,iterating_parameter,parameter_list):
         # add cost values for all parameters in the parameter space
         self.parameter_list = parameter_list
@@ -32,17 +33,20 @@ class EvalCost:
                             else :
                                 self.defined_vals[k.name] =  int(k.false_weight)
         self.defined_vals[iterating_parameter.name] = iterating_parameter.temporary_val
-        #print(self.defined_vals)
+        print(self.defined_vals)
         self.evaluator = asteval.Interpreter(usersyms=self.defined_vals)
 
     def get_cost(self):
         self.tot_cost = self.evaluator(self.cost_formula)
         return self.tot_cost
+
+
 class VerifyAssertions:
     def __init__(self, assertions_formulas, iterating_parameter, parameter_list):
         self.assertions = assertions_formulas
         self.defined_vals = dict()
         self.construct_parameter_space(iterating_parameter, parameter_list)
+
     def construct_parameter_space(self,iterating_parameter,parameter_list):
         # add cost values for all parameters in the parameter space
         self.parameter_list = parameter_list
@@ -68,7 +72,7 @@ class VerifyAssertions:
         self.evaluator = asteval.Interpreter(usersyms=self.defined_vals)
 
     def verify_assertions(self):
-        all_asserts_valid = True;
+        all_asserts_valid = True
         for i in self.assertions.assertion_list:
             if self.evaluator(i):
                 print("Assertion \t<<",i,">>\t holds in current state")

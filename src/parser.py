@@ -13,7 +13,7 @@ def main():
     parser.add_argument('-a', "--algorithm_selection", type=str,
     help = 'Select one of algorithm in [se, ps, eo]. If not selected, default value is self defined algorithm.')
     
-    args = parser.parse_args();
+    args = parser.parse_args()
 
     if not os.path.exists(args.parameter_file):
         print("Error: " + args.parameter_file + " does not exist, exiting")
@@ -48,9 +48,20 @@ def main():
     print("Iterating Parameter Loaded Successfylly")
 
 
-    ###### yilin, I combined the assertions and cost functions, simply because at the beginning of each iteration, we should only have to calculate and realize the variables for both the cost and the assertions at once from the parameters and iterating_parameter, and we call EvalSpace constructor to give the object everything it needs, then we run construct_parameter_space to go through during every iteration and populate the dictionary of parameters to current values. If we were to split them into two classes, we would be doing 2x the paramater resolution work for no reason, since these are very related computations. If this is not optimal for you and you like the way you did it, or you have a better solution, please let me know
+    ###### yilin, I combined the assertions and cost functions, 
+    #simply because at the beginning of each iteration, we should 
+    #only have to calculate and realize the variables for both the 
+    #cost and the assertions at once from the parameters and iterating_parameter, 
+    #and we call EvalSpace constructor to give the object everything it needs, 
+    #then we run construct_parameter_space to go through during every iteration 
+    #and populate the dictionary of parameters to current values. If we were to 
+    #split them into two classes, we would be doing 2x the paramater resolution 
+    #work for no reason, since these are very related computations. If this is not 
+    #optimal for you and you like the way you did it, or you have a better solution, 
+    #please let me know
+
     # print("Cost Function Loading...")
-    cost_function_json = json_params['cost_function']
+    #cost_function_json = json_params['cost_function']
     # cost_function = EvalSpace.EvalSpace(cost_function_json['formula'], assertions)
     # print("Cost Function Loaded Successfully\nCost Function is:")
     # print("Cost function used is as follows:", cost_function.cost_formula)
@@ -66,19 +77,19 @@ def main():
     print("Assertions Loading...")
     assertions_json = json_params['assertions']
     assertions = parameter_types.InitAssertions(assertions_json)
-    print("Assertions Loaded Successfully")
+    print("Cost Function and Assertions Loaded Successfully")
 
     print("Creating instance parameter computation environment")
 
     cost_function = EvalSpace.EvalCost(cost_function_json['formula'], iterating_parameter, parameter_object_list)
     print("Populating parameter dictionary for assertion and cost function resolution")
     print("Running cost function")
-    inst_cost = cost_function.get_cost();
+    inst_cost = cost_function.get_cost()
     print("Total cost of initial state is", inst_cost)
 
     print("Verifying assertions")
     check_assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, parameter_object_list)
-    is_assert_list_valid = check_assertions.verify_assertions();
+    is_assert_list_valid = check_assertions.verify_assertions()
 
     print("Algorithm Initializing...")
 
