@@ -1,8 +1,7 @@
 # This file defines type classes.
 #
 # One Type class should have the following attributes:
-#       name                --  
-#       wrt                 --  
+#       name                --  The name of the variable                                eg: param_A
 #       init_value          --  The initial value of variable from user                 eg: 1.3, False, 2
 #       temporary_val       --  The temporary value of variable, updated every step     eg: 1.3, False, 2
 #       value_range         --  The bounds of the variable from user                    eg: [[1,3]], [[1,3],[4,7]]
@@ -20,7 +19,7 @@
 
 
 import random
-import ast
+import EvalSpace
 
 class Int_Parameter:
     def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
@@ -91,7 +90,6 @@ class Bool_Parameter:
         new_val = random.choice([True, False])
         return Bool_Parameter(name, self.value_range, self.upper_bound, self.lower_bound, self.true_weight, self.false_weight,new_val)
 
-
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
         for i in range(neighbor_num - 1):
@@ -136,6 +134,7 @@ class Float_Parameter:
             new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
+
 class Composite_Parameter:
     def __init__(self, name, children_json=None, children_list=None):
         self.type = 'composite'
@@ -185,18 +184,20 @@ class Iterating_Parameter:
         self.init_value = float(init_value)
         self.bound = float(bound)
         self.step = float(step)
-        self.step_function = step_function
-        self.temporary_val = init_value
-        self.tmpvalue = float(init_value)
+        self.temporary_val = float(init_value)
+        self.step_function = EvalSpace.EvalStepFunction(step_function, self)
+        # self.tmpvalue = float(init_value)
 
     def IsOverBound(self):
-        if self.tmpvalue > self.bound:
+        if self.temporary_val > self.bound:
             return True
         return False
 
     def Iterate(self):
         # TODO: Inplement  self.tmpvalue = ast_calculate(self.step_function, step)
-        self.tmpvalue = self.tmpvalue + self.step
+        # EvalStepFunction
+        self.step_function.construct_parameter_space(self,[])
+        self.temporary_val = self.temporary_val + self.step_function.get_step()
         return
 
 class Assertions:

@@ -2,18 +2,12 @@
 #
 # All the algorithms should contain the following attributes:
 #       variable_list       --          This is a list of variable class                eg: [v1, v2, v3]
-#       variable_dict        --         This is dict of N poits of each variable        eg: [v1: [1,2,3], v2: [3,4,5], v3: [3,5,1]]
-#       initIterator        --          This is the iterator of algorithm               eg: t, T
-#       initStepSize        --          The default step size of iterator               eg: 0.01
-#       initItBound         --          The bound of iterator parameter                 eg: [0, 100]
-#       initItFunc          --          The function of step size, default 0.01x        eg: x^2+2x
-#       cost_function       --          Then costfunction of variables                  eg: x^2+y^2
+#       iterating_parameter --          The iterating parameter                         eg: time
+#       cost_function       --          Then cost function of variables                 eg: x^2+y^2
 #       variable_num        --          The number of variables                         eg: 3
 #       search_neighbor_num --          The number of neighbors to check                eg: 10
-#       end_requirements    --          The ending requirements of algorithms           eg: 
 #
 # The algorithm should contain the following functions:
-#       UpdateVariables     --          The function used to update variables in one step, return variables
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
 
 class Algorithm:
@@ -24,18 +18,13 @@ class Algorithm:
         self.variable_num = len(variable_list)
         self.search_neighbor_num = 10   # TO DO: Set the number 10 to a parameter in __init__
         self.name = ''
-        # TO DO: ADD attribute end_requirements
 
 
     def UpdateVariables(self):
         pass
 
     def CreateVariableDict(self):
-        new_variable_list = []      #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
-        for tmp_variable in self.variable_list:
-            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
-            new_variable_list.append(tmp_new_list)
-        return new_variable_list
+        pass
 
     def CheckEndRequirements(self):
         pass
@@ -85,15 +74,14 @@ class SelfDefinedAlgorithm(Algorithm):
     def Solve(self):
         iteration_number = 0
         while not self.CheckEndRequirements():
-            print('\nIteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_number, self.iterating_parameter.tmpvalue,
-                    self.iterating_parameter.bound,self.iterating_parameter.tmpvalue/self.iterating_parameter.bound))
+            print('\nIteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_number, self.iterating_parameter.temporary_val,
+                    self.iterating_parameter.bound,self.iterating_parameter.temporary_val/self.iterating_parameter.bound))
             iteration_number += 1
             self.iterating_parameter.Iterate()
             # print(self.variable_list)
             print('Current Parameter Values are: ')
             self.variable_list = self.GetLocalOptimalValLists()
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
-            # TODO: print out local optimal variable list self.variable_list
         return 
 
 

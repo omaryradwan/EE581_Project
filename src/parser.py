@@ -60,17 +60,6 @@ def main():
     #optimal for you and you like the way you did it, or you have a better solution, 
     #please let me know
 
-    # print("Cost Function Loading...")
-    #cost_function_json = json_params['cost_function']
-    # cost_function = EvalSpace.EvalSpace(cost_function_json['formula'], assertions)
-    # print("Cost Function Loaded Successfully\nCost Function is:")
-    # print("Cost function used is as follows:", cost_function.cost_formula)
-
-    # #always run cost_function.construct_parameter_space before cost function and eval assertions during each step 1..k
-
-    # print("At initial time, cost is ", cost_function.eval(iterating_parameter, parameter_object_list))
-    # # print(ast.dump(ast.parse(cost_function.formula)))
-
     print("Cost Function Loading...")
     cost_function_json = json_params['cost_function']
 
