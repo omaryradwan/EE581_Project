@@ -16,8 +16,8 @@
       "type" : "int",
       "init_value" : "76",
       "upper_bound" : "100",
-      "lower_bound" : "0",
-      "value_range" : "[0,100]"
+      "lower_bound" : "30",
+      "value_range" : "[30,100]"
     },
   "param_C" :
     {
@@ -49,9 +49,9 @@
             "name" : "param_C_z",
             "type" : "int",
             "init_value" : "0",
-            "upper_bound" : "100",
-            "lower_bound" : "0",
-            "value_range" : "[0,100]"
+            "upper_bound" : "-30",
+            "lower_bound" : "-70",
+            "value_range" : "[-70,-30]"
           }
         }
       ]
@@ -61,10 +61,10 @@
       "init_value" : "1",
       "bound" : "50",
       "step" : "2",
-      "step_function" : "x^2"
+      "step_function" : "1/time"
     },
     "cost_function":{
-      "formula" : "param_A**2 + param_B**2 + param_C_x**2 + param_C_y"
+      "formula" : "(param_B-30)**2 + param_C_y**2 + (param_C_z+60)**2"
     },
     "assertions" : {
         "values" : ["param_A == param_C_x", "param_C_y >= 100", "param_A < 0", "param_A is True", "param_C_y > 3 and param_C_x is False"]
