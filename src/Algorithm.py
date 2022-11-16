@@ -9,14 +9,16 @@
 #
 # The algorithm should contain the following functions:
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
+import EvalSpace
 
 class Algorithm:
-    def __init__(self, variable_list, cost_function, iterating_parameter):
+    def __init__(self, variable_list, cost_function, iterating_parameter, assertions):
         self.variable_list = variable_list
         self.iterating_parameter = iterating_parameter
         self.cost_function = cost_function
         self.variable_num = len(variable_list)
         self.search_neighbor_num = 10   # TO DO: Set the number 10 to a parameter in __init__
+        self.assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, variable_list)
         self.name = ''
 
 
@@ -34,9 +36,28 @@ class Algorithm:
 
 
 class SelfDefinedAlgorithm(Algorithm):
-    def __init__(self, variable_list, cost_function, iterating_parameter):
-        super().__init__(variable_list, cost_function, iterating_parameter)
+    def __init__(self, variable_list, cost_function, iterating_parameter, assertions):
+        super().__init__(variable_list, cost_function, iterating_parameter, assertions)
         self.name = 'Self Defined Algorithm'
+
+    def CreateVariableListList(self):
+        new_variable_list_list = []      
+        for i in range(self.variable_num):
+            tmp_variable = self.variable_list[i]
+            tmp_new_list_in_assertions = []
+            while len(tmp_new_list_in_assertions) < self.search_neighbor_num:
+                tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
+                # print(tmp_new_list)
+                for tmp_new_variable in tmp_new_list:
+                    self.assertions.construct_parameter_space(self.iterating_parameter, [tmp_new_variable])
+                    if self.assertions.verify_assertions():
+                        # print("Append One")
+                        tmp_new_list_in_assertions.append(tmp_new_variable)
+                # print(len(tmp_new_list_in_assertions))
+                # new_variable_list_list.append(tmp_new_list[0:self.search_neighbor_num])
+                # break
+            new_variable_list_list.append(tmp_new_list_in_assertions[0:self.search_neighbor_num])
+        return new_variable_list_list
 
     def GetLocalOptimalValLists(self):
         new_variable_list_list = self.CreateVariableListList() #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
@@ -58,15 +79,6 @@ class SelfDefinedAlgorithm(Algorithm):
         print("Local Cost List is: ", cost_val_list)
         print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
         return possible_val_list[cost_val_list.index(min(cost_val_list))]
-    
-    def CreateVariableListList(self):
-        new_variable_list_list = []      
-        for i in range(self.variable_num):
-            tmp_variable = self.variable_list[i]
-        # for tmp_variable in self.variable_list:
-            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
-            new_variable_list_list.append(tmp_new_list)
-        return new_variable_list_list
 
     def CheckEndRequirements(self):
         return self.iterating_parameter.IsOverBound()
@@ -79,7 +91,7 @@ class SelfDefinedAlgorithm(Algorithm):
             iteration_number += 1
             self.iterating_parameter.Iterate()
             # print(self.variable_list)
-            print('Current Parameter Values are: ')
+            # print('Current Parameter Values are: ')
             self.variable_list = self.GetLocalOptimalValLists()
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
         return 
@@ -144,11 +156,11 @@ class GeneticEvo(Algorithm):
         return
 
 
-def InitAlgorithm(name, variable_list, cost_function, iterating_parameter):
+def InitAlgorithm(name, variable_list, cost_function, iterating_parameter, assertions):
     if name == 'sa':
-        return SimulatedAnnealing(variable_list, cost_function, iterating_parameter)
+        return SimulatedAnnealing(variable_list, cost_function, iterating_parameter, assertions)
     elif name == 'ps':
-        return ParticleSwarm(variable_list, cost_function, iterating_parameter)
+        return ParticleSwarm(variable_list, cost_function, iterating_parameter, assertions)
     elif name == 'ge':
-        return GeneticEvo(variable_list, cost_function, iterating_parameter)
-    return SelfDefinedAlgorithm(variable_list, cost_function, iterating_parameter)
+        return GeneticEvo(variable_list, cost_function, iterating_parameter, assertions)
+    return SelfDefinedAlgorithm(variable_list, cost_function, iterating_parameter, assertions)

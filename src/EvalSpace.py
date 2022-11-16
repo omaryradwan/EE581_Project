@@ -35,7 +35,7 @@ class EvalUtils:
                             else :
                                 self.defined_vals[k.name] =  int(k.false_weight)
         self.defined_vals[iterating_parameter.name] = iterating_parameter.temporary_val
-        print(self.defined_vals)
+        # print(self.defined_vals)
         self.evaluator = asteval.Interpreter(usersyms=self.defined_vals)
 
 class EvalCost(EvalUtils):
@@ -54,13 +54,15 @@ class VerifyAssertions(EvalUtils):
     def verify_assertions(self):
         all_asserts_valid = True
         for i in self.formulas.assertion_list:
-            print(i)
+            # print(i)
             if self.evaluator(i):
-                print("Assertion \t<<",i,">>\t holds in current state")
+                # print("Assertion \t<<",i,">>\t holds in current state")
+                continue
             else:
-                print("Assertion \t<<",i,">>\t does NOT in current state")
+                # print("Assertion \t<<",i,">>\t does NOT in current state")
                 all_asserts_valid = False
-        return False
+        # print(all_asserts_valid)
+        return all_asserts_valid
 
 class EvalStepFunction(EvalUtils):
     def __init__(self, step_function, iterating_parameter):

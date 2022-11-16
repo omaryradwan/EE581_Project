@@ -46,12 +46,15 @@ class Int_Parameter:
         self.temporary_val = val
 
     def GenRandomNeighbor(self, name):
+        # print(self.lower_bound, self.upper_bound)
+        random.seed()
         new_val = random.randint(self.lower_bound, self.upper_bound)
+        # print(new_val)
         return Int_Parameter(name, self.value_range, self.upper_bound, self.lower_bound, new_val)
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
-        for i in range(neighbor_num - 1):
+        for i in range(neighbor_num):
             new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
@@ -92,7 +95,7 @@ class Bool_Parameter:
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
-        for i in range(neighbor_num - 1):
+        for i in range(neighbor_num):
             new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
@@ -125,12 +128,15 @@ class Float_Parameter:
         self.temporary_val = val
     
     def GenRandomNeighbor(self, name):
+        # print(self.lower_bound, self.upper_bound)
+        random.seed()
         new_val = random.uniform(self.lower_bound, self.upper_bound)
+        # print(new_val)
         return Float_Parameter(name, self.value_range, self.upper_bound, self.lower_bound, new_val)
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
-        for i in range(neighbor_num - 1):
+        for i in range(neighbor_num):
             new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name))
         return neighbor_list
@@ -146,16 +152,6 @@ class Composite_Parameter:
             self.children_list = children_list
             self.temporary_val = self.children_list
 
-    def GenRandomNeighbor(self, name):
-        new_child_list = []
-        for child_group in self.children_list:
-            new_child_group = []
-            for child in child_group:
-                new_child_group.append(child.GenRandomNeighbor(child.name))
-            new_child_list.append(new_child_group)
-        return Composite_Parameter(name, children_list = new_child_list)
-
-
     def GetChildrenFromJson(self, children_json):
         children_list = []
         for children in children_json:
@@ -168,6 +164,16 @@ class Composite_Parameter:
                 tmp_children_group.append(InitTypedVariable(child_json))
             children_list.append(tmp_children_group)
         return children_list
+
+    def GenRandomNeighbor(self, name):
+        new_child_list = []
+        for child_group in self.children_list:
+            new_child_group = []
+            for child in child_group:
+                new_child_group.append(child.GenRandomNeighbor(child.name))
+            new_child_list.append(new_child_group)
+        return Composite_Parameter(name, children_list = new_child_list)
+
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []

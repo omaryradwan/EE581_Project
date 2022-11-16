@@ -82,7 +82,7 @@ def main():
 
     print("Algorithm Initializing...")
 
-    solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function, iterating_parameter)
+    solve_algorithm = Algorithm.InitAlgorithm(args.algorithm_selection, parameter_object_list, cost_function, iterating_parameter, assertions)
 
     print("Algorithm Initialized\n"+solve_algorithm.name + " Selected")
 
