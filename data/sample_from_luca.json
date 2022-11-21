@@ -4,8 +4,8 @@
       "name" : "param_A",
       "type" : "bool",
       "init_value" : "True",
-      "upper_bound" : "None",
-      "lower_bound" : "None",
+      "upper_bound" : "2000",
+      "lower_bound" : "-50",
       "value_range" : "None",
       "true_weight" : "44",
       "false_weight" : "-20"
@@ -67,6 +67,6 @@
       "formula" : "(param_B-30)**2 + param_C_y**2 + (param_C_z+60)**2"
     },
     "assertions" : {
-        "values" : ["param_C_y >= param_C_z"]
+        "values" : ["param_C_y >= param_C_z","param_B > 0", "param_A < param_C_y"]
     }
 }

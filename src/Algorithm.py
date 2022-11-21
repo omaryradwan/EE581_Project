@@ -10,7 +10,7 @@
 # The algorithm should contain the following functions:
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
 import EvalSpace
-
+import sympy
 class Algorithm:
     def __init__(self, variable_list, cost_function, iterating_parameter, assertions):
         self.variable_list = variable_list
@@ -74,10 +74,14 @@ class SelfDefinedAlgorithm(Algorithm):
             # print(tmp_variable_list) 
             self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_variable_list)
             cost_val_list.append(self.cost_function.get_cost())
+            ########################SYMPY WORK################
+            # self.assertions.valid_parameter_range(self.iterating_parameter, tmp_variable_list, tmp_variable_list[0]);
+
+            ##################################################
             possible_val_list.append(tmp_variable_list)
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
-        print("Local Cost List is: ", cost_val_list)
-        print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
+        # print("Local Cost List is: ", cost_val_list)
+        # print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
         return possible_val_list[cost_val_list.index(min(cost_val_list))]
 
     def CheckEndRequirements(self):
@@ -100,7 +104,6 @@ class SelfDefinedAlgorithm(Algorithm):
 class SimulatedAnnealing(Algorithm):
     def __init__(self, variable_list, initIterator, initStepSize, initItBound, initItFunc, cost_function):
         super().__init__(variable_list, initIterator)
-
     def UpdateVariables(self):
         #TBD
         return self.variables

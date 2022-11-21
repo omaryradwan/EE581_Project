@@ -19,7 +19,9 @@
 
 
 import random
+import numpy as np
 import EvalSpace
+import math
 
 class Int_Parameter:
     def __init__(self, name, value_range, upper_bound, lower_bound, init_value = None):
@@ -27,7 +29,7 @@ class Int_Parameter:
         self.name = name
         self.init_value = int(init_value)
         self.temporary_val = int(init_value)
-        self.value_range = value_range
+        self.value_range = value_range if value_range != None else (int(upper_bound) - int(lower_bound))
         self.upper_bound = int(upper_bound)
         self.lower_bound = int(lower_bound)
         self.discrete_val = 0
@@ -115,9 +117,28 @@ class Float_Parameter:
         # TBD
         # Currently I keep three digits after the dot '.'
         # Eg: 0.4777 -> {477, -3}, 123123.23 -> {123123230, -3}
-        float_transed = float(format(val, '.3f'))
         return {int(float_transed*1000), -3}
-    
+
+    def SetDiscreteTerms(self,val):
+        float_transed = float(format(val, '.3f'))
+        self.trans_base = float_transed
+        self.trans_mantissa = -3
+
+    def SetTransformed(self, num):
+        decimal_places = 18
+        num = round(num, -int(math.floor(math.log10(abs(num)))) + 2)
+        num_str = str(f'{num:.{decimal_places}f}')
+        parts = num_str.split('.', 2)
+        decimal = parts[1] if len(parts) > 1 else ''
+        exp = -len(decimal)
+        digits = parts[0].lstrip('0') + decimal
+        trimmed = digits.rstrip('0')
+        exp += len(digits) - len(trimmed)
+        sig = int(trimmed) if trimmed else 0
+        self.exp = exp
+        self.sig = sig
+
+
     def TransformBack(self, val):
         return float(val)/1000
 
