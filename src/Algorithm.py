@@ -44,7 +44,9 @@ class SelfDefinedAlgorithm(Algorithm):
         new_variable_list_list = []      
         for i in range(self.variable_num):
             tmp_variable = self.variable_list[i]
-            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
+            # intervals = self.assertions.valid_parameter_range(self.iterating_parameter, self.variable_list, tmp_variable)
+            intervals = [] # This line will be replaced by previous line later.
+            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, intervals)
             # tmp_new_list_in_assertions = []
             # while len(tmp_new_list_in_assertions) < self.search_neighbor_num:
             #     tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
