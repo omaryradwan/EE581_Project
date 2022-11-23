@@ -44,19 +44,21 @@ class SelfDefinedAlgorithm(Algorithm):
         new_variable_list_list = []      
         for i in range(self.variable_num):
             tmp_variable = self.variable_list[i]
-            tmp_new_list_in_assertions = []
-            while len(tmp_new_list_in_assertions) < self.search_neighbor_num:
-                tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
-                # print(tmp_new_list)
-                for tmp_new_variable in tmp_new_list:
-                    self.assertions.construct_parameter_space(self.iterating_parameter, [tmp_new_variable])
-                    if self.assertions.verify_assertions():
-                        # print("Append One")
-                        tmp_new_list_in_assertions.append(tmp_new_variable)
+            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
+            # tmp_new_list_in_assertions = []
+            # while len(tmp_new_list_in_assertions) < self.search_neighbor_num:
+            #     tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
+            #     # print(tmp_new_list)
+            #     for tmp_new_variable in tmp_new_list:
+            #         self.assertions.construct_parameter_space(self.iterating_parameter, [tmp_new_variable])
+            #         if self.assertions.verify_assertions():
+            #             # print("Append One")
+            #             tmp_new_list_in_assertions.append(tmp_new_variable)
                 # print(len(tmp_new_list_in_assertions))
                 # new_variable_list_list.append(tmp_new_list[0:self.search_neighbor_num])
                 # break
-            new_variable_list_list.append(tmp_new_list_in_assertions[0:self.search_neighbor_num])
+            # new_variable_list_list.append(tmp_new_list_in_assertions[0:self.search_neighbor_num])
+            new_variable_list_list.append(tmp_new_list)
         return new_variable_list_list
 
     def GetLocalOptimalValLists(self):
@@ -75,13 +77,13 @@ class SelfDefinedAlgorithm(Algorithm):
             self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_variable_list)
             cost_val_list.append(self.cost_function.get_cost())
             ########################SYMPY WORK################
-            # self.assertions.valid_parameter_range(self.iterating_parameter, tmp_variable_list, tmp_variable_list[0]);
+            # self.assertions.valid_parameter_range(self.iterating_parameter, tmp_variable_list, tmp_variable_list[0])
 
             ##################################################
             possible_val_list.append(tmp_variable_list)
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
         # print("Local Cost List is: ", cost_val_list)
-        # print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
+        print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
         return possible_val_list[cost_val_list.index(min(cost_val_list))]
 
     def CheckEndRequirements(self):

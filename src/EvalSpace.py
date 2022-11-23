@@ -66,10 +66,10 @@ class VerifyAssertions(EvalUtils):
         # print(all_asserts_valid)
         return all_asserts_valid
 
-    def valid_parameter_range(self,iterating_parameter,parameter_list,target_parameter):
+    def valid_parameter_range(self, iterating_parameter, parameter_list, target_parameter):
 
         local_parameter_list = list()
-        param_to_symbol_dict = dict();
+        param_to_symbol_dict = dict()
 
         #adding iterating parameter as a symbol
         param_to_symbol_dict[iterating_parameter.name] = symbols(iterating_parameter.name, integer = True)

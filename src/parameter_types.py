@@ -23,17 +23,33 @@ import numpy as np
 import EvalSpace
 import math
 
-class Int_Parameter:
-    def __init__(self, name, upper_bound, lower_bound, init_value = None):
-        self.type = 'int'
+class Int_Parameter():
+    def __init__(self, name, upper_bound, lower_bound, init_value):
         self.name = name
+        self.type = 'int'
         self.init_value = int(init_value)
         self.temporary_val = int(init_value)
-        self.value_range = (int(upper_bound) - int(lower_bound))
         self.upper_bound = int(upper_bound)
         self.lower_bound = int(lower_bound)
-        self.discrete_val = 0
+        self.value_set = self.InitValueSet([[self.lower_bound, self.upper_bound]])
 
+    # This function takes a list of interval ends (integer) and return a set contain all unique points in these intervals
+    # eg: InitValueSet([[1,3], [2,5]]) will return a list [1,2,3,4,5].
+    # Attention: Make sure the interval_ends_list contain at least one point.
+    def InitValueSet(self, interval_ends_list):
+        value_list = []
+        for interval_pair in interval_ends_list:
+            left_end = interval_pair[0]
+            right_end = interval_pair[1]
+            for val in range(left_end, right_end):
+                value_list.append(val)
+        return list(set(value_list))
+
+    # This function takes a interval and get its interval end points list. Then pass this list to InitValueSet to get
+    # new set. Finally, update self.value set to new set. 
+    def UpdateValueSet(self, intervals):
+        #TODO: Inteprete interval into 
+        return self.value_set
 
     def TransformIntoDiscrete(self, val):
         return val
@@ -48,10 +64,10 @@ class Int_Parameter:
         self.temporary_val = val
 
     def GenRandomNeighbor(self, name):
-        # print(self.lower_bound, self.upper_bound)
         random.seed()
-        new_val = random.randint(self.lower_bound, self.upper_bound)
-        # print(new_val)
+        #Randomly generate a new value from value set.
+        new_val = random.choice(self.value_set)
+        # new_val = random.randint(self.lower_bound, self.upper_bound)
         return Int_Parameter(name, self.upper_bound, self.lower_bound, new_val)
 
     def GenRandomNeighbors(self, neighbor_num):
@@ -63,18 +79,23 @@ class Int_Parameter:
         
 
 class Bool_Parameter:
-    def __init__(self, name, upper_bound, lower_bound, true_weight, false_weight, init_value = None):
+    def __init__(self, name, upper_bound, lower_bound, true_weight, false_weight, init_value):
         self.type = 'bool'
         self.name = name
         self.init_value = init_value
         self.temporary_val = init_value
-        self.value_range = {true_weight, false_weight}
         self.upper_bound = upper_bound
         self.lower_bound = lower_bound
         self.discrete_val = 0
         self.true_weight = true_weight
         self.false_weight = false_weight
-    
+        self.value_set = [false_weight, true_weight]
+
+    # This function takes a list of false and true weight. Then update self.value_set
+    # Attention: Make sure the 0 index is false_weight and 1 index is true_weight
+    def UpdateValueSet(self, weight_list):
+        self.value_set = weight_list
+
     def TransformIntoDiscrete(self, val):
         if val:
             return 1
@@ -93,7 +114,7 @@ class Bool_Parameter:
 
     def GenRandomNeighbor(self, name):
         new_val = random.choice([True, False])
-        return Bool_Parameter(name, self.upper_bound, self.lower_bound, self.true_weight, self.false_weight,new_val)
+        return Bool_Parameter(name, self.upper_bound, self.lower_bound, self.true_weight, self.false_weight, new_val)
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
@@ -103,7 +124,7 @@ class Bool_Parameter:
         return neighbor_list
 
 class Float_Parameter:
-    def __init__(self, name, upper_bound, lower_bound, init_value = None):
+    def __init__(self, name, upper_bound, lower_bound, init_value, discrete_val = None):
         self.type = 'float'
         self.name = name
         self.init_value = float(init_value)
@@ -111,10 +132,29 @@ class Float_Parameter:
         self.upper_bound = float(upper_bound)
         self.lower_bound = float(lower_bound)
         self.value_range = self.upper_bound - self.lower_bound
-        self.discrete_val = 0
+        self.discrete_val = 0 if discrete_val == None else discrete_val
+        self.value_set = self.InitValueSet([[self.lower_bound, self.upper_bound]])
 
-    def TransformIntoDiscrete(self, val):
-        return {int(float_transed*1000), -3}
+    # This function takes a list of interval ends and return a set contain all unique points in these intervals
+    # eg: InitValueSet([[1.5,3], [2,5]]) will return a list [2,3,4,5].
+    # Attention: Make sure the interval_ends_list contain at least one point.
+    def InitValueSet(self, interval_ends_list):
+        value_list = []
+        for interval_pair in interval_ends_list:
+            left_end = math.ceil(interval_pair[0])
+            right_end = math.floor(interval_pair[1])
+            for val in range(left_end, right_end):
+                value_list.append(val)
+        return list(set(value_list))
+
+    # This function takes a interval and get its interval end points list. Then pass this list to InitValueSet to get
+    # new set. Finally, update self.value set to new set. 
+    def UpdateValueSet(self, intervals):
+        #TODO: Inteprete interval into 
+        return self.value_set
+
+    # def TransformIntoDiscrete(self, val):
+    #     return {int(float_transed*1000), -3}
 
     def SetDiscreteTerms(self,val):
         float_transed = float(format(val, '.3f'))
@@ -136,11 +176,11 @@ class Float_Parameter:
         self.sig = sig
 
 
-    def TransformBack(self, val):
-        return float(val)/1000
+    # def TransformBack(self, val):
+    #     return float(val)/1000
 
-    def UpdatediscVal(self, val):
-        self.discrete_val = val
+    # def UpdatediscVal(self, val):
+    #     self.discrete_val = val
 
     def UpdatetmpVal(self, val):
         self.temporary_val = val
@@ -148,9 +188,10 @@ class Float_Parameter:
     def GenRandomNeighbor(self, name):
         # print(self.lower_bound, self.upper_bound)
         random.seed()
-        new_val = random.uniform(self.lower_bound, self.upper_bound)
-        # print(new_val)
-        return Float_Parameter(name, self.upper_bound, self.lower_bound, new_val)
+        #Randomly generate a new value from value set.
+        new_val = random.choice(self.value_set)
+        # new_val = random.uniform(self.lower_bound, self.upper_bound)
+        return Float_Parameter(name, self.upper_bound, self.lower_bound, self.init_value, discrete_val = new_val)
 
     def GenRandomNeighbors(self, neighbor_num):
         neighbor_list = []
@@ -210,7 +251,6 @@ class Iterating_Parameter:
         self.step = float(step)
         self.temporary_val = float(init_value)
         self.step_function = EvalSpace.EvalStepFunction(step_function, self)
-        # self.tmpvalue = float(init_value)
 
     def IsOverBound(self):
         if self.temporary_val > self.bound:
@@ -218,8 +258,6 @@ class Iterating_Parameter:
         return False
 
     def Iterate(self):
-        # TODO: Inplement  self.tmpvalue = ast_calculate(self.step_function, step)
-        # EvalStepFunction
         self.step_function.construct_parameter_space(self,[])
         self.temporary_val = self.temporary_val + self.step_function.get_step()
         return
@@ -240,7 +278,6 @@ parameter_types = {"int" : Int_Parameter,
 
 
 def InitTypedVariable(parameters):
-    # print(parameters)
     type_name = parameters['type']
     if type_name == 'int':
         var = Int_Parameter(parameters['name'], parameters['upper_bound'],
