@@ -6,7 +6,6 @@
       "init_value" : "True",
       "upper_bound" : "2000",
       "lower_bound" : "-50",
-      "value_range" : "None",
       "true_weight" : "44",
       "false_weight" : "-20"
     },
@@ -16,8 +15,7 @@
       "type" : "int",
       "init_value" : "76",
       "upper_bound" : "100",
-      "lower_bound" : "30",
-      "value_range" : "[30,100]"
+      "lower_bound" : "30"
     },
   "param_C" :
     {
@@ -31,7 +29,6 @@
               "init_value" : "True",
               "upper_bound" : "None",
               "lower_bound" : "None",
-              "value_range" : "None",
               "true_weight" : "44",
               "false_weight" : "-20"
           }
@@ -42,16 +39,14 @@
             "type" : "float",
             "init_value" : "154.5",
             "upper_bound" : "200.0",
-            "lower_bound" : "50.0",
-            "value_range" : "[50.0, 200.0]"
+            "lower_bound" : "50.0"
           },
           "z" : {
             "name" : "param_C_z",
             "type" : "int",
             "init_value" : "-50",
             "upper_bound" : "0",
-            "lower_bound" : "-1000",
-            "value_range" : "[-1000,20]"
+            "lower_bound" : "-1000"
           }
         }
       ]
