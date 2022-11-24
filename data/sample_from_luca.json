@@ -54,7 +54,7 @@
     "iterating_variable":{
       "name" : "time",
       "init_value" : "1",
-      "bound" : "10",
+      "bound" : "50",
       "step" : "2",
       "step_function" : "1/time"
     },

@@ -19,7 +19,7 @@ class Algorithm:
         self.iterating_parameter = iterating_parameter
         self.cost_function = cost_function
         self.variable_num = len(variable_list)
-        self.search_neighbor_num = 10   # TO DO: Set the number 10 to a parameter in __init__
+        self.search_neighbor_num = 100   # TO DO: Set the number 10 to a parameter in __init__
         self.assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, variable_list)
         self.name = ''
 
@@ -72,7 +72,13 @@ class SelfDefinedAlgorithm(Algorithm):
         # print("Local Cost List is: ", cost_val_list)
         print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
-
+        # for i in range(self.variable_num):
+        #     if self.variable_list[i].type == 'composite':
+        #         for children in self.variable_list[i].children_list:
+        #             for child in children:
+        #                 print(child.temporary_val)
+        #     else:
+        #         print(self.variable_list[i].temporary_val)
 
     def CoordinateRandomSearch(self, i):
         tmp_list_list = []
@@ -99,6 +105,13 @@ class SelfDefinedAlgorithm(Algorithm):
                 total_possible_list_list.append(tmp_list_list[j])
         print("Local Optimal Cost is: ", min(total_cost_list))
         self.variable_list = total_possible_list_list[total_cost_list.index(min(total_cost_list))]
+        # for i in range(self.variable_num):
+        #     if self.variable_list[i].type == 'composite':
+        #         for children in self.variable_list[i].children_list:
+        #             for child in children:
+        #                 print(child.temporary_val)
+        #     else:
+        #         print(self.variable_list[i].temporary_val)
 
 
     def CheckEndRequirements(self):
