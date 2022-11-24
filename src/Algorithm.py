@@ -11,6 +11,8 @@
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
 import EvalSpace
 import sympy
+import copy
+
 class Algorithm:
     def __init__(self, variable_list, cost_function, iterating_parameter, assertions):
         self.variable_list = variable_list
@@ -47,23 +49,10 @@ class SelfDefinedAlgorithm(Algorithm):
             # intervals = self.assertions.valid_parameter_range(self.iterating_parameter, self.variable_list, tmp_variable)
             intervals = [] # This line will be replaced by previous line later.
             tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, intervals)
-            # tmp_new_list_in_assertions = []
-            # while len(tmp_new_list_in_assertions) < self.search_neighbor_num:
-            #     tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num)
-            #     # print(tmp_new_list)
-            #     for tmp_new_variable in tmp_new_list:
-            #         self.assertions.construct_parameter_space(self.iterating_parameter, [tmp_new_variable])
-            #         if self.assertions.verify_assertions():
-            #             # print("Append One")
-            #             tmp_new_list_in_assertions.append(tmp_new_variable)
-                # print(len(tmp_new_list_in_assertions))
-                # new_variable_list_list.append(tmp_new_list[0:self.search_neighbor_num])
-                # break
-            # new_variable_list_list.append(tmp_new_list_in_assertions[0:self.search_neighbor_num])
             new_variable_list_list.append(tmp_new_list)
         return new_variable_list_list
 
-    def GetLocalOptimalValLists(self):
+    def GetLocalOptimalValListsWildly(self):
         new_variable_list_list = self.CreateVariableListList() #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
         cost_val_list = []
         possible_val_list = [] #[[1,7,10],[1.4,7.3,10.1],[1.6,7.7,10.6]]
@@ -78,15 +67,39 @@ class SelfDefinedAlgorithm(Algorithm):
             # print(tmp_variable_list) 
             self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_variable_list)
             cost_val_list.append(self.cost_function.get_cost())
-            ########################SYMPY WORK################
-            # self.assertions.valid_parameter_range(self.iterating_parameter, tmp_variable_list, tmp_variable_list[0])
-
-            ##################################################
             possible_val_list.append(tmp_variable_list)
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
         # print("Local Cost List is: ", cost_val_list)
         print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
-        return possible_val_list[cost_val_list.index(min(cost_val_list))]
+        self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
+
+
+    def CoordinateRandomSearch(self, i):
+        tmp_list_list = []
+        tmp_variable = self.variable_list[i]
+        intervals=[]
+        tmp_variable_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, intervals)
+        for j in range(len(tmp_variable_list)):
+            tmp_new_variable = tmp_variable_list[j]
+            tmp_variable_list_copy = copy.deepcopy(self.variable_list)
+            tmp_variable_list_copy[i] = tmp_new_variable
+            tmp_list_list.append(tmp_variable_list_copy)
+        return tmp_list_list
+
+    def GetLocalOptimalValListsCoordinately(self):
+        total_possible_list_list = []
+        total_cost_list = []
+        total_cost_list.append(self.cost_function.get_cost())
+        total_possible_list_list.append(self.variable_list)
+        for i in range(self.variable_num):
+            tmp_list_list = self.CoordinateRandomSearch(i)
+            for j in range(len(tmp_list_list)):
+                self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_list_list[j])
+                total_cost_list.append(self.cost_function.get_cost())
+                total_possible_list_list.append(tmp_list_list[j])
+        print("Local Optimal Cost is: ", min(total_cost_list))
+        self.variable_list = total_possible_list_list[total_cost_list.index(min(total_cost_list))]
+
 
     def CheckEndRequirements(self):
         return self.iterating_parameter.IsOverBound()
@@ -98,9 +111,7 @@ class SelfDefinedAlgorithm(Algorithm):
                     self.iterating_parameter.bound,self.iterating_parameter.temporary_val/self.iterating_parameter.bound))
             iteration_number += 1
             self.iterating_parameter.Iterate()
-            # print(self.variable_list)
-            # print('Current Parameter Values are: ')
-            self.variable_list = self.GetLocalOptimalValLists()
+            self.GetLocalOptimalValListsCoordinately()
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
         return 
 
