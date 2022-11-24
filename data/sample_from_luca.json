@@ -4,8 +4,6 @@
       "name" : "param_A",
       "type" : "bool",
       "init_value" : "True",
-      "upper_bound" : "2000",
-      "lower_bound" : "-50",
       "true_weight" : "44",
       "false_weight" : "-20"
     },
@@ -27,8 +25,6 @@
               "name" : "param_C_x",
               "type" : "bool",
               "init_value" : "True",
-              "upper_bound" : "None",
-              "lower_bound" : "None",
               "true_weight" : "44",
               "false_weight" : "-20"
           }

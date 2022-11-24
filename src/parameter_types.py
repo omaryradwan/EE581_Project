@@ -74,14 +74,11 @@ class Int_Parameter():
         
 
 class Bool_Parameter:
-    def __init__(self, name, upper_bound, lower_bound, true_weight, false_weight, init_value):
+    def __init__(self, name, true_weight, false_weight, init_value):
         self.type = 'bool'
         self.name = name
         self.init_value = init_value
         self.temporary_val = init_value
-        self.upper_bound = upper_bound
-        self.lower_bound = lower_bound
-        self.discrete_val = 0
         self.true_weight = true_weight
         self.false_weight = false_weight
         self.value_set = [false_weight, true_weight]
@@ -91,25 +88,12 @@ class Bool_Parameter:
     def UpdateValueSet(self, weight_list):
         self.value_set = weight_list
 
-    def TransformIntoDiscrete(self, val):
-        if val:
-            return 1
-        return 0
-    
-    def TransformBack(self, val):
-        if val == 1:
-            return True
-        return False
-
-    def UpdatediscVal(self, val):
-        self.discrete_val = val
-
     def UpdatetmpVal(self, val):
         self.temporary_val = val
 
     def GenRandomNeighbor(self, name, intervals):
         new_val = random.choice([True, False])
-        new_variable = Bool_Parameter(name, self.upper_bound, self.lower_bound, self.true_weight, self.false_weight, self.init_value)
+        new_variable = Bool_Parameter(name, self.true_weight, self.false_weight, self.init_value)
         new_variable.UpdatetmpVal(new_val)
         return new_variable
 
@@ -283,7 +267,7 @@ def InitTypedVariable(parameters):
                              parameters['lower_bound'], parameters['init_value'])
         return var
     elif type_name == 'bool':
-        return Bool_Parameter(parameters['name'], parameters['upper_bound'], parameters['lower_bound'],parameters['true_weight'],parameters['false_weight'],
+        return Bool_Parameter(parameters['name'],parameters['true_weight'],parameters['false_weight'],
                                parameters['init_value'])
     elif type_name == 'float':
         return Float_Parameter(parameters['name'], parameters['upper_bound'],
