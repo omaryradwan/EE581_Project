@@ -105,16 +105,16 @@ class Bool_Parameter:
         return neighbor_list
 
 class Float_Parameter:
-    def __init__(self, name, upper_bound, lower_bound, init_value):
+    def __init__(self, name, upper_bound, lower_bound, init_value, digits):
         self.type = 'float'
         self.name = name
         self.init_value = float(init_value)
         self.temporary_val = float(init_value)
         self.upper_bound = float(upper_bound)
         self.lower_bound = float(lower_bound)
-        self.value_range = self.upper_bound - self.lower_bound
         self.discrete_val = 0
         self.value_set = self.InitValueSet([[self.lower_bound, self.upper_bound]])
+        self.digits = digits
 
     # This function takes a list of interval ends and return a set contain all unique points in these intervals
     # eg: InitValueSet([[1.5,3], [2,5]]) will return a list [2,3,4,5].
@@ -159,7 +159,6 @@ class Float_Parameter:
 
     # def TransformBack(self, val):
     #     return float(val)/1000
-
     def UpdatediscVal(self, val):
         self.discrete_val = val
 
@@ -172,7 +171,7 @@ class Float_Parameter:
         #self.UpdateValueSet(intervals)
         new_val = random.choice(self.value_set)
         # new_val = random.uniform(self.lower_bound, self.upper_bound)
-        new_variable = Float_Parameter(name, self.upper_bound, self.lower_bound, self.init_value)
+        new_variable = Float_Parameter(name, self.upper_bound, self.lower_bound, self.init_value, self.digits)
         new_variable.UpdatetmpVal(new_val) # This line will be replaced
         return new_variable
 
@@ -270,8 +269,8 @@ def InitTypedVariable(parameters):
         return Bool_Parameter(parameters['name'],parameters['true_weight'],parameters['false_weight'],
                                parameters['init_value'])
     elif type_name == 'float':
-        return Float_Parameter(parameters['name'], parameters['upper_bound'],
-                             parameters['lower_bound'], parameters['init_value'])
+        return Float_Parameter(parameters['name'], parameters['upper_bound'], parameters['lower_bound'], 
+                                parameters['init_value'], parameters['digits'])
     elif type_name == 'composite':
         return Composite_Parameter(parameters['name'], parameters['values'])
     print("Error: " + type_name + " type does not exist, exiting")
