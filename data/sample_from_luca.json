@@ -59,6 +59,6 @@
       "formula" : "(param_B-30)**2 + param_C_y**2 + (param_C_z+60)**2"
     },
     "assertions" : {
-        "values" : ["param_C_y >= param_C_z","param_B > 0", "param_A < param_C_y"]
+        "values" : ["param_C_y >= param_C_z","param_B > 0"]
     }
 }

@@ -46,9 +46,8 @@ class SelfDefinedAlgorithm(Algorithm):
         new_variable_list_list = []      
         for i in range(self.variable_num):
             tmp_variable = self.variable_list[i]
-            # intervals = self.assertions.valid_parameter_range(self.iterating_parameter, self.variable_list, tmp_variable)
-            intervals = [] # This line will be replaced by previous line later.
-            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, intervals)
+            # assertions_set = self.assertions.valid_parameter_range(self.iterating_parameter, self.variable_list, tmp_variable)
+            tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, self.assertions, self.iterating_parameter, self.variable_list)
             new_variable_list_list.append(tmp_new_list)
         return new_variable_list_list
 
@@ -124,7 +123,7 @@ class SelfDefinedAlgorithm(Algorithm):
                     self.iterating_parameter.bound,self.iterating_parameter.temporary_val/self.iterating_parameter.bound))
             iteration_number += 1
             self.iterating_parameter.Iterate()
-            self.GetLocalOptimalValListsCoordinately()
+            self.GetLocalOptimalValListsWildly()
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
         return 
 

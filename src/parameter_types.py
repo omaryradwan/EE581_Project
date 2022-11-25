@@ -45,31 +45,27 @@ class Int_Parameter():
                 value_list.append(val)
         return list(set(value_list))
 
-    # This function takes a interval and get its interval end points list. Then pass this list to InitValueSet to get
-    # new set. Finally, update self.value set to new set. 
-    def UpdateValueSet(self, intervals):
-        #TODO: Inteprete interval into 
-        return self.value_set
+    def UpdateValueSet(self, value_set):
+        self.value_set = value_set
 
     def UpdatetmpVal(self, val):
         self.temporary_val = val
 
-    def GenRandomNeighbor(self, name, intervals):
+    def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
         random.seed()
-        #TODO: Randomly generate a new value from value set.
-        #self.UpdateValueSet(intervals)
+        assertions_set = assertions.valid_parameter_range(iterating_parameter, variable_list, self)
+        self.UpdateValueSet(assertions_set)
         new_val = random.choice(self.value_set)
-        # new_val = random.randint(self.lower_bound, self.upper_bound)
         new_variable = Int_Parameter(name, self.upper_bound, self.lower_bound, self.init_value)
         new_variable.UpdatetmpVal(new_val)
         return new_variable
 
 
-    def GenRandomNeighbors(self, neighbor_num, intervals):
+    def GenRandomNeighbors(self, neighbor_num, assertions, iterating_parameter, variable_list):
         neighbor_list = []
         for i in range(neighbor_num):
             new_name = self.name
-            neighbor_list.append(self.GenRandomNeighbor(new_name, intervals))
+            neighbor_list.append(self.GenRandomNeighbor(new_name, assertions, iterating_parameter, variable_list))
         return neighbor_list
         
 
@@ -83,25 +79,25 @@ class Bool_Parameter:
         self.false_weight = false_weight
         self.value_set = [false_weight, true_weight]
 
-    # This function takes a list of false and true weight. Then update self.value_set
-    # Attention: Make sure the 0 index is false_weight and 1 index is true_weight
-    def UpdateValueSet(self, weight_list):
-        self.value_set = weight_list
+    def UpdateValueSet(self, value_set):
+        self.value_set = value_set
 
     def UpdatetmpVal(self, val):
         self.temporary_val = val
 
-    def GenRandomNeighbor(self, name, intervals):
-        new_val = random.choice([True, False])
+    def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
+        assertions_set = assertions.valid_parameter_range(iterating_parameter, variable_list, self)
+        self.UpdateValueSet(assertions_set)
+        new_val = random.choice(self.value_set)
         new_variable = Bool_Parameter(name, self.true_weight, self.false_weight, self.init_value)
         new_variable.UpdatetmpVal(new_val)
         return new_variable
 
-    def GenRandomNeighbors(self, neighbor_num, intervals):
+    def GenRandomNeighbors(self, neighbor_num, assertions, iterating_parameter, variable_list):
         neighbor_list = []
         for i in range(neighbor_num):
             new_name = self.name
-            neighbor_list.append(self.GenRandomNeighbor(new_name, intervals))
+            neighbor_list.append(self.GenRandomNeighbor(new_name, assertions, iterating_parameter, variable_list))
         return neighbor_list
 
 class Float_Parameter:
@@ -123,24 +119,13 @@ class Float_Parameter:
         value_list = []
         for interval_pair in interval_ends_list:
             left_end = math.ceil(interval_pair[0])
-            right_end = math.floor(interval_pair[1])
+            right_end = math.floor(interval_pair[1]) ##[1.2323, 1.4444]
             for val in range(left_end, right_end):
                 value_list.append(val)
         return list(set(value_list))
 
-    # This function takes a interval and get its interval end points list. Then pass this list to InitValueSet to get
-    # new set. Finally, update self.value set to new set. 
-    def UpdateValueSet(self, intervals):
-        #TODO: Inteprete interval into interval_ends_list
-        return self.value_set
-
-    # def TransformIntoDiscrete(self, val):
-    #     return {int(float_transed*1000), -3}
-
-    def SetDiscreteTerms(self,val):
-        float_transed = float(format(val, '.3f'))
-        self.trans_base = float_transed
-        self.trans_mantissa = -3
+    def UpdateValueSet(self, value_set):
+        self.value_set = value_set
 
     def SetTransformed(self, num):
         decimal_places = 18
@@ -156,30 +141,26 @@ class Float_Parameter:
         self.exp = exp
         self.sig = sig
 
-
-    # def TransformBack(self, val):
-    #     return float(val)/1000
     def UpdatediscVal(self, val):
         self.discrete_val = val
 
     def UpdatetmpVal(self, val):
         self.temporary_val = float(val)
     
-    def GenRandomNeighbor(self, name, intervals):
+    def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
         random.seed()
-        #TODO: Randomly generate a new value from value set.
-        #self.UpdateValueSet(intervals)
+        assertions_set = assertions.valid_parameter_range(iterating_parameter, variable_list, self)
+        self.UpdateValueSet(assertions_set)
         new_val = random.choice(self.value_set)
-        # new_val = random.uniform(self.lower_bound, self.upper_bound)
         new_variable = Float_Parameter(name, self.upper_bound, self.lower_bound, self.init_value, self.digits)
-        new_variable.UpdatetmpVal(new_val) # This line will be replaced
+        new_variable.UpdatetmpVal(new_val)
         return new_variable
 
-    def GenRandomNeighbors(self, neighbor_num, intervals):
+    def GenRandomNeighbors(self, neighbor_num, assertions, iterating_parameter, variable_list):
         neighbor_list = []
         for i in range(neighbor_num):
             new_name = self.name
-            neighbor_list.append(self.GenRandomNeighbor(new_name, intervals))
+            neighbor_list.append(self.GenRandomNeighbor(new_name, assertions, iterating_parameter, variable_list))
         return neighbor_list
 
 class Composite_Parameter:
@@ -206,21 +187,21 @@ class Composite_Parameter:
             children_list.append(tmp_children_group)
         return children_list
 
-    def GenRandomNeighbor(self, name, intervals):
+    def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
         new_child_list = []
         for child_group in self.children_list:
             new_child_group = []
             for child in child_group:
-                new_child_group.append(child.GenRandomNeighbor(child.name, intervals))
+                new_child_group.append(child.GenRandomNeighbor(child.name, assertions, iterating_parameter, variable_list))
             new_child_list.append(new_child_group)
         return Composite_Parameter(name, children_list = new_child_list)
 
 
-    def GenRandomNeighbors(self, neighbor_num, intervals):
+    def GenRandomNeighbors(self, neighbor_num, assertions, iterating_parameter, variable_list):
         neighbor_list = []
         for i in range(neighbor_num - 1):
             new_name = self.name
-            neighbor_list.append(self.GenRandomNeighbor(new_name, intervals))
+            neighbor_list.append(self.GenRandomNeighbor(new_name, assertions, iterating_parameter, variable_list))
         return neighbor_list
 
 

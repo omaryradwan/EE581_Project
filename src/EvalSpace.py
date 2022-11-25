@@ -67,6 +67,8 @@ class VerifyAssertions(EvalUtils):
         return all_asserts_valid
 
     def valid_parameter_range(self, iterating_parameter, parameter_list, target_parameter):
+        if target_parameter.type == 'bool':
+            return [True, False]
 
         local_parameter_list = list()
         param_to_symbol_dict = dict()
@@ -89,18 +91,20 @@ class VerifyAssertions(EvalUtils):
             local_parameter_list.append(i)
 
         #go through the available assertioms, and if our target_parameter is in their, pull it in
-        eq_dict = dict()
-        bound_eq_str = target_parameter.lower_bound + " < " + target_parameter.name + " < "  + target_parameter.upper_bound
+        eq_dict = []
+        # bound_eq_str = target_parameter.lower_bound + " < " + target_parameter.name + " < "  + target_parameter.upper_bound
         # bound_solve = sympify(bound_eq_str)
         for i in self.formulas.assertion_list:
+            # print(i)
+            # print(sympify(i).free_symbols)
             for j in sympify(i).free_symbols:
-                if str(j) == str(param_to_symbol_dict[target_parameter.name]):
-                    eq_dict[i] = sympify(i, evaluate=False)
-
-
+                if param_to_symbol_dict.get(target_parameter.name) != None and str(j) == str(param_to_symbol_dict[target_parameter.name]):
+                    # eq_dict[i] = sympify(i, evaluate=False)
+                    eq_dict.append(sympify(i, evaluate=False))
+        
         #go through all the assertions and subsitutute all the values for the symbols(first for iterating parameter, then for the rest of them, as long as they're not target parameter)
         valid_interval_list = list()
-        for i in eq_dict.keys():
+        for i in range(len(eq_dict)):
             maximum_exp = 0
             eq_dict[i] = eq_dict[i].subs(param_to_symbol_dict[iterating_parameter.name], iterating_parameter.temporary_val)
 
@@ -108,19 +112,19 @@ class VerifyAssertions(EvalUtils):
                 if param.name == target_parameter.name:
                     continue
                 if(param.type == "float"):
-                    eq_dict[i] = eq_dict[i].subs(param.name, param.sig);
+                    eq_dict[i] = eq_dict[i].subs(param.name, param.sig)
                     maximum_exp += param.sig
                 elif (param.type == "int"):
                     eq_dict[i] = eq_dict[i].subs(param.name, param.temporary_val)
-        valid_interval_list.append(solveset(eq_dict[i], target_parameter.name, domain=S.Integers))
+            valid_interval_list.append(solveset(eq_dict[i], target_parameter.name, domain=S.Integers))
 
         interval = Interval(int(target_parameter.lower_bound), int(target_parameter.upper_bound))
         for i in valid_interval_list:
             interval = interval.intersect(i)
-
-        print("valid interval for target parameter", target_parameter.name)
-        print(interval)
-        #print(interval[0], interval[len(interval)])
+        # print("valid interval for target parameter", target_parameter.name)
+        # print(list(interval))
+        # print(interval)
+        return list(interval)
 
 
 class EvalStepFunction(EvalUtils):
