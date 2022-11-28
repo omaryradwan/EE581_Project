@@ -151,9 +151,12 @@ class Float_Parameter:
         random.seed()
         assertions_set = assertions.valid_parameter_range(iterating_parameter, variable_list, self)
         self.UpdateValueSet(assertions_set)
+        # print(self.value_set)
         new_val = random.choice(self.value_set)
         new_variable = Float_Parameter(name, self.upper_bound, self.lower_bound, self.init_value, self.digits)
         new_variable.UpdatetmpVal(new_val)
+        # print(new_val)
+        # print(new_variable.temporary_val)
         return new_variable
 
     def GenRandomNeighbors(self, neighbor_num, assertions, iterating_parameter, variable_list):
