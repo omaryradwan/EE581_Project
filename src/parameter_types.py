@@ -8,7 +8,7 @@
 #       upper_bound         --  The dependent bounds of the variable from user          eg: [[-a, a^2], [a, a+1]]
 #       lower_bound         --  The discrete value of variable                          eg: 1, 2, [1,3,5]
 #       discrete_val        --  The current discrete value                              eg: 3, 4, 5
-#       
+#
 #
 #  One Type class should have the following functions:
 #       TransformIntoDiscrete()         --          Transform a given value into the discrete field, return the discrete value
@@ -53,7 +53,8 @@ class Int_Parameter():
 
     def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
         random.seed()
-        assertions_set = assertions.valid_parameter_range(iterating_parameter, variable_list, self)
+        assertions_set = assertions.get_valid_interval(iterating_parameter, variable_list, self)
+        # print(assertions_set)
         self.UpdateValueSet(assertions_set)
         new_val = random.choice(self.value_set)
         new_variable = Int_Parameter(name, self.upper_bound, self.lower_bound, self.init_value)
@@ -67,7 +68,7 @@ class Int_Parameter():
             new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name, assertions, iterating_parameter, variable_list))
         return neighbor_list
-        
+
 
 class Bool_Parameter:
     def __init__(self, name, true_weight, false_weight, init_value):
@@ -79,6 +80,7 @@ class Bool_Parameter:
         self.false_weight = false_weight
         self.value_set = [false_weight, true_weight]
 
+
     def UpdateValueSet(self, value_set):
         self.value_set = value_set
 
@@ -86,7 +88,7 @@ class Bool_Parameter:
         self.temporary_val = val
 
     def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
-        assertions_set = assertions.valid_parameter_range(iterating_parameter, variable_list, self)
+        assertions_set = assertions.get_valid_interval(iterating_parameter, variable_list, self)
         self.UpdateValueSet(assertions_set)
         new_val = random.choice(self.value_set)
         new_variable = Bool_Parameter(name, self.true_weight, self.false_weight, self.init_value)
@@ -146,10 +148,10 @@ class Float_Parameter:
 
     def UpdatetmpVal(self, val):
         self.temporary_val = float(val)
-    
+
     def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
         random.seed()
-        assertions_set = assertions.valid_parameter_range(iterating_parameter, variable_list, self)
+        assertions_set = assertions.get_valid_interval(iterating_parameter, variable_list, self)
         self.UpdateValueSet(assertions_set)
         new_val = random.choice(self.value_set)
         new_variable = Float_Parameter(name, self.upper_bound, self.lower_bound, self.init_value, self.digits)
@@ -225,6 +227,7 @@ class Iterating_Parameter:
         self.temporary_val = self.temporary_val + self.step_function.get_step()
         return
 
+
 class Assertions:
     def __init__(self, assertion_list):
         self.assertion_list = assertion_list
@@ -250,7 +253,7 @@ def InitTypedVariable(parameters):
         return Bool_Parameter(parameters['name'],parameters['true_weight'],parameters['false_weight'],
                                parameters['init_value'])
     elif type_name == 'float':
-        return Float_Parameter(parameters['name'], parameters['upper_bound'], parameters['lower_bound'], 
+        return Float_Parameter(parameters['name'], parameters['upper_bound'], parameters['lower_bound'],
                                 parameters['init_value'], parameters['digits'])
     elif type_name == 'composite':
         return Composite_Parameter(parameters['name'], parameters['values'])

@@ -2,7 +2,9 @@ import ast
 import asteval
 import sympy
 from sympy import *
+import numpy as np
 import random
+from functools import reduce
 class EvalUtils:
     def __init__(self, formulas, iterating_parameter, parameter_list):
         self.formulas = formulas
@@ -42,7 +44,7 @@ class EvalUtils:
 
 class EvalCost(EvalUtils):
     def __init__(self, cost_formula, iterating_parameter, parameter_list):
-        super().__init__(cost_formula, iterating_parameter, parameter_list)  
+        super().__init__(cost_formula, iterating_parameter, parameter_list)
 
     def get_cost(self):
         self.tot_cost = self.evaluator(self.formulas)
@@ -66,18 +68,12 @@ class VerifyAssertions(EvalUtils):
         # print(all_asserts_valid)
         return all_asserts_valid
 
-    def valid_parameter_range(self, iterating_parameter, parameter_list, target_parameter):
-        if target_parameter.type == 'bool':
-            return [True, False]
-
-        local_parameter_list = list()
-        param_to_symbol_dict = dict()
-
-        #adding iterating parameter as a symbol
-        param_to_symbol_dict[iterating_parameter.name] = symbols(iterating_parameter.name, integer = True)
-
-        #adding all other parameters from parameter_list to symbols, as well as storing them privately to do stuff with them
-        for i in parameter_list:
+    def get_valid_interval(self,iterating_parameter, parameter_list, target_parameter):
+        eq_list = list()
+        for i in self.formulas.assertion_list:
+            if target_parameter.name in i:
+                eq_list.append(i)
+        for i in set(parameter_list):
             if i.type == 'float':
                 i.SetTransformed(i.temporary_val)
             #if its composite, we don't want to add the whole thing, its components
@@ -85,46 +81,46 @@ class VerifyAssertions(EvalUtils):
                 for j in i.temporary_val:
                     for k in j:
                         parameter_list.append(k)
+                parameter_list.remove(i)
                 continue
-            #create a symbol and add a top level symbol to our list
-            param_to_symbol_dict[i.name] = symbols(i.name, integer = True)
-            local_parameter_list.append(i)
+            parameter_list.append(i)
 
-        #go through the available assertioms, and if our target_parameter is in their, pull it in
-        eq_dict = []
-        # bound_eq_str = target_parameter.lower_bound + " < " + target_parameter.name + " < "  + target_parameter.upper_bound
-        # bound_solve = sympify(bound_eq_str)
-        for i in self.formulas.assertion_list:
-            # print(i)
-            # print(sympify(i).free_symbols)
-            for j in sympify(i).free_symbols:
-                if param_to_symbol_dict.get(target_parameter.name) != None and str(j) == str(param_to_symbol_dict[target_parameter.name]):
-                    # eq_dict[i] = sympify(i, evaluate=False)
-                    eq_dict.append(sympify(i, evaluate=False))
-        
-        #go through all the assertions and subsitutute all the values for the symbols(first for iterating parameter, then for the rest of them, as long as they're not target parameter)
+        if target_parameter.type == 'bool':
+            return [True, False]
         valid_interval_list = list()
-        for i in range(len(eq_dict)):
-            maximum_exp = 0
-            eq_dict[i] = eq_dict[i].subs(param_to_symbol_dict[iterating_parameter.name], iterating_parameter.temporary_val)
-
-            for param in local_parameter_list:
+        initial_valid_bound =  np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
+        valid_interval_list.append(initial_valid_bound)
+        for equation_inst in eq_list:
+            equation_inst = equation_inst.replace(iterating_parameter.name, str(iterating_parameter.temporary_val))
+            for param in set(parameter_list):
                 if param.name == target_parameter.name:
                     continue
-                if(param.type == "float"):
-                    eq_dict[i] = eq_dict[i].subs(param.name, param.sig)
-                    maximum_exp += param.sig
-                elif (param.type == "int"):
-                    eq_dict[i] = eq_dict[i].subs(param.name, param.temporary_val)
-            valid_interval_list.append(solveset(eq_dict[i], target_parameter.name, domain=S.Integers))
+                if param.type == "float" :
+                    equation_inst = equation_inst.replace(param.name, str(param.temporary_val))
+                elif param.type == "int":
+                    equation_inst = equation_inst.replace(param.name, str(param.temporary_val))
+                if param.type == "bool":
+                    if param.temporary_val:
+                        equation_inst = equation_inst.replace(param.name, str(param.true_weight))
+                    else:
+                        equation_inst = equation_inst.replace(param.name, str(param.false_weight))
+            eq = lambdify(target_parameter.name, equation_inst)
+            valid_bound_arr = np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
+            valid_bound_arr_candidate = eq(valid_bound_arr)
+            # print(valid_bound_arr_candidate[0].dtype)
+            if(valid_bound_arr_candidate[0].dtype == bool):
+                valid_bound_arr = valid_bound_arr[valid_bound_arr_candidate == True]
+            else:
+                valid_bound_arr = valid_bound_arr_candidate
 
-        interval = Interval(int(target_parameter.lower_bound), int(target_parameter.upper_bound))
-        for i in valid_interval_list:
-            interval = interval.intersect(i)
-        # print("valid interval for target parameter", target_parameter.name)
-        # print(list(interval))
-        # print(interval)
-        return list(interval)
+            valid_interval_list.append(valid_bound_arr)
+
+        fully_valid_interval = reduce(np.intersect1d, valid_interval_list)
+
+        if len(fully_valid_interval.tolist()) == 0:
+            print(target_parameter.name, " has no valid intervals, resetting bounds....")
+            return initial_valid_bound.tolist()
+        return(fully_valid_interval.tolist())
 
 
 class EvalStepFunction(EvalUtils):

@@ -1,64 +1,72 @@
 {
-  "param_A" :
-    {
-      "name" : "param_A",
-      "type" : "bool",
-      "init_value" : "True",
-      "true_weight" : "44",
-      "false_weight" : "-20"
-    },
-  "param_B" :
-    {
-      "name" : "param_B",
-      "type" : "int",
-      "init_value" : "76",
-      "upper_bound" : "100",
-      "lower_bound" : "30"
-    },
-  "param_C" :
-    {
-      "name" : "param_C",
-      "type" : "composite",
-      "values" : [
-        {
-          "x" : {
-              "name" : "param_C_x",
-              "type" : "bool",
-              "init_value" : "True",
-              "true_weight" : "44",
-              "false_weight" : "-20"
-          }
-        },
-        {
-          "y": {
-            "name" : "param_C_y",
-            "type" : "float",
-            "init_value" : "154.5",
-            "upper_bound" : "200.0",
-            "lower_bound" : "50.0",
-            "digits" : "5"
-          },
-          "z" : {
-            "name" : "param_C_z",
-            "type" : "int",
-            "init_value" : "-50",
-            "upper_bound" : "0",
-            "lower_bound" : "-1000"
-          }
+  "param_A": {
+    "name": "param_A",
+    "type": "bool",
+    "init_value": "True",
+    "true_weight": "44",
+    "false_weight": "-20"
+  },
+  "param_B": {
+    "name": "param_B",
+    "type": "int",
+    "init_value": "76",
+    "upper_bound": "100",
+    "lower_bound": "30"
+  },
+  "param_D": {
+    "name": "param_D",
+    "type": "int",
+    "init_value": "6",
+    "upper_bound": "10",
+    "lower_bound": "5"
+  },
+  "param_C": {
+    "name": "param_C",
+    "type": "composite",
+    "values": [
+      {
+        "x": {
+          "name": "param_C_x",
+          "type": "bool",
+          "init_value": "True",
+          "true_weight": "44",
+          "false_weight": "-20"
         }
-      ]
-    },
-    "iterating_variable":{
-      "name" : "time",
-      "init_value" : "1",
-      "bound" : "50",
-      "step" : "2",
-      "step_function" : "1/time"
-    },
-    "cost_function":{
-      "formula" : "(param_B-30)**2 + param_C_y**2 + (param_C_z+60)**2"
-    },
-    "assertions" : {
-        "values" : ["param_C_y >= param_C_z","param_B > 0"]
-    }
+      },
+      {
+        "y": {
+          "name": "param_C_y",
+          "type": "float",
+          "init_value": "154.5",
+          "upper_bound": "200.0",
+          "lower_bound": "50.0",
+          "digits": "5"
+        },
+        "z": {
+          "name": "param_C_z",
+          "type": "int",
+          "init_value": "-50",
+          "upper_bound": "0",
+          "lower_bound": "-1000"
+        }
+      }
+    ]
+  },
+  "iterating_variable": {
+    "name": "time",
+    "init_value": "1",
+    "bound": "50",
+    "step": "1",
+    "step_function": "1"
+  },
+  "cost_function": {
+    "formula": "(param_B-30)**2 + (param_D- 10)**2"
+  },
+  "assertions": {
+    "values": [
+      "param_C_y >= param_C_z",
+      "param_B > 12",
+      "param_D > 6"
+    ]
+  }
 }

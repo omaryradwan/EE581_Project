@@ -1,0 +1,105 @@
+{
+  "PCIe_ports": {
+    "name": "PCIe_ports",
+    "type": "int",
+    "init_value": "4",
+    "upper_bound": "8",
+    "lower_bound": "1",
+    "value_range": "[1,8]"
+  },
+  "is_big_endian": {
+    "name": "is_big_endian",
+    "type": "bool",
+    "init_value": "True",
+    "upper_bound": "None",
+    "lower_bound": "None",
+    "value_range": "None",
+    "true_weight": "100",
+    "false_weight": "50"
+  },
+  "L3_Cache": {
+    "name": "L3_Cache",
+    "type": "composite",
+    "values": [
+      {
+        "L3_size": {
+          "name": "L3_size",
+          "type": "int",
+          "init_value": "2048",
+          "upper_bound": "8192",
+          "lower_bound": "128",
+          "value_range": "[128,8192]"
+        },
+        "L3_block_count": {
+          "name": "L3_block_count",
+          "type": "int",
+          "init_value": "4",
+          "upper_bound": "64",
+          "lower_bound": "1",
+          "value_range": "[1,64]"
+        }
+      }
+    ]
+  },
+  "L2_Cache": {
+    "name": "L2_Cache",
+    "type": "composite",
+    "values": [
+      {
+        "L2_size": {
+          "name": "L2_size",
+          "type": "int",
+          "init_value": "2048",
+          "upper_bound": "8192",
+          "lower_bound": "128",
+          "value_range": "[128,8192]"
+        },
+        "L2_block_count": {
+          "name": "L2_block_count",
+          "type": "int",
+          "init_value": "4",
+          "upper_bound": "64",
+          "lower_bound": "1",
+          "value_range": "[1,64]"
+        }
+      }
+    ]
+  },
+  "L1_Cache": {
+    "name": "L1_Cache",
+    "type": "composite",
+    "values": [
+      {
+        "L1_size": {
+          "name": "L1_size",
+          "type": "int",
+          "init_value": "2048",
+          "upper_bound": "8192",
+          "lower_bound": "128",
+          "value_range": "[128,8192]"
+        },
+        "L1_block_count": {
+          "name": "L1_block_count",
+          "type": "int",
+          "init_value": "4",
+          "upper_bound": "64",
+          "lower_bound": "1",
+          "value_range": "[1,64]"
+        }
+      }
+    ]
+  },
+  "iterating_variable": {
+    "name": "configuration_permutation",
+    "init_value": "1",
+    "bound": "100",
+    "step": "1",
+    "step_function": "1"
+  },
+  "cost_function": {
+    "formula": "100*PCIe_ports + is_big_endian + L3_size * 250 + L2_size * 500 + L1_size*1000"
+  },
+  "assertions": {
+    "values": []
+  }
+}
