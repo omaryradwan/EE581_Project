@@ -21,6 +21,7 @@ class Algorithm:
         self.variable_num = len(variable_list)
         self.search_neighbor_num = 100   # TO DO: Set the number 10 to a parameter in __init__
         self.assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, variable_list)
+        local_var_list = variable_list
         self.name = ''
 
 
@@ -43,7 +44,7 @@ class SelfDefinedAlgorithm(Algorithm):
         self.name = 'Self Defined Algorithm'
 
     def CreateVariableListList(self):
-        new_variable_list_list = []      
+        new_variable_list_list = []
         for i in range(self.variable_num):
             tmp_variable = self.variable_list[i]
             tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, self.assertions, self.iterating_parameter, self.variable_list)
@@ -54,7 +55,7 @@ class SelfDefinedAlgorithm(Algorithm):
         new_variable_list_list = self.CreateVariableListList() #[[1,1.4,1.6],[7,7.3,7.7],[10,10.1,10.6]]
         cost_val_list = []
         possible_val_list = [] #[[1,7,10],[1.4,7.3,10.1],[1.6,7.7,10.6]]
-        
+
         cost_val_list.append(self.cost_function.get_cost())
         possible_val_list.append(self.variable_list)
 
@@ -62,7 +63,7 @@ class SelfDefinedAlgorithm(Algorithm):
             tmp_variable_list = []
             for j in range(self.variable_num):
                 tmp_variable_list.append(new_variable_list_list[j][i])
-            # print(tmp_variable_list) 
+            # print(tmp_variable_list)
             self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_variable_list)
             cost_val_list.append(self.cost_function.get_cost())
             possible_val_list.append(tmp_variable_list)
@@ -126,7 +127,7 @@ class SelfDefinedAlgorithm(Algorithm):
             self.iterating_parameter.Iterate()
             self.GetLocalOptimalValListsWildly()
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
-        return 
+        return
 
 
 class SimulatedAnnealing(Algorithm):
@@ -188,6 +189,8 @@ class GeneticEvo(Algorithm):
 
 
 def InitAlgorithm(name, variable_list, cost_function, iterating_parameter, assertions):
+
+
     if name == 'sa':
         return SimulatedAnnealing(variable_list, cost_function, iterating_parameter, assertions)
     elif name == 'ps':
