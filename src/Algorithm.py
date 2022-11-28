@@ -10,7 +10,6 @@
 # The algorithm should contain the following functions:
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
 import EvalSpace
-import sympy
 import copy
 
 class Algorithm:
@@ -21,7 +20,7 @@ class Algorithm:
         self.variable_num = len(variable_list)
         self.search_neighbor_num = 100   # TO DO: Set the number 10 to a parameter in __init__
         self.assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, variable_list)
-        local_var_list = variable_list
+        # local_var_list = variable_list
         self.name = ''
 
 

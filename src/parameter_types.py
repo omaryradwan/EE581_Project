@@ -1,21 +1,25 @@
 # This file defines type classes.
 #
-# One Type class should have the following attributes:
-#       name                --  The name of the variable                                eg: param_A
+# Type class have the following attributes: Int, Bool, Float, Composite
+#       name                --  The name of variable                                    eg: param_A
+#       type                --  The type of variable                                    eg: int, float, bool
 #       init_value          --  The initial value of variable from user                 eg: 1.3, False, 2
 #       temporary_val       --  The temporary value of variable, updated every step     eg: 1.3, False, 2
-#       value_range         --  The bounds of the variable from user                    eg: [[1,3]], [[1,3],[4,7]]
-#       upper_bound         --  The dependent bounds of the variable from user          eg: [[-a, a^2], [a, a+1]]
-#       lower_bound         --  The discrete value of variable                          eg: 1, 2, [1,3,5]
-#       discrete_val        --  The current discrete value                              eg: 3, 4, 5
+#       value_set           --  The valid set of the variable                           eg: [1,2,...,10]
+#       upper_bound         --  The upper const bound of variable                       eg: -10, -5
+#       lower_bound         --  The lower const bound of variable                       eg: 10, 20
+#       discrete_val        --  The temporary discrete value                            eg: 1, 0, 2
+#       true_weight         --  The value of bool variable when it is true              eg: 10, 20
+#       false_weight        --  The value of bool variable when it is true              eg: 10, 50
 #
-#
-#  One Type class should have the following functions:
-#       TransformIntoDiscrete()         --          Transform a given value into the discrete field, return the discrete value
-#       TransformBack()                 --          Transform a given discrete value into tyoed field, return the typed value
-#       UpdatediscVal()                 --          Update discrete value by given value
-#       UpdatetmpVal()                  --          Update tmporary value by given value
-#       GenRandomNeighbors()            --          Generate N random neighbors
+# Type class should have the following functions:
+#       __init__                            --          Initialize the typed parameter
+#       UpdateValueSet()                    --          Update value set by given set
+#       UpdatediscVal()                     --          Update discrete value by given value
+#       UpdatetmpVal()                      --          Update tmporary value by given value
+#       GenRandomNeighbor()                 --          Generate 1 random neighbor
+#       GenRandomNeighbors()                --          Generate N random neighbors
+#       GetChildrenFromJson()               --          Initialize the composite children from JSON
 
 
 import random
@@ -235,10 +239,10 @@ class Assertions:
     def __init__(self, assertion_list):
         self.assertion_list = assertion_list
 
-    def AreAssertionsSatisfied():
-        # TBD
-        # Evaluate every assertion value and if any violated, return false.
-        return true
+    # def AreAssertionsSatisfied():
+    #     # TBD
+    #     # Evaluate every assertion value and if any violated, return false.
+    #     return true
 
 parameter_types = {"int" : Int_Parameter,
                     "bool" : Bool_Parameter,

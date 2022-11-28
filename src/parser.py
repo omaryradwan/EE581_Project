@@ -4,7 +4,6 @@ import argparse
 import Algorithm
 import EvalSpace
 import parameter_types
-import ast
 
 def main():
     parser = argparse.ArgumentParser()
