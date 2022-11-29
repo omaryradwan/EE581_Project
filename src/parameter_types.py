@@ -59,7 +59,7 @@ class Int_Parameter():
         assertions_set.sort(key = lambda x: abs(x - self.temporary_val))
         weight_arr = np.arange(0,len(assertions_set))
         len_arr = len(assertions_set)
-        calc_dist = lambda x: (len_arr - x)
+        calc_dist = lambda x: (len_arr - x)**2
         vec_len_arr = np.vectorize(calc_dist)
         weights = vec_len_arr(weight_arr)
         new_val = random.choices(assertions_set, weights=weights.tolist(), k=1)[0]
