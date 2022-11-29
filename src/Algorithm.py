@@ -11,13 +11,17 @@
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
 import EvalSpace
 import copy
-
+import math
+import time
+time_start = time.time()
+end_time = time.time()
 class Algorithm:
     def __init__(self, variable_list, cost_function, iterating_parameter, assertions):
         self.variable_list = variable_list
         self.iterating_parameter = iterating_parameter
         self.cost_function = cost_function
         self.variable_num = len(variable_list)
+        self.min_cost = math.inf
         self.search_neighbor_num = 100   # TO DO: Set the number 10 to a parameter in __init__
         self.assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, variable_list)
         # local_var_list = variable_list
@@ -78,6 +82,8 @@ class SelfDefinedAlgorithm(Algorithm):
         # print("Local Cost List is: ", cost_val_list)
 
         print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
+        if self.min_cost > cost_val_list[cost_val_list.index(min(cost_val_list))]:
+            self.min_cost = cost_val_list[cost_val_list.index(min(cost_val_list))]
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
         # for i in range(self.variable_num):
         #     if self.variable_list[i].type == 'composite':
@@ -135,7 +141,9 @@ class SelfDefinedAlgorithm(Algorithm):
                     self.iterating_parameter.bound,self.iterating_parameter.temporary_val/self.iterating_parameter.bound))
             iteration_number += 1
             self.iterating_parameter.Iterate()
+            time_start = time.time()
             self.GetLocalOptimalValListsWildly()
+            print("/// Runtime: ", time.time() - time_start)
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
             # for i in range(self.variable_num):
             #     if self.variable_list[i].type == 'composite':

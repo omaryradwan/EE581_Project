@@ -158,7 +158,7 @@
   "iterating_variable": {
     "name": "iteration",
     "init_value": "1",
-    "bound": "100",
+    "bound": "10",
     "step": "1",
     "step_function": "1"
   },

@@ -60,7 +60,7 @@ def main():
     print("Populating parameter dictionary for assertion and cost function resolution")
     print("Running cost function")
     inst_cost = cost_function.get_cost()
-    print("Total cost of initial state is", inst_cost)
+    print("Initial Local Optimal Cost is: ", inst_cost)
 
     print("Verifying assertions")
     check_assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, parameter_object_list)
@@ -76,6 +76,22 @@ def main():
     solve_algorithm.Solve()
     print("Algorithm Ends")
     final_best_parameter_list = solve_algorithm.variable_list
+    final_cost = solve_algorithm.min_cost
+    print("#############Final Cost: ", final_cost)
+    print("///////////////Parameter Values//////////")
+
+    for i in set(final_best_parameter_list):
+        if i.type == "composite":
+            for j in i.temporary_val:
+                for k in j:
+                    final_best_parameter_list.append(k)
+                    # parameter_list.remove(i)
+                    continue
+        final_best_parameter_list.append(i)
+
+    for i in set(final_best_parameter_list):
+        if(i.type != "composite"):
+            print("### ", i.name, " : " , i.temporary_val)
 
 
 if __name__ == "__main__":
