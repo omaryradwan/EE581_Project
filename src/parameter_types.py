@@ -54,9 +54,17 @@ class Int_Parameter():
     def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
         random.seed()
         assertions_set = assertions.get_valid_interval(iterating_parameter, variable_list, self)
-        # print(assertions_set)
         self.UpdateValueSet(assertions_set)
-        new_val = random.choice(self.value_set)
+        assertion_arr = np.array(assertions_set)
+        assertions_set.sort(key = lambda x: abs(x - self.temporary_val))
+        weight_arr = np.arange(0,len(assertions_set))
+        len_arr = len(assertions_set)
+        calc_dist = lambda x: (len_arr - x)
+        vec_len_arr = np.vectorize(calc_dist)
+        weights = vec_len_arr(weight_arr)
+        new_val = random.choices(assertions_set, weights=weights.tolist(), k=1)[0]
+
+        # new_val = random.choice(assertions_set)
         new_variable = Int_Parameter(name, self.upper_bound, self.lower_bound, self.init_value)
         new_variable.UpdatetmpVal(new_val)
         return new_variable

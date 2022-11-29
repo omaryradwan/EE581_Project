@@ -11,7 +11,7 @@
     "type": "int",
     "init_value": "76",
     "upper_bound": "100",
-    "lower_bound": "30"
+    "lower_bound": "-20"
   },
   "param_D": {
     "name": "param_D",
@@ -60,13 +60,11 @@
     "step_function": "1"
   },
   "cost_function": {
-    "formula": "(param_B-30)**2 + (param_D- 10)**2"
+    "formula": "(param_B + 30)**2 + (param_D- 10)**2 + param_C_y*2 + param_C_z**3 + param_C_x**2"
   },
   "assertions": {
     "values": [
-      "param_C_y >= param_C_z",
-      "param_B > 12",
-      "param_D > 6"
+      "param_C_y >= param_C_z"
     ]
   }
 }

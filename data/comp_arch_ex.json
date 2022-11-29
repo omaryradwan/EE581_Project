@@ -3,9 +3,9 @@
     "name": "PCIe_ports",
     "type": "int",
     "init_value": "4",
-    "upper_bound": "8",
+    "upper_bound": "64",
     "lower_bound": "1",
-    "value_range": "[1,8]"
+    "value_range": "[1,64]"
   },
   "is_big_endian": {
     "name": "is_big_endian",
@@ -89,6 +89,30 @@
       }
     ]
   },
+  "Core": {
+    "name": "Core",
+    "type": "composite",
+    "values": [
+      {
+        "FPU_Units": {
+          "name": "FPU_Units",
+          "type": "int",
+          "init_value": "4",
+          "upper_bound": "64",
+          "lower_bound": "1",
+          "value_range": "[1,64]"
+        },
+        "ALU_Units": {
+          "name": "ALU_Units",
+          "type": "int",
+          "init_value": "4",
+          "upper_bound": "64",
+          "lower_bound": "1",
+          "value_range": "[1,64]"
+        }
+      }
+    ]
+  },
   "iterating_variable": {
     "name": "configuration_permutation",
     "init_value": "1",
@@ -97,9 +121,16 @@
     "step_function": "1"
   },
   "cost_function": {
-    "formula": "100*PCIe_ports + is_big_endian + L3_size * 250 + L2_size * 500 + L1_size*1000"
+    "formula": "(100*PCIe_ports + (L3_size * 250 + L2_size * 500 + L1_size*1000)**2 )*is_big_endian + ALU_Units*80 + FPU_Units*160"
   },
   "assertions": {
-    "values": []
+    "values": [
+      "L1_size % 2 == 0",
+      "L2_size % 2 == 0",
+      "L3_size % 2 == 0",
+      "L1_size < L2_size",
+      "L2_size < L3_size",
+      "ALU_Units + FPU_Units < PCIe_ports"
+    ]
   }
 }

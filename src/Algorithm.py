@@ -105,13 +105,7 @@ class SelfDefinedAlgorithm(Algorithm):
                 total_possible_list_list.append(tmp_list_list[j])
         print("Local Optimal Cost is: ", min(total_cost_list))
         self.variable_list = total_possible_list_list[total_cost_list.index(min(total_cost_list))]
-        # for i in range(self.variable_num):
-        #     if self.variable_list[i].type == 'composite':
-        #         for children in self.variable_list[i].children_list:
-        #             for child in children:
-        #                 print(child.temporary_val)
-        #     else:
-        #         print(self.variable_list[i].temporary_val)
+
 
 
     def CheckEndRequirements(self):
@@ -126,6 +120,13 @@ class SelfDefinedAlgorithm(Algorithm):
             self.iterating_parameter.Iterate()
             self.GetLocalOptimalValListsWildly()
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
+            for i in range(self.variable_num):
+                if self.variable_list[i].type == 'composite':
+                    for children in self.variable_list[i].children_list:
+                        for child in children:
+                            print(child.name, child.temporary_val)
+                else:
+                    print(self.variable_list[i].name, self.variable_list[i].temporary_val)
         return
 
 

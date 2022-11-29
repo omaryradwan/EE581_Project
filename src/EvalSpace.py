@@ -81,9 +81,10 @@ class VerifyAssertions(EvalUtils):
                 for j in i.temporary_val:
                     for k in j:
                         parameter_list.append(k)
-                parameter_list.remove(i)
+                # parameter_list.remove(i)
                 continue
             parameter_list.append(i)
+        # print(parameter_list)
 
         if target_parameter.type == 'bool':
             return [True, False]
@@ -93,9 +94,13 @@ class VerifyAssertions(EvalUtils):
         for equation_inst in eq_list:
             equation_inst = equation_inst.replace(iterating_parameter.name, str(iterating_parameter.temporary_val))
             for param in set(parameter_list):
+                global_exp = 0;
+                if param.type == 'composite':
+                    continue
                 if param.name == target_parameter.name:
                     continue
                 if param.type == "float" :
+                    param.SetTransformed(param.temporary_val)
                     equation_inst = equation_inst.replace(param.name, str(param.temporary_val))
                 elif param.type == "int":
                     equation_inst = equation_inst.replace(param.name, str(param.temporary_val))
@@ -104,6 +109,7 @@ class VerifyAssertions(EvalUtils):
                         equation_inst = equation_inst.replace(param.name, str(param.true_weight))
                     else:
                         equation_inst = equation_inst.replace(param.name, str(param.false_weight))
+            # print(equation_inst, "target: ", target_parameter.name)
             eq = lambdify(target_parameter.name, equation_inst)
             valid_bound_arr = np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
             valid_bound_arr_candidate = eq(valid_bound_arr)
@@ -112,13 +118,13 @@ class VerifyAssertions(EvalUtils):
                 valid_bound_arr = valid_bound_arr[valid_bound_arr_candidate == True]
             else:
                 valid_bound_arr = valid_bound_arr_candidate
-
             valid_interval_list.append(valid_bound_arr)
 
         fully_valid_interval = reduce(np.intersect1d, valid_interval_list)
-
+        # print("For ",target_parameter.name, " we have the following valid interval")
+        # print(fully_valid_interval)
         if len(fully_valid_interval.tolist()) == 0:
-            print(target_parameter.name, " has no valid intervals, resetting bounds....")
+            # print(target_parameter.name, " has no valid intervals, resetting bounds....")
             return initial_valid_bound.tolist()
         return(fully_valid_interval.tolist())
 
