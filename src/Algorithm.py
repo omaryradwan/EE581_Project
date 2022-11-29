@@ -10,7 +10,6 @@
 # The algorithm should contain the following functions:
 #       CreateVariableDict  --          Randomly slelect neighbor of initial point to create initial dict, each variable n points.
 import EvalSpace
-import sympy
 import copy
 
 class Algorithm:
@@ -21,7 +20,7 @@ class Algorithm:
         self.variable_num = len(variable_list)
         self.search_neighbor_num = 100   # TO DO: Set the number 10 to a parameter in __init__
         self.assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, variable_list)
-        local_var_list = variable_list
+        # local_var_list = variable_list
         self.name = ''
 
 
@@ -47,7 +46,6 @@ class SelfDefinedAlgorithm(Algorithm):
         new_variable_list_list = []
         for i in range(self.variable_num):
             tmp_variable = self.variable_list[i]
-            # assertions_set = self.assertions.valid_parameter_range(self.iterating_parameter, self.variable_list, tmp_variable)
             tmp_new_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, self.assertions, self.iterating_parameter, self.variable_list)
             new_variable_list_list.append(tmp_new_list)
         return new_variable_list_list
@@ -72,19 +70,18 @@ class SelfDefinedAlgorithm(Algorithm):
         # print("Local Cost List is: ", cost_val_list)
         print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
-        # for i in range(self.variable_num):
-        #     if self.variable_list[i].type == 'composite':
-        #         for children in self.variable_list[i].children_list:
-        #             for child in children:
-        #                 print(child.temporary_val)
-        #     else:
-        #         print(self.variable_list[i].temporary_val)
+        for i in range(self.variable_num):
+            if self.variable_list[i].type == 'composite':
+                for children in self.variable_list[i].children_list:
+                    for child in children:
+                        print(child.name, ": ", child.temporary_val)
+            else:
+                print(self.variable_list[i].name, ": ", self.variable_list[i].temporary_val)
 
     def CoordinateRandomSearch(self, i):
         tmp_list_list = []
         tmp_variable = self.variable_list[i]
-        intervals=[]
-        tmp_variable_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, intervals)
+        tmp_variable_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, self.assertions, self.iterating_parameter, self.variable_list)
         for j in range(len(tmp_variable_list)):
             tmp_new_variable = tmp_variable_list[j]
             tmp_variable_list_copy = copy.deepcopy(self.variable_list)
@@ -104,8 +101,21 @@ class SelfDefinedAlgorithm(Algorithm):
                 total_cost_list.append(self.cost_function.get_cost())
                 total_possible_list_list.append(tmp_list_list[j])
         print("Local Optimal Cost is: ", min(total_cost_list))
+        # print(min(total_cost_list))
+        # print(total_cost_list)
+        # print(total_possible_list_list)
         self.variable_list = total_possible_list_list[total_cost_list.index(min(total_cost_list))]
+<<<<<<< HEAD
 
+=======
+        for i in range(self.variable_num):
+            if self.variable_list[i].type == 'composite':
+                for children in self.variable_list[i].children_list:
+                    for child in children:
+                        print(child.name, ": ", child.temporary_val)
+            else:
+                print(self.variable_list[i].name, ": ", self.variable_list[i].temporary_val)
+>>>>>>> 3b15b24e5284a13b643099376b840422fa6b8644
 
 
     def CheckEndRequirements(self):

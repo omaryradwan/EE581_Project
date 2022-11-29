@@ -1,7 +1,4 @@
-import ast
 import asteval
-import sympy
-from sympy import *
 import numpy as np
 import random
 from functools import reduce
