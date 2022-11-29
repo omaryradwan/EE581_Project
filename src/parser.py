@@ -11,7 +11,7 @@ def main():
     parser.add_argument('-p', "--parameter_file", type=str, required=True)
     parser.add_argument('-a', "--algorithm_selection", type=str,
     help = 'Select one of algorithm in [se, ps, eo]. If not selected, default value is self defined algorithm.')
-    
+
     args = parser.parse_args()
 
     if not os.path.exists(args.parameter_file):
@@ -75,6 +75,8 @@ def main():
     print("Algorithm Starts...")
     solve_algorithm.Solve()
     print("Algorithm Ends")
+    final_best_parameter_list = solve_algorithm.variable_list
+
 
 if __name__ == "__main__":
     main()

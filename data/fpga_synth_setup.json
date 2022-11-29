@@ -2,64 +2,42 @@
   "bus_connections": {
     "name": "bus_connections",
     "type": "int",
-    "init_value": "4",
     "upper_bound": "64",
-    "lower_bound": "1",
-    "value_range": "[1,64]"
+    "lower_bound": "1"
   },
   "L1_Cache": {
     "name": "L1_Cache",
     "type": "int",
-    "init_value": "256",
     "upper_bound": "8192",
-    "lower_bound": "128",
-    "value_range": "[128,8192]"
+    "lower_bound": "128"
   },
   "L2_Cache": {
     "name": "L2_Cache",
     "type": "int",
-    "init_value": "2048",
     "upper_bound": "8192",
-    "lower_bound": "1024",
-    "value_range": "[1024,32768]"
+    "lower_bound": "1024"
   },
   "turboboost": {
     "name": "turboboost",
     "type": "bool",
-    "init_value": "False",
-    "upper_bound": "None",
-    "lower_bound": "None",
-    "value_range": "None",
     "true_weight": "100",
     "false_weight": "30"
   },
   "enable_Routine12": {
     "name": "enableRoutine12",
     "type": "bool",
-    "init_value": "True",
-    "upper_bound": "None",
-    "lower_bound": "None",
-    "value_range": "None",
     "true_weight": "1500",
     "false_weight": "0"
   },
   "enable_Routine13": {
     "name": "enableRoutine13",
     "type": "bool",
-    "init_value": "True",
-    "upper_bound": "None",
-    "lower_bound": "None",
-    "value_range": "None",
     "true_weight": "1500",
     "false_weight": "0"
   },
   "enable_Routine23": {
     "name": "enableRoutine23",
     "type": "bool",
-    "init_value": "True",
-    "upper_bound": "None",
-    "lower_bound": "None",
-    "value_range": "None",
     "true_weight": "1500",
     "false_weight": "0"
   },
@@ -71,42 +49,32 @@
         "input_connections_Routine1": {
           "name": "input_connections_Routine1",
           "type": "int",
-          "init_value": "1",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[1,64]"
+          "lower_bound": "1"
         },
         "output_connections_Routine1": {
           "name": "output_connections_Routine1",
           "type": "int",
-          "init_value": "1",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[1,64]"
+          "lower_bound": "1"
         },
         "memory_ports_Routine1": {
           "name": "memory_ports_Routine1",
           "type": "int",
-          "init_value": "1",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[1,64]"
+          "lower_bound": "1"
         },
         "Routine1_to_Routine2_interconnect": {
           "name": "Routine1_to_Routine2_interconnect",
           "type": "int",
-          "init_value": "0",
           "upper_bound": "8",
-          "lower_bound": "0",
-          "value_range": "[0,8]"
+          "lower_bound": "0"
         },
         "Routine1_to_Routine3_interconnect": {
           "name": "Routine1_to_Routine3_interconnect",
           "type": "int",
-          "init_value": "0",
           "upper_bound": "8",
-          "lower_bound": "0",
-          "value_range": "[0,8]"
+          "lower_bound": "0"
         }
       }
     ]
@@ -119,42 +87,32 @@
         "input_connections_Routine2": {
           "name": "input_connections_Routine2",
           "type": "int",
-          "init_value": "1",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[1,64]"
+          "lower_bound": "1"
         },
         "output_connections_Routine2": {
           "name": "output_connections_Routine2",
           "type": "int",
-          "init_value": "1",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[1,64]"
+          "lower_bound": "1"
         },
         "memory_ports_Routine2": {
           "name": "memory_ports_Routine2",
           "type": "int",
-          "init_value": "6",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[6,64]"
+          "lower_bound": "1"
         },
         "Routine2_to_Routine1_interconnect": {
           "name": "Routine2_to_Routine1_interconnect",
           "type": "int",
-          "init_value": "0",
           "upper_bound": "8",
-          "lower_bound": "0",
-          "value_range": "[0,8]"
+          "lower_bound": "0"
         },
         "Routine2_to_Routine3_interconnect": {
           "name": "Routine2_to_Routine3_interconnect",
           "type": "int",
-          "init_value": "0",
           "upper_bound": "8",
-          "lower_bound": "0",
-          "value_range": "[0,8]"
+          "lower_bound": "0"
         }
       }
     ]
@@ -167,42 +125,32 @@
         "input_connections_Routine3": {
           "name": "input_connections_Routine3",
           "type": "int",
-          "init_value": "1",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[1,64]"
+          "lower_bound": "1"
         },
         "output_connections_Routine3": {
           "name": "output_connections_Routine3",
           "type": "int",
-          "init_value": "1",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[1,64]"
+          "lower_bound": "1"
         },
         "memory_ports_Routine3": {
           "name": "memory_ports_Routine3",
           "type": "int",
-          "init_value": "8",
           "upper_bound": "64",
-          "lower_bound": "1",
-          "value_range": "[8,64]"
+          "lower_bound": "1"
         },
         "Routine3_to_Routine1_interconnect": {
           "name": "Routine3_to_Routine1_interconnect",
           "type": "int",
-          "init_value": "0",
           "upper_bound": "8",
-          "lower_bound": "0",
-          "value_range": "[0,8]"
+          "lower_bound": "0"
         },
         "Routine3_to_Routine2_interconnect": {
           "name": "Routine3_to_Routine2_interconnect",
           "type": "int",
-          "init_value": "0",
           "upper_bound": "8",
-          "lower_bound": "0",
-          "value_range": "[0,8]"
+          "lower_bound": "0"
         }
       }
     ]
@@ -222,7 +170,6 @@
       "L1_Cache % 128 == 0",
       "L2_Cache % 128 == 0",
       "enableRoutine12 + enableRoutine13 + enableRoutine23 == 1500",
-      "enableRoutine12 + enableRoutine13 + enableRoutine23 > 0",
       "Routine1_to_Routine2_interconnect + Routine1_to_Routine3_interconnect > 3",
       "Routine2_to_Routine3_interconnect + Routine2_to_Routine3_interconnect > 1",
       "Routine3_to_Routine2_interconnect + Routine3_to_Routine1_interconnect > 4",

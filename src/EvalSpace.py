@@ -84,7 +84,7 @@ class VerifyAssertions(EvalUtils):
 
         valid_interval_list = list()
         initial_valid_bound = None
-        if target_parameter.type == "int":
+        if target_parameter.type == "int" or target_parameter.type == "float":
             initial_valid_bound =  np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
         elif target_parameter.type == "bool":
             initial_valid_bound = np.arange(int(target_parameter.false_weight), int(target_parameter.true_weight), 1)
@@ -109,8 +109,8 @@ class VerifyAssertions(EvalUtils):
                         equation_inst = equation_inst.replace(param.name, str(param.false_weight))
 
             eq = lambdify(target_parameter.name, equation_inst)
-            if target_parameter.type is not "bool":
-                valid_bound_arr =  np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
+            if target_parameter.type !=  "bool":
+                valid_bound_arr =  np.arange(int(target_parameter.lower_bound), int(target_parameter.upper_bound), 1)
             else:
                 # print(equation_inst)
                 valid_bound_arr =  np.arange(int(target_parameter.false_weight) - 1, int(target_parameter.true_weight) + 1, 1)
@@ -134,12 +134,17 @@ class VerifyAssertions(EvalUtils):
                 valid_bound_arr = valid_bound_arr_candidate
 
             valid_interval_list.append(valid_bound_arr)
-
+            # print(equation_inst)
         fully_valid_interval = reduce(np.intersect1d, valid_interval_list)
-
-        if len(fully_valid_interval.tolist()) == 0:
+        # fully_valid_interval = fully_valid_interval[fully_valid_interval != target_parameter.temporary_val]
+        # print(target_parameter.name)
+        # print(type(fully_valid_interval))
+        if type(fully_valid_interval) == None:
+            # print("got here")
+            return []
+        if len(fully_valid_interval) == 0:
             return initial_valid_bound.tolist()
-        return(fully_valid_interval.tolist())
+        return fully_valid_interval.tolist()
 
 
 class EvalStepFunction(EvalUtils):

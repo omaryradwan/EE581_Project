@@ -63,25 +63,29 @@ class SelfDefinedAlgorithm(Algorithm):
             for j in range(self.variable_num):
                 tmp_variable_list.append(new_variable_list_list[j][i])
             # print(tmp_variable_list)
+
             self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_variable_list)
+            if self.cost_function.get_cost() == 0:
+                continue
             cost_val_list.append(self.cost_function.get_cost())
             possible_val_list.append(tmp_variable_list)
 
         for i in cost_val_list:
             if i == 0:
                 cost_val_list.remove(i)
-        print(cost_val_list)
+        # print(cost_val_list)
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
         # print("Local Cost List is: ", cost_val_list)
+
         print("Local Optimal Cost is: ", cost_val_list[cost_val_list.index(min(cost_val_list))])
         self.variable_list = possible_val_list[cost_val_list.index(min(cost_val_list))]
-        for i in range(self.variable_num):
-            if self.variable_list[i].type == 'composite':
-                for children in self.variable_list[i].children_list:
-                    for child in children:
-                        print(child.name, ": ", child.temporary_val)
-            else:
-                print(self.variable_list[i].name, ": ", self.variable_list[i].temporary_val)
+        # for i in range(self.variable_num):
+        #     if self.variable_list[i].type == 'composite':
+        #         for children in self.variable_list[i].children_list:
+        #             for child in children:
+        #                 print(child.name, ": ", child.temporary_val)
+        #     else:
+        #         print(self.variable_list[i].name, ": ", self.variable_list[i].temporary_val)
 
     def CoordinateRandomSearch(self, i):
         tmp_list_list = []
@@ -94,30 +98,30 @@ class SelfDefinedAlgorithm(Algorithm):
             tmp_list_list.append(tmp_variable_list_copy)
         return tmp_list_list
 
-    def GetLocalOptimalValListsCoordinately(self):
-        total_possible_list_list = []
-        total_cost_list = []
-        total_cost_list.append(self.cost_function.get_cost())
-        total_possible_list_list.append(self.variable_list)
-        for i in range(self.variable_num):
-            tmp_list_list = self.CoordinateRandomSearch(i)
-            for j in range(len(tmp_list_list)):
-                self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_list_list[j])
-                total_cost_list.append(self.cost_function.get_cost())
-                total_possible_list_list.append(tmp_list_list[j])
-        print("Local Optimal Cost is: ", min(total_cost_list))
-        # print(min(total_cost_list))
-        # print(total_cost_list)
-        # print(total_possible_list_list)
-        self.variable_list = total_possible_list_list[total_cost_list.index(min(total_cost_list))]
+    # def GetLocalOptimalValListsCoordinately(self):
+    #     total_possible_list_list = []
+    #     total_cost_list = []
+    #     total_cost_list.append(self.cost_function.get_cost())
+    #     total_possible_list_list.append(self.variable_list)
+    #     for i in range(self.variable_num):
+    #         tmp_list_list = self.CoordinateRandomSearch(i)
+    #         for j in range(len(tmp_list_list)):
+    #             self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_list_list[j])
+    #             total_cost_list.append(self.cost_function.get_cost())
+    #             total_possible_list_list.append(tmp_list_list[j])
+    #     print("Local Optimal Cost is: ", min(total_cost_list))
+    #     # print(min(total_cost_list))
+    #     # print(total_cost_list)
+    #     # print(total_possible_list_list)
+    #     self.variable_list = total_possible_list_list[total_cost_list.index(min(total_cost_list))]
 
-        for i in range(self.variable_num):
-            if self.variable_list[i].type == 'composite':
-                for children in self.variable_list[i].children_list:
-                    for child in children:
-                        print(child.name, ": ", child.temporary_val)
-            else:
-                print(self.variable_list[i].name, ": ", self.variable_list[i].temporary_val)
+        # for i in range(self.variable_num):
+        #     if self.variable_list[i].type == 'composite':
+        #         for children in self.variable_list[i].children_list:
+        #             for child in children:
+        #                 print(child.name, ": ", child.temporary_val)
+        #     else:
+        #         print(self.variable_list[i].name, ": ", self.variable_list[i].temporary_val)
 
 
 
@@ -133,13 +137,13 @@ class SelfDefinedAlgorithm(Algorithm):
             self.iterating_parameter.Iterate()
             self.GetLocalOptimalValListsWildly()
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
-            for i in range(self.variable_num):
-                if self.variable_list[i].type == 'composite':
-                    for children in self.variable_list[i].children_list:
-                        for child in children:
-                            print(child.name, child.temporary_val)
-                else:
-                    print(self.variable_list[i].name, self.variable_list[i].temporary_val)
+            # for i in range(self.variable_num):
+            #     if self.variable_list[i].type == 'composite':
+            #         for children in self.variable_list[i].children_list:
+            #             for child in children:
+            #                 print(child.name, child.temporary_val)
+            #     else:
+            #         print(self.variable_list[i].name, self.variable_list[i].temporary_val)
         return
 
 

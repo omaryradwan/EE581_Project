@@ -28,11 +28,14 @@ import EvalSpace
 import math
 
 class Int_Parameter():
-    def __init__(self, name, upper_bound, lower_bound, init_value):
+    def __init__(self, name, upper_bound, lower_bound, init_value = None):
         self.name = name
         self.type = 'int'
-        self.init_value = int(init_value)
-        self.temporary_val = int(init_value)
+        if init_value != None:
+            self.init_value = init_value
+        else:
+            self.init_value = random.choice(np.arange(int(lower_bound), int(upper_bound),1).tolist())
+        self.temporary_val = random.choice(np.arange(int(lower_bound), int(upper_bound),1).tolist())
         self.upper_bound = int(upper_bound)
         self.lower_bound = int(lower_bound)
         self.value_set = self.InitValueSet([[self.lower_bound, self.upper_bound]])
@@ -62,6 +65,7 @@ class Int_Parameter():
         assertion_arr = np.array(assertions_set)
         assertions_set.sort(key = lambda x: abs(x - self.temporary_val))
         weight_arr = np.arange(0,len(assertions_set))
+
         len_arr = len(assertions_set)
         calc_dist = lambda x: (len_arr - x)**2
         vec_len_arr = np.vectorize(calc_dist)
@@ -83,11 +87,14 @@ class Int_Parameter():
 
 
 class Bool_Parameter:
-    def __init__(self, name, true_weight, false_weight, init_value):
+    def __init__(self, name, true_weight, false_weight, init_value = None):
         self.type = 'bool'
         self.name = name
-        self.init_value = init_value
-        self.temporary_val = init_value
+        if init_value != None:
+            self.init_value = init_value
+        else:
+            self.init_value = random.choice([True,False])
+        self.temporary_val = random.choice([True,False])
         self.true_weight = true_weight
         self.false_weight = false_weight
         self.value_set = [False, True]
@@ -120,11 +127,14 @@ class Bool_Parameter:
         return neighbor_list
 
 class Float_Parameter:
-    def __init__(self, name, upper_bound, lower_bound, init_value, digits):
+    def __init__(self, name, upper_bound, lower_bound, digits, init_value = None):
         self.type = 'float'
         self.name = name
-        self.init_value = float(init_value)
-        self.temporary_val = float(init_value)
+        if init_value != None:
+            self.init_value = init_value
+        else:
+            self.init_value = random.choice(np.arange(float(lower_bound), float(upper_bound),1.0).tolist())
+        self.temporary_val = random.choice(np.arange(float(lower_bound), float(upper_bound),1.0).tolist())
         self.upper_bound = float(upper_bound)
         self.lower_bound = float(lower_bound)
         self.discrete_val = 0
@@ -266,15 +276,12 @@ parameter_types = {"int" : Int_Parameter,
 def InitTypedVariable(parameters):
     type_name = parameters['type']
     if type_name == 'int':
-        var = Int_Parameter(parameters['name'], parameters['upper_bound'],
-                             parameters['lower_bound'], parameters['init_value'])
+        var = Int_Parameter(parameters['name'], parameters['upper_bound'],parameters['lower_bound'])
         return var
     elif type_name == 'bool':
-        return Bool_Parameter(parameters['name'],parameters['true_weight'],parameters['false_weight'],
-                               parameters['init_value'])
+        return Bool_Parameter(parameters['name'],parameters['true_weight'],parameters['false_weight'])
     elif type_name == 'float':
-        return Float_Parameter(parameters['name'], parameters['upper_bound'], parameters['lower_bound'],
-                                parameters['init_value'], parameters['digits'])
+        return Float_Parameter(parameters['name'], parameters['upper_bound'], parameters['lower_bound'],parameters['digits'])
     elif type_name == 'composite':
         return Composite_Parameter(parameters['name'], parameters['values'])
     print("Error: " + type_name + " type does not exist, exiting")
