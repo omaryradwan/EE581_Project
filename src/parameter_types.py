@@ -90,8 +90,7 @@ class Bool_Parameter:
         self.temporary_val = init_value
         self.true_weight = true_weight
         self.false_weight = false_weight
-        self.value_set = [false_weight, true_weight]
-
+        self.value_set = [False, True]
 
     def UpdateValueSet(self, value_set):
         self.value_set = value_set
@@ -101,9 +100,15 @@ class Bool_Parameter:
 
     def GenRandomNeighbor(self, name, assertions, iterating_parameter, variable_list):
         assertions_set = assertions.get_valid_interval(iterating_parameter, variable_list, self)
-        self.UpdateValueSet(assertions_set)
-        new_val = random.choice(self.value_set)
+        # print("bools only", assertions_set)
+        if(np.amax(assertions_set) == int(self.true_weight) - 1):
+            new_val = True
+        elif(np.amin(assertions_set) == int(self.false_weight) - 1):
+            new_val = False
+        else:
+            new_val = random.choice(self.value_set)
         new_variable = Bool_Parameter(name, self.true_weight, self.false_weight, self.init_value)
+        # print(new_val, self.value_set)
         new_variable.UpdatetmpVal(new_val)
         return new_variable
 

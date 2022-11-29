@@ -2,6 +2,7 @@ import asteval
 import numpy as np
 import random
 from functools import reduce
+from sympy import *
 class EvalUtils:
     def __init__(self, formulas, iterating_parameter, parameter_list):
         self.formulas = formulas
@@ -73,7 +74,6 @@ class VerifyAssertions(EvalUtils):
         for i in set(parameter_list):
             if i.type == 'float':
                 i.SetTransformed(i.temporary_val)
-            #if its composite, we don't want to add the whole thing, its components
             if i.type == "composite":
                 for j in i.temporary_val:
                     for k in j:
@@ -81,17 +81,18 @@ class VerifyAssertions(EvalUtils):
                 # parameter_list.remove(i)
                 continue
             parameter_list.append(i)
-        # print(parameter_list)
 
-        if target_parameter.type == 'bool':
-            return [True, False]
         valid_interval_list = list()
-        initial_valid_bound =  np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
+        initial_valid_bound = None
+        if target_parameter.type == "int":
+            initial_valid_bound =  np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
+        elif target_parameter.type == "bool":
+            initial_valid_bound = np.arange(int(target_parameter.false_weight), int(target_parameter.true_weight), 1)
         valid_interval_list.append(initial_valid_bound)
+
         for equation_inst in eq_list:
             equation_inst = equation_inst.replace(iterating_parameter.name, str(iterating_parameter.temporary_val))
             for param in set(parameter_list):
-                global_exp = 0;
                 if param.type == 'composite':
                     continue
                 if param.name == target_parameter.name:
@@ -106,22 +107,37 @@ class VerifyAssertions(EvalUtils):
                         equation_inst = equation_inst.replace(param.name, str(param.true_weight))
                     else:
                         equation_inst = equation_inst.replace(param.name, str(param.false_weight))
-            # print(equation_inst, "target: ", target_parameter.name)
+
             eq = lambdify(target_parameter.name, equation_inst)
-            valid_bound_arr = np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
+            if target_parameter.type is not "bool":
+                valid_bound_arr =  np.arange(target_parameter.lower_bound, target_parameter.upper_bound, 1)
+            else:
+                # print(equation_inst)
+                valid_bound_arr =  np.arange(int(target_parameter.false_weight) - 1, int(target_parameter.true_weight) + 1, 1)
             valid_bound_arr_candidate = eq(valid_bound_arr)
-            # print(valid_bound_arr_candidate[0].dtype)
+
+            #for all solution or no solution
+            if(type(valid_bound_arr_candidate) == bool):
+                if valid_bound_arr_candidate == False :
+                    return []
+                if(valid_bound_arr_candidate == True):
+                    continue
             if(valid_bound_arr_candidate[0].dtype == bool):
                 valid_bound_arr = valid_bound_arr[valid_bound_arr_candidate == True]
+                if target_parameter.type == 'bool':
+                    # print(valid_bound_arr)
+                    if len(valid_bound_arr) == 0:
+                        return [ int(target_parameter.false_weight) ]
+
+                # print(valid_bound_arr)
             else:
                 valid_bound_arr = valid_bound_arr_candidate
+
             valid_interval_list.append(valid_bound_arr)
 
         fully_valid_interval = reduce(np.intersect1d, valid_interval_list)
-        # print("For ",target_parameter.name, " we have the following valid interval")
-        # print(fully_valid_interval)
+
         if len(fully_valid_interval.tolist()) == 0:
-            # print(target_parameter.name, " has no valid intervals, resetting bounds....")
             return initial_valid_bound.tolist()
         return(fully_valid_interval.tolist())
 
