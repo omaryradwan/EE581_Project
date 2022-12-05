@@ -183,14 +183,23 @@ class SelfDefinedAlgorithm(Algorithm):
             self.variable_list = copy.deepcopy(nxt_self_list)
             print("/// Runtime: ", time.time() - time_start)
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
+<<<<<<< HEAD
             print("Cost is ", self.cost_function.get_cost())
+=======
+>>>>>>> b3441b61e0647bddb6f8b4f1dcee0754d89b2a06
             for i in range(self.variable_num):
                 if self.variable_list[i].type == 'composite':
                     for children in self.variable_list[i].children_list:
                         for child in children:
+<<<<<<< HEAD
                             print(child.name, child.temporary_val)
                 else:
                     print(self.variable_list[i].name, self.variable_list[i].temporary_val)
+=======
+                            print("#####", child.name, ":", child.temporary_val)
+                else:
+                    print("#####", self.variable_list[i].name, ":", self.variable_list[i].temporary_val)
+>>>>>>> b3441b61e0647bddb6f8b4f1dcee0754d89b2a06
         return
 
 
