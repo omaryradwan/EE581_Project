@@ -145,13 +145,13 @@ class SelfDefinedAlgorithm(Algorithm):
             self.GetLocalOptimalValListsWildly()
             print("/// Runtime: ", time.time() - time_start)
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
-            # for i in range(self.variable_num):
-            #     if self.variable_list[i].type == 'composite':
-            #         for children in self.variable_list[i].children_list:
-            #             for child in children:
-            #                 print(child.name, child.temporary_val)
-            #     else:
-            #         print(self.variable_list[i].name, self.variable_list[i].temporary_val)
+            for i in range(self.variable_num):
+                if self.variable_list[i].type == 'composite':
+                    for children in self.variable_list[i].children_list:
+                        for child in children:
+                            print("#####", child.name, ":", child.temporary_val)
+                else:
+                    print("#####", self.variable_list[i].name, ":", self.variable_list[i].temporary_val)
         return
 
 
