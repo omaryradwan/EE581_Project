@@ -64,7 +64,7 @@ def main():
 
     print("Verifying assertions")
     check_assertions = EvalSpace.VerifyAssertions(assertions, iterating_parameter, parameter_object_list)
-    is_assert_list_valid = check_assertions.verify_assertions()
+    # is_assert_list_valid = check_assertions.verify_assertions()
 
     print("Algorithm Initializing...")
 

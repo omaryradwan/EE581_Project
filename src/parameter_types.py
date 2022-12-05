@@ -70,8 +70,11 @@ class Int_Parameter():
         calc_dist = lambda x: (len_arr - x)**2
         vec_len_arr = np.vectorize(calc_dist)
         weights = vec_len_arr(weight_arr)
-        new_val = random.choices(assertions_set, weights=weights.tolist(), k=1)[0]
-
+        # print(weights)
+        # print(assertions_set)
+        # new_val = random.choices(assertions_set, weights=weights.tolist(), k=1)[0]
+        new_val = random.choice(assertions_set)
+        # print(new_val)
         # new_val = random.choice(assertions_set)
         new_variable = Int_Parameter(name, self.upper_bound, self.lower_bound, self.init_value)
         new_variable.UpdatetmpVal(new_val)
@@ -231,7 +234,7 @@ class Composite_Parameter:
 
     def GenRandomNeighbors(self, neighbor_num, assertions, iterating_parameter, variable_list):
         neighbor_list = []
-        for i in range(neighbor_num - 1):
+        for i in range(neighbor_num):
             new_name = self.name
             neighbor_list.append(self.GenRandomNeighbor(new_name, assertions, iterating_parameter, variable_list))
         return neighbor_list
@@ -261,11 +264,6 @@ class Iterating_Parameter:
 class Assertions:
     def __init__(self, assertion_list):
         self.assertion_list = assertion_list
-
-    # def AreAssertionsSatisfied():
-    #     # TBD
-    #     # Evaluate every assertion value and if any violated, return false.
-    #     return true
 
 parameter_types = {"int" : Int_Parameter,
                     "bool" : Bool_Parameter,

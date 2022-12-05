@@ -1,1 +1,1 @@
-python3 parser.py -p ../data/sample_from_luca.json
+python3 parser.py -p ../data/fpga_synth_setup.json
