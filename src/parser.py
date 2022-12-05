@@ -73,7 +73,8 @@ def main():
     print("Algorithm Initialized\n"+solve_algorithm.name + " Selected")
 
     print("Algorithm Starts...")
-    solve_algorithm.Solve()
+    # solve_algorithm.Solve()
+    solve_algorithm.solve2()
     print("Algorithm Ends")
     final_best_parameter_list = solve_algorithm.variable_list
     final_cost = solve_algorithm.min_cost

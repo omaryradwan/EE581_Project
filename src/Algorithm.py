@@ -98,27 +98,117 @@ class SelfDefinedAlgorithm(Algorithm):
             tmp_list_list.append(tmp_variable_list_copy)
         return tmp_list_list
 
-    # def GetLocalOptimalValListsCoordinately(self):
-    #     total_possible_list_list = []
-    #     total_cost_list = []
-    #     total_cost_list.append(self.cost_function.get_cost())
-    #     total_possible_list_list.append(self.variable_list)
-    #     for i in range(self.variable_num):
-    #         tmp_list_list = self.CoordinateRandomSearch(i)
-    #         for j in range(len(tmp_list_list)):
-    #             self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_list_list[j])
-    #             total_cost_list.append(self.cost_function.get_cost())
-    #             total_possible_list_list.append(tmp_list_list[j])
-    #     print("Local Optimal Cost is: ", min(total_cost_list))
-    #     # print(min(total_cost_list))
-    #     # print(total_cost_list)
-    #     # print(total_possible_list_list)
-    #     self.variable_list = total_possible_list_list[total_cost_list.index(min(total_cost_list))]
-
-
-
     def CheckEndRequirements(self):
         return self.iterating_parameter.IsOverBound()
+
+
+
+    nums = set();
+    def solve2(self):
+        iteration_num = 0;
+        initial_half_list = []
+        for i in range(self.variable_num):
+            tmp_param_list = self.variable_list[i]
+            initial_parameter_half_list = tmp_param_list.GenRandomNeighbors(self.search_neighbor_num,self.assertions,self.iterating_parameter,self.variable_list)
+            initial_half_list.append(initial_parameter_half_list)
+
+        half_list = copy.deepcopy(initial_half_list)
+        while not self.CheckEndRequirements():
+            iteration_num += 1;
+            self.iterating_parameter.Iterate()
+            print('\nIteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_num, self.iterating_parameter.temporary_val, self.iterating_parameter.bound,self.iterating_parameter.temporary_val/self.iterating_parameter.bound))
+            full_list = []
+            print('\nIteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_num, self.iterating_parameter.temporary_val, self.iterating_parameter.bound,self.iterating_parameter.temporary_val/self.iterating_parameter.bound))
+            time_start = time.time();
+
+            loop_half_list = copy.deepcopy(half_list)
+            for i in range(len(loop_half_list)):
+                for j in range(len(loop_half_list[i])):
+                    tmp_var = loop_half_list[i][j].GenRandomNeighbors(1,self.assertions,self.iterating_parameter, self.variable_list)
+                    loop_half_list[i].extend(tmp_var)
+                full_list.append(loop_half_list[i])
+
+
+            cost_list = []
+            for i in range(2*self.search_neighbor_num):
+                tmp_conjoined_param_list = []
+                for j in range(self.variable_num):
+                    tmp_conjoined_param_list.append(full_list[j][i])
+                    self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_conjoined_param_list)
+                cost_inst = self.cost_function.get_cost()
+                if cost_inst == 0:
+                    cost_inst = math.inf
+                cost_list.append(cost_inst)
+
+            # print("FULL COST LIST", cost_list)
+            # print("SORTED COST LIST " , sorted(cost_list))
+            # print("/// Runtime: ", time.time() - time_start)
+
+
+            best_cost_index = cost_list.index(min(cost_list))
+            # print("BEST COST INDEX ", best_cost_index)
+            optimal_param_list = list()
+            for i in range(self.variable_num):
+                optimal_param_list.append(full_list[i][best_cost_index])
+
+            self.variable_list = copy.deepcopy(optimal_param_list)
+            self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
+            print("######BEST LOCAL Cost is ", self.cost_function.get_cost())
+            for i in range(self.variable_num):
+                if self.variable_list[i].type == 'composite':
+                    for children in self.variable_list[i].children_list:
+                        for child in children:
+
+                            print("#####", child.name, ":", child.temporary_val)
+                else:
+                    print("#####", self.variable_list[i].name, ":", self.variable_list[i].temporary_val)
+
+
+            indx_size = int(len(cost_list)/2)
+            lowest_cost_indices = sorted(range(len(cost_list)), key = lambda sub: cost_list[sub])[:indx_size]
+            print(lowest_cost_indices)
+            new_half = []
+
+            for i in range(self.variable_num):
+                tmp_list = []
+                for j in lowest_cost_indices:
+                    tmp_list.append(full_list[i][j])
+                new_half.append(tmp_list)
+
+
+            # fake_full_list = copy.deepcopy(full_list)
+            # for i in range(int(len(full_list)/2)):
+            #     min_in_fake_full_list_index = (cost_list.index(max(cost_list)))
+            #     for j in range(self.variable_num):
+            #         del fake_full_list[j][min_in_fake_full_list_index]
+            #     del cost_list[min_in_fake_full_list_index]
+            half_list = copy.deepcopy(new_half)
+
+            # cost_list = []
+            # for i in range(self.search_neighbor_num):
+            #     tmp_conjoined_param_list = []
+            #     for j in range(self.variable_num):
+            #         tmp_conjoined_param_list.append(new_half[j][i])
+            #         self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_conjoined_param_list)
+            #     cost_inst = self.cost_function.get_cost()
+            #     if cost_inst == 0:
+            #         cost_inst = math.inf
+            #     self.nums.add(cost_inst)
+            #     cost_list.append(cost_inst)
+
+            # print("FAKE SORTED FULL COST LIST", cost_list)
+            # print("FAKE SORTED FULL COST LIST", sorted(cost_list))
+            # print("Cost nums size", len(self.nums))
+
+
+            # new_half = copy.deepcopy(fake_full_list)
+            # half_list = copy.deepcopy(new_half)
+
+        self.min_cost = self.cost_function.get_cost()
+
+        return
+
+
 
     def Solve(self):
         iteration_number = 0
@@ -127,48 +217,39 @@ class SelfDefinedAlgorithm(Algorithm):
             tmp_variable = self.variable_list[i]
             init_val_list = tmp_variable.GenRandomNeighbors(self.search_neighbor_num, self.assertions, self.iterating_parameter, self.variable_list)
             half_list.append(init_val_list)
-            #[[Int Int][Bool Bool][Com Com][]]
-        # print("half list is ", half_list)
-        # print(len(half_list), len(half_list[0]))
+
         while not self.CheckEndRequirements():
-            print('\nIteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_number, self.iterating_parameter.temporary_val,
-                    self.iterating_parameter.bound,self.iterating_parameter.temporary_val/self.iterating_parameter.bound))
+            print('\nIteration number: {:2} Iterating Parameter Value: {:2} Bound: {:2} Finishing Percentage: {:2.2%}'.format(iteration_number, self.iterating_parameter.temporary_val, self.iterating_parameter.bound,self.iterating_parameter.temporary_val/self.iterating_parameter.bound))
+
             iteration_number += 1
             time_start = time.time()
             full_list = []
+
             for i in range(len(half_list)):
-                tmp_half_variable_list = half_list[i]
-                for j in range(len(tmp_half_variable_list)):
-                    tmp_variable = tmp_half_variable_list[j]
+                for j in range(len(half_list[i])):
+                    tmp_variable = half_list[i][j]
                     new_tmp_variable_list = tmp_variable.GenRandomNeighbors(1, self.assertions, self.iterating_parameter, self.variable_list)
-                    #[a, b, c] -> a, b, c
-                    # tmp_half_variable_list.append(new_tmp_variable_list.)
-                    tmp_half_variable_list.extend(new_tmp_variable_list)
-                full_list.append(tmp_half_variable_list)
-            #[[Int1 Int Int Int][Bool1 Bool Bool Bool][Com1 Com Com Com][]]
+                    half_list[i].extend(new_tmp_variable_list)
+
+
+                full_list.append(half_list[i])
+
             cost_full_list = []
-            # print(len(full_list), len(full_list[0]))
+
             for i in range(2*self.search_neighbor_num):
                 tmp_variable_list = [] #[Int1, Bool1, Com1]
                 for j in range(self.variable_num):
                     tmp_variable_list.append(full_list[j][i])
-                # print("tmp is ", tmp_variable_list)
-                # for i in range(self.variable_num):
-                #     if tmp_variable_list[i].type == 'composite':
-                #         for children in tmp_variable_list[i].children_list:
-                #             for child in children:
-                #                 print(child.name, child.temporary_val)
-                #     else:
-                #         print(tmp_variable_list[i].name, tmp_variable_list[i].temporary_val)
+
                 self.cost_function.construct_parameter_space(self.iterating_parameter, tmp_variable_list)
                 cost_val = self.cost_function.get_cost()
                 if cost_val == 0:
                     cost_val = math.inf
                 cost_full_list.append(cost_val)
-            print(cost_full_list)
+            print("FULL COST LIST: ", cost_full_list)
 
             minimum_index = cost_full_list.index(min(cost_full_list))
-            # print(minimum_index)
+
             new_half_list_index = list(np.argpartition(np.array(cost_full_list), self.search_neighbor_num))
             nxt_half_list = []
             nxt_self_list = []
@@ -179,27 +260,21 @@ class SelfDefinedAlgorithm(Algorithm):
                 nxt_self_list.append(full_list[i][minimum_index])
                 nxt_half_list.append(tmp_half_list)
             half_list = copy.deepcopy(nxt_half_list)
-            # print(nxt_self_list)
+
+
             self.variable_list = copy.deepcopy(nxt_self_list)
             print("/// Runtime: ", time.time() - time_start)
             self.cost_function.construct_parameter_space(self.iterating_parameter, self.variable_list)
-<<<<<<< HEAD
-            print("Cost is ", self.cost_function.get_cost())
-=======
->>>>>>> b3441b61e0647bddb6f8b4f1dcee0754d89b2a06
+            print("######BEST LOCAL Cost is ", self.cost_function.get_cost())
             for i in range(self.variable_num):
                 if self.variable_list[i].type == 'composite':
                     for children in self.variable_list[i].children_list:
                         for child in children:
-<<<<<<< HEAD
-                            print(child.name, child.temporary_val)
-                else:
-                    print(self.variable_list[i].name, self.variable_list[i].temporary_val)
-=======
+
                             print("#####", child.name, ":", child.temporary_val)
                 else:
                     print("#####", self.variable_list[i].name, ":", self.variable_list[i].temporary_val)
->>>>>>> b3441b61e0647bddb6f8b4f1dcee0754d89b2a06
+
         return
 
 

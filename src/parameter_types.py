@@ -26,6 +26,7 @@ import random
 import numpy as np
 import EvalSpace
 import math
+import time
 
 class Int_Parameter():
     def __init__(self, name, upper_bound, lower_bound, init_value = None):
@@ -73,7 +74,9 @@ class Int_Parameter():
         # print(weights)
         # print(assertions_set)
         # new_val = random.choices(assertions_set, weights=weights.tolist(), k=1)[0]
+        random.seed(time.time())
         new_val = random.choice(assertions_set)
+
         # print(new_val)
         # new_val = random.choice(assertions_set)
         new_variable = Int_Parameter(name, self.upper_bound, self.lower_bound, self.init_value)
