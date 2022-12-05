@@ -1,0 +1,1631 @@
+Typed Parameter Loading...
+Parameter Loaded Successfully
+All Loaded Parameters are:
+{'PCIe_ports': 'int', 'is_big_endian': 'bool', 'L3_Cache': 'composite', 'L2_Cache': 'composite', 'L1_Cache': 'composite', 'Core': 'composite'}
+Iterating Parameter Loading...
+Iterating Parameter Loaded Successfylly
+Cost Function Loading...
+Assertions Loading...
+Cost Function and Assertions Loaded Successfully
+Creating instance parameter computation environment
+Populating parameter dictionary for assertion and cost function resolution
+Running cost function
+Initial Local Optimal Cost is:  9065420156692160
+Verifying assertions
+Algorithm Initializing...
+Algorithm Initialized
+Self Defined Algorithm Selected
+Algorithm Starts...
+
+Iteration number:  1 Iterating Parameter Value: 2.0 Bound: 100.0 Finishing Percentage: 2.00%
+
+Iteration number:  1 Iterating Parameter Value: 2.0 Bound: 100.0 Finishing Percentage: 2.00%
+######BEST LOCAL Cost is  289680400386720
+##### PCIe_ports : 38
+##### is_big_endian : True
+##### L3_size : 1214
+##### L3_block_count : 30
+##### L2_size : 1437
+##### L2_block_count : 11
+##### L1_size : 680
+##### L1_block_count : 54
+##### FPU_Units : 32
+##### ALU_Units : 20
+[14, 1, 9, 13, 17, 0, 19, 12, 5, 7]
+
+Iteration number:  2 Iterating Parameter Value: 3.0 Bound: 100.0 Finishing Percentage: 3.00%
+
+Iteration number:  2 Iterating Parameter Value: 3.0 Bound: 100.0 Finishing Percentage: 3.00%
+######BEST LOCAL Cost is  197683600531680
+##### PCIe_ports : 53
+##### is_big_endian : True
+##### L3_size : 2332
+##### L3_block_count : 1
+##### L2_size : 710
+##### L2_block_count : 4
+##### L1_size : 468
+##### L1_block_count : 21
+##### FPU_Units : 9
+##### ALU_Units : 3
+[10, 16, 0, 14, 18, 15, 1, 13, 17, 2]
+
+Iteration number:  3 Iterating Parameter Value: 4.0 Bound: 100.0 Finishing Percentage: 4.00%
+
+Iteration number:  3 Iterating Parameter Value: 4.0 Bound: 100.0 Finishing Percentage: 4.00%
+######BEST LOCAL Cost is  122102500635920
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 896
+##### L3_block_count : 3
+##### L2_size : 1290
+##### L2_block_count : 35
+##### L1_size : 236
+##### L1_block_count : 7
+##### FPU_Units : 26
+##### ALU_Units : 22
+[16, 15, 0, 1, 2, 3, 4, 5, 6, 17]
+
+Iteration number:  4 Iterating Parameter Value: 5.0 Bound: 100.0 Finishing Percentage: 5.00%
+
+Iteration number:  4 Iterating Parameter Value: 5.0 Bound: 100.0 Finishing Percentage: 5.00%
+######BEST LOCAL Cost is  122102500635920
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 896
+##### L3_block_count : 3
+##### L2_size : 1290
+##### L2_block_count : 35
+##### L1_size : 236
+##### L1_block_count : 7
+##### FPU_Units : 26
+##### ALU_Units : 22
+[0, 1, 2, 11, 3, 4, 5, 6, 13, 7]
+
+Iteration number:  5 Iterating Parameter Value: 6.0 Bound: 100.0 Finishing Percentage: 6.00%
+
+Iteration number:  5 Iterating Parameter Value: 6.0 Bound: 100.0 Finishing Percentage: 6.00%
+######BEST LOCAL Cost is  122102500635920
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 896
+##### L3_block_count : 3
+##### L2_size : 1290
+##### L2_block_count : 35
+##### L1_size : 236
+##### L1_block_count : 7
+##### FPU_Units : 26
+##### ALU_Units : 22
+[0, 1, 12, 18, 2, 3, 4, 5, 6, 7]
+
+Iteration number:  6 Iterating Parameter Value: 7.0 Bound: 100.0 Finishing Percentage: 7.00%
+
+Iteration number:  6 Iterating Parameter Value: 7.0 Bound: 100.0 Finishing Percentage: 7.00%
+######BEST LOCAL Cost is  122102500635920
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 896
+##### L3_block_count : 3
+##### L2_size : 1290
+##### L2_block_count : 35
+##### L1_size : 236
+##### L1_block_count : 7
+##### FPU_Units : 26
+##### ALU_Units : 22
+[0, 11, 1, 2, 3, 4, 18, 5, 13, 6]
+
+Iteration number:  7 Iterating Parameter Value: 8.0 Bound: 100.0 Finishing Percentage: 8.00%
+
+Iteration number:  7 Iterating Parameter Value: 8.0 Bound: 100.0 Finishing Percentage: 8.00%
+######BEST LOCAL Cost is  52417600543840
+##### PCIe_ports : 54
+##### is_big_endian : True
+##### L3_size : 1584
+##### L3_block_count : 33
+##### L2_size : 316
+##### L2_block_count : 57
+##### L1_size : 170
+##### L1_block_count : 50
+##### FPU_Units : 22
+##### ALU_Units : 4
+[10, 0, 1, 17, 2, 3, 4, 5, 15, 12]
+
+Iteration number:  8 Iterating Parameter Value: 9.0 Bound: 100.0 Finishing Percentage: 9.00%
+
+Iteration number:  8 Iterating Parameter Value: 9.0 Bound: 100.0 Finishing Percentage: 9.00%
+######BEST LOCAL Cost is  38007225285600
+##### PCIe_ports : 28
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 37
+##### L2_size : 480
+##### L2_block_count : 43
+##### L1_size : 162
+##### L1_block_count : 7
+##### FPU_Units : 24
+##### ALU_Units : 22
+[10, 0, 19, 18, 1, 2, 11, 3, 4, 5]
+
+Iteration number:  9 Iterating Parameter Value: 10.0 Bound: 100.0 Finishing Percentage: 10.00%
+
+Iteration number:  9 Iterating Parameter Value: 10.0 Bound: 100.0 Finishing Percentage: 10.00%
+######BEST LOCAL Cost is  38007225285600
+##### PCIe_ports : 28
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 37
+##### L2_size : 480
+##### L2_block_count : 43
+##### L1_size : 162
+##### L1_block_count : 7
+##### FPU_Units : 24
+##### ALU_Units : 22
+[0, 11, 1, 2, 3, 19, 4, 5, 6, 7]
+
+Iteration number: 10 Iterating Parameter Value: 11.0 Bound: 100.0 Finishing Percentage: 11.00%
+
+Iteration number: 10 Iterating Parameter Value: 11.0 Bound: 100.0 Finishing Percentage: 11.00%
+######BEST LOCAL Cost is  38007225285600
+##### PCIe_ports : 28
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 37
+##### L2_size : 480
+##### L2_block_count : 43
+##### L1_size : 162
+##### L1_block_count : 7
+##### FPU_Units : 24
+##### ALU_Units : 22
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 11 Iterating Parameter Value: 12.0 Bound: 100.0 Finishing Percentage: 12.00%
+
+Iteration number: 11 Iterating Parameter Value: 12.0 Bound: 100.0 Finishing Percentage: 12.00%
+######BEST LOCAL Cost is  38007225285600
+##### PCIe_ports : 28
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 37
+##### L2_size : 480
+##### L2_block_count : 43
+##### L1_size : 162
+##### L1_block_count : 7
+##### FPU_Units : 24
+##### ALU_Units : 22
+[0, 1, 2, 16, 3, 4, 17, 5, 6, 7]
+
+Iteration number: 12 Iterating Parameter Value: 13.0 Bound: 100.0 Finishing Percentage: 13.00%
+
+Iteration number: 12 Iterating Parameter Value: 13.0 Bound: 100.0 Finishing Percentage: 13.00%
+######BEST LOCAL Cost is  38007225285600
+##### PCIe_ports : 28
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 37
+##### L2_size : 480
+##### L2_block_count : 43
+##### L1_size : 162
+##### L1_block_count : 7
+##### FPU_Units : 24
+##### ALU_Units : 22
+[0, 1, 2, 3, 4, 5, 6, 19, 7, 16]
+
+Iteration number: 13 Iterating Parameter Value: 14.0 Bound: 100.0 Finishing Percentage: 14.00%
+
+Iteration number: 13 Iterating Parameter Value: 14.0 Bound: 100.0 Finishing Percentage: 14.00%
+######BEST LOCAL Cost is  38007225285600
+##### PCIe_ports : 28
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 37
+##### L2_size : 480
+##### L2_block_count : 43
+##### L1_size : 162
+##### L1_block_count : 7
+##### FPU_Units : 24
+##### ALU_Units : 22
+[0, 1, 2, 3, 4, 5, 6, 16, 7, 12]
+
+Iteration number: 14 Iterating Parameter Value: 15.0 Bound: 100.0 Finishing Percentage: 15.00%
+
+Iteration number: 14 Iterating Parameter Value: 15.0 Bound: 100.0 Finishing Percentage: 15.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[14, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 15 Iterating Parameter Value: 16.0 Bound: 100.0 Finishing Percentage: 16.00%
+
+Iteration number: 15 Iterating Parameter Value: 16.0 Bound: 100.0 Finishing Percentage: 16.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 11, 6, 7, 8]
+
+Iteration number: 16 Iterating Parameter Value: 17.0 Bound: 100.0 Finishing Percentage: 17.00%
+
+Iteration number: 16 Iterating Parameter Value: 17.0 Bound: 100.0 Finishing Percentage: 17.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 18, 1, 2, 16, 3, 4, 5, 6, 7]
+
+Iteration number: 17 Iterating Parameter Value: 18.0 Bound: 100.0 Finishing Percentage: 18.00%
+
+Iteration number: 17 Iterating Parameter Value: 18.0 Bound: 100.0 Finishing Percentage: 18.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 18 Iterating Parameter Value: 19.0 Bound: 100.0 Finishing Percentage: 19.00%
+
+Iteration number: 18 Iterating Parameter Value: 19.0 Bound: 100.0 Finishing Percentage: 19.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 19 Iterating Parameter Value: 20.0 Bound: 100.0 Finishing Percentage: 20.00%
+
+Iteration number: 19 Iterating Parameter Value: 20.0 Bound: 100.0 Finishing Percentage: 20.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 15, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 20 Iterating Parameter Value: 21.0 Bound: 100.0 Finishing Percentage: 21.00%
+
+Iteration number: 20 Iterating Parameter Value: 21.0 Bound: 100.0 Finishing Percentage: 21.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 21 Iterating Parameter Value: 22.0 Bound: 100.0 Finishing Percentage: 22.00%
+
+Iteration number: 21 Iterating Parameter Value: 22.0 Bound: 100.0 Finishing Percentage: 22.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 13, 6, 7, 8]
+
+Iteration number: 22 Iterating Parameter Value: 23.0 Bound: 100.0 Finishing Percentage: 23.00%
+
+Iteration number: 22 Iterating Parameter Value: 23.0 Bound: 100.0 Finishing Percentage: 23.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 11, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 23 Iterating Parameter Value: 24.0 Bound: 100.0 Finishing Percentage: 24.00%
+
+Iteration number: 23 Iterating Parameter Value: 24.0 Bound: 100.0 Finishing Percentage: 24.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 24 Iterating Parameter Value: 25.0 Bound: 100.0 Finishing Percentage: 25.00%
+
+Iteration number: 24 Iterating Parameter Value: 25.0 Bound: 100.0 Finishing Percentage: 25.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 16, 5, 6, 7, 8]
+
+Iteration number: 25 Iterating Parameter Value: 26.0 Bound: 100.0 Finishing Percentage: 26.00%
+
+Iteration number: 25 Iterating Parameter Value: 26.0 Bound: 100.0 Finishing Percentage: 26.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 26 Iterating Parameter Value: 27.0 Bound: 100.0 Finishing Percentage: 27.00%
+
+Iteration number: 26 Iterating Parameter Value: 27.0 Bound: 100.0 Finishing Percentage: 27.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 16, 6, 7, 8]
+
+Iteration number: 27 Iterating Parameter Value: 28.0 Bound: 100.0 Finishing Percentage: 28.00%
+
+Iteration number: 27 Iterating Parameter Value: 28.0 Bound: 100.0 Finishing Percentage: 28.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 28 Iterating Parameter Value: 29.0 Bound: 100.0 Finishing Percentage: 29.00%
+
+Iteration number: 28 Iterating Parameter Value: 29.0 Bound: 100.0 Finishing Percentage: 29.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 29 Iterating Parameter Value: 30.0 Bound: 100.0 Finishing Percentage: 30.00%
+
+Iteration number: 29 Iterating Parameter Value: 30.0 Bound: 100.0 Finishing Percentage: 30.00%
+######BEST LOCAL Cost is  32148900601040
+##### PCIe_ports : 60
+##### is_big_endian : True
+##### L3_size : 564
+##### L3_block_count : 11
+##### L2_size : 508
+##### L2_block_count : 55
+##### L1_size : 172
+##### L1_block_count : 9
+##### FPU_Units : 5
+##### ALU_Units : 3
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 30 Iterating Parameter Value: 31.0 Bound: 100.0 Finishing Percentage: 31.00%
+
+Iteration number: 30 Iterating Parameter Value: 31.0 Bound: 100.0 Finishing Percentage: 31.00%
+######BEST LOCAL Cost is  28249225139120
+##### PCIe_ports : 13
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 52
+##### L2_size : 238
+##### L2_block_count : 29
+##### L1_size : 198
+##### L1_block_count : 57
+##### FPU_Units : 54
+##### ALU_Units : 6
+[18, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 31 Iterating Parameter Value: 32.0 Bound: 100.0 Finishing Percentage: 32.00%
+
+Iteration number: 31 Iterating Parameter Value: 32.0 Bound: 100.0 Finishing Percentage: 32.00%
+######BEST LOCAL Cost is  28249225139120
+##### PCIe_ports : 13
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 52
+##### L2_size : 238
+##### L2_block_count : 29
+##### L1_size : 198
+##### L1_block_count : 57
+##### FPU_Units : 54
+##### ALU_Units : 6
+[0, 1, 2, 3, 4, 5, 6, 17, 7, 8]
+
+Iteration number: 32 Iterating Parameter Value: 33.0 Bound: 100.0 Finishing Percentage: 33.00%
+
+Iteration number: 32 Iterating Parameter Value: 33.0 Bound: 100.0 Finishing Percentage: 33.00%
+######BEST LOCAL Cost is  28249225139120
+##### PCIe_ports : 13
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 52
+##### L2_size : 238
+##### L2_block_count : 29
+##### L1_size : 198
+##### L1_block_count : 57
+##### FPU_Units : 54
+##### ALU_Units : 6
+[0, 12, 1, 2, 3, 10, 4, 5, 6, 7]
+
+Iteration number: 33 Iterating Parameter Value: 34.0 Bound: 100.0 Finishing Percentage: 34.00%
+
+Iteration number: 33 Iterating Parameter Value: 34.0 Bound: 100.0 Finishing Percentage: 34.00%
+######BEST LOCAL Cost is  28249225139120
+##### PCIe_ports : 13
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 52
+##### L2_size : 238
+##### L2_block_count : 29
+##### L1_size : 198
+##### L1_block_count : 57
+##### FPU_Units : 54
+##### ALU_Units : 6
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 34 Iterating Parameter Value: 35.0 Bound: 100.0 Finishing Percentage: 35.00%
+
+Iteration number: 34 Iterating Parameter Value: 35.0 Bound: 100.0 Finishing Percentage: 35.00%
+######BEST LOCAL Cost is  28249225139120
+##### PCIe_ports : 13
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 52
+##### L2_size : 238
+##### L2_block_count : 29
+##### L1_size : 198
+##### L1_block_count : 57
+##### FPU_Units : 54
+##### ALU_Units : 6
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 35 Iterating Parameter Value: 36.0 Bound: 100.0 Finishing Percentage: 36.00%
+
+Iteration number: 35 Iterating Parameter Value: 36.0 Bound: 100.0 Finishing Percentage: 36.00%
+######BEST LOCAL Cost is  28249225139120
+##### PCIe_ports : 13
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 52
+##### L2_size : 238
+##### L2_block_count : 29
+##### L1_size : 198
+##### L1_block_count : 57
+##### FPU_Units : 54
+##### ALU_Units : 6
+[0, 1, 2, 3, 4, 5, 6, 18, 7, 8]
+
+Iteration number: 36 Iterating Parameter Value: 37.0 Bound: 100.0 Finishing Percentage: 37.00%
+
+Iteration number: 36 Iterating Parameter Value: 37.0 Bound: 100.0 Finishing Percentage: 37.00%
+######BEST LOCAL Cost is  28249225139120
+##### PCIe_ports : 13
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 52
+##### L2_size : 238
+##### L2_block_count : 29
+##### L1_size : 198
+##### L1_block_count : 57
+##### FPU_Units : 54
+##### ALU_Units : 6
+[0, 1, 2, 13, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 37 Iterating Parameter Value: 38.0 Bound: 100.0 Finishing Percentage: 38.00%
+
+Iteration number: 37 Iterating Parameter Value: 38.0 Bound: 100.0 Finishing Percentage: 38.00%
+######BEST LOCAL Cost is  28249225139120
+##### PCIe_ports : 13
+##### is_big_endian : True
+##### L3_size : 858
+##### L3_block_count : 52
+##### L2_size : 238
+##### L2_block_count : 29
+##### L1_size : 198
+##### L1_block_count : 57
+##### FPU_Units : 54
+##### ALU_Units : 6
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 38 Iterating Parameter Value: 39.0 Bound: 100.0 Finishing Percentage: 39.00%
+
+Iteration number: 38 Iterating Parameter Value: 39.0 Bound: 100.0 Finishing Percentage: 39.00%
+######BEST LOCAL Cost is  20205025615600
+##### PCIe_ports : 61
+##### is_big_endian : True
+##### L3_size : 398
+##### L3_block_count : 11
+##### L2_size : 268
+##### L2_block_count : 57
+##### L1_size : 216
+##### L1_block_count : 29
+##### FPU_Units : 6
+##### ALU_Units : 58
+[14, 0, 1, 2, 3, 4, 5, 12, 6, 7]
+
+Iteration number: 39 Iterating Parameter Value: 40.0 Bound: 100.0 Finishing Percentage: 40.00%
+
+Iteration number: 39 Iterating Parameter Value: 40.0 Bound: 100.0 Finishing Percentage: 40.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[17, 0, 1, 2, 15, 3, 4, 5, 6, 7]
+
+Iteration number: 40 Iterating Parameter Value: 41.0 Bound: 100.0 Finishing Percentage: 41.00%
+
+Iteration number: 40 Iterating Parameter Value: 41.0 Bound: 100.0 Finishing Percentage: 41.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 14, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 41 Iterating Parameter Value: 42.0 Bound: 100.0 Finishing Percentage: 42.00%
+
+Iteration number: 41 Iterating Parameter Value: 42.0 Bound: 100.0 Finishing Percentage: 42.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 42 Iterating Parameter Value: 43.0 Bound: 100.0 Finishing Percentage: 43.00%
+
+Iteration number: 42 Iterating Parameter Value: 43.0 Bound: 100.0 Finishing Percentage: 43.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 43 Iterating Parameter Value: 44.0 Bound: 100.0 Finishing Percentage: 44.00%
+
+Iteration number: 43 Iterating Parameter Value: 44.0 Bound: 100.0 Finishing Percentage: 44.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 11, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 44 Iterating Parameter Value: 45.0 Bound: 100.0 Finishing Percentage: 45.00%
+
+Iteration number: 44 Iterating Parameter Value: 45.0 Bound: 100.0 Finishing Percentage: 45.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 45 Iterating Parameter Value: 46.0 Bound: 100.0 Finishing Percentage: 46.00%
+
+Iteration number: 45 Iterating Parameter Value: 46.0 Bound: 100.0 Finishing Percentage: 46.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 17, 19, 3, 4, 5, 6, 7]
+
+Iteration number: 46 Iterating Parameter Value: 47.0 Bound: 100.0 Finishing Percentage: 47.00%
+
+Iteration number: 46 Iterating Parameter Value: 47.0 Bound: 100.0 Finishing Percentage: 47.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 10, 8]
+
+Iteration number: 47 Iterating Parameter Value: 48.0 Bound: 100.0 Finishing Percentage: 48.00%
+
+Iteration number: 47 Iterating Parameter Value: 48.0 Bound: 100.0 Finishing Percentage: 48.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 19, 1, 10, 2, 3, 4, 5, 15, 6]
+
+Iteration number: 48 Iterating Parameter Value: 49.0 Bound: 100.0 Finishing Percentage: 49.00%
+
+Iteration number: 48 Iterating Parameter Value: 49.0 Bound: 100.0 Finishing Percentage: 49.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 49 Iterating Parameter Value: 50.0 Bound: 100.0 Finishing Percentage: 50.00%
+
+Iteration number: 49 Iterating Parameter Value: 50.0 Bound: 100.0 Finishing Percentage: 50.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 18, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 50 Iterating Parameter Value: 51.0 Bound: 100.0 Finishing Percentage: 51.00%
+
+Iteration number: 50 Iterating Parameter Value: 51.0 Bound: 100.0 Finishing Percentage: 51.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 13, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 51 Iterating Parameter Value: 52.0 Bound: 100.0 Finishing Percentage: 52.00%
+
+Iteration number: 51 Iterating Parameter Value: 52.0 Bound: 100.0 Finishing Percentage: 52.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 18, 6, 7, 8]
+
+Iteration number: 52 Iterating Parameter Value: 53.0 Bound: 100.0 Finishing Percentage: 53.00%
+
+Iteration number: 52 Iterating Parameter Value: 53.0 Bound: 100.0 Finishing Percentage: 53.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 53 Iterating Parameter Value: 54.0 Bound: 100.0 Finishing Percentage: 54.00%
+
+Iteration number: 53 Iterating Parameter Value: 54.0 Bound: 100.0 Finishing Percentage: 54.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 12, 1, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 54 Iterating Parameter Value: 55.0 Bound: 100.0 Finishing Percentage: 55.00%
+
+Iteration number: 54 Iterating Parameter Value: 55.0 Bound: 100.0 Finishing Percentage: 55.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 55 Iterating Parameter Value: 56.0 Bound: 100.0 Finishing Percentage: 56.00%
+
+Iteration number: 55 Iterating Parameter Value: 56.0 Bound: 100.0 Finishing Percentage: 56.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 56 Iterating Parameter Value: 57.0 Bound: 100.0 Finishing Percentage: 57.00%
+
+Iteration number: 56 Iterating Parameter Value: 57.0 Bound: 100.0 Finishing Percentage: 57.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 57 Iterating Parameter Value: 58.0 Bound: 100.0 Finishing Percentage: 58.00%
+
+Iteration number: 57 Iterating Parameter Value: 58.0 Bound: 100.0 Finishing Percentage: 58.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 58 Iterating Parameter Value: 59.0 Bound: 100.0 Finishing Percentage: 59.00%
+
+Iteration number: 58 Iterating Parameter Value: 59.0 Bound: 100.0 Finishing Percentage: 59.00%
+######BEST LOCAL Cost is  13690000594640
+##### PCIe_ports : 59
+##### is_big_endian : True
+##### L3_size : 444
+##### L3_block_count : 36
+##### L2_size : 238
+##### L2_block_count : 6
+##### L1_size : 140
+##### L1_block_count : 37
+##### FPU_Units : 2
+##### ALU_Units : 54
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 59 Iterating Parameter Value: 60.0 Bound: 100.0 Finishing Percentage: 60.00%
+
+Iteration number: 59 Iterating Parameter Value: 60.0 Bound: 100.0 Finishing Percentage: 60.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[12, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 60 Iterating Parameter Value: 61.0 Bound: 100.0 Finishing Percentage: 61.00%
+
+Iteration number: 60 Iterating Parameter Value: 61.0 Bound: 100.0 Finishing Percentage: 61.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 61 Iterating Parameter Value: 62.0 Bound: 100.0 Finishing Percentage: 62.00%
+
+Iteration number: 61 Iterating Parameter Value: 62.0 Bound: 100.0 Finishing Percentage: 62.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 62 Iterating Parameter Value: 63.0 Bound: 100.0 Finishing Percentage: 63.00%
+
+Iteration number: 62 Iterating Parameter Value: 63.0 Bound: 100.0 Finishing Percentage: 63.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 63 Iterating Parameter Value: 64.0 Bound: 100.0 Finishing Percentage: 64.00%
+
+Iteration number: 63 Iterating Parameter Value: 64.0 Bound: 100.0 Finishing Percentage: 64.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 13, 11, 6, 7]
+
+Iteration number: 64 Iterating Parameter Value: 65.0 Bound: 100.0 Finishing Percentage: 65.00%
+
+Iteration number: 64 Iterating Parameter Value: 65.0 Bound: 100.0 Finishing Percentage: 65.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 18, 7, 8]
+
+Iteration number: 65 Iterating Parameter Value: 66.0 Bound: 100.0 Finishing Percentage: 66.00%
+
+Iteration number: 65 Iterating Parameter Value: 66.0 Bound: 100.0 Finishing Percentage: 66.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 66 Iterating Parameter Value: 67.0 Bound: 100.0 Finishing Percentage: 67.00%
+
+Iteration number: 66 Iterating Parameter Value: 67.0 Bound: 100.0 Finishing Percentage: 67.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 67 Iterating Parameter Value: 68.0 Bound: 100.0 Finishing Percentage: 68.00%
+
+Iteration number: 67 Iterating Parameter Value: 68.0 Bound: 100.0 Finishing Percentage: 68.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 15, 5, 6, 7, 8]
+
+Iteration number: 68 Iterating Parameter Value: 69.0 Bound: 100.0 Finishing Percentage: 69.00%
+
+Iteration number: 68 Iterating Parameter Value: 69.0 Bound: 100.0 Finishing Percentage: 69.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 69 Iterating Parameter Value: 70.0 Bound: 100.0 Finishing Percentage: 70.00%
+
+Iteration number: 69 Iterating Parameter Value: 70.0 Bound: 100.0 Finishing Percentage: 70.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 70 Iterating Parameter Value: 71.0 Bound: 100.0 Finishing Percentage: 71.00%
+
+Iteration number: 70 Iterating Parameter Value: 71.0 Bound: 100.0 Finishing Percentage: 71.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 16, 5, 6, 7, 8]
+
+Iteration number: 71 Iterating Parameter Value: 72.0 Bound: 100.0 Finishing Percentage: 72.00%
+
+Iteration number: 71 Iterating Parameter Value: 72.0 Bound: 100.0 Finishing Percentage: 72.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 72 Iterating Parameter Value: 73.0 Bound: 100.0 Finishing Percentage: 73.00%
+
+Iteration number: 72 Iterating Parameter Value: 73.0 Bound: 100.0 Finishing Percentage: 73.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 73 Iterating Parameter Value: 74.0 Bound: 100.0 Finishing Percentage: 74.00%
+
+Iteration number: 73 Iterating Parameter Value: 74.0 Bound: 100.0 Finishing Percentage: 74.00%
+######BEST LOCAL Cost is  11868025632080
+##### PCIe_ports : 63
+##### is_big_endian : True
+##### L3_size : 522
+##### L3_block_count : 52
+##### L2_size : 148
+##### L2_block_count : 11
+##### L1_size : 140
+##### L1_block_count : 2
+##### FPU_Units : 1
+##### ALU_Units : 24
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 74 Iterating Parameter Value: 75.0 Bound: 100.0 Finishing Percentage: 75.00%
+
+Iteration number: 74 Iterating Parameter Value: 75.0 Bound: 100.0 Finishing Percentage: 75.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[12, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 75 Iterating Parameter Value: 76.0 Bound: 100.0 Finishing Percentage: 76.00%
+
+Iteration number: 75 Iterating Parameter Value: 76.0 Bound: 100.0 Finishing Percentage: 76.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 76 Iterating Parameter Value: 77.0 Bound: 100.0 Finishing Percentage: 77.00%
+
+Iteration number: 76 Iterating Parameter Value: 77.0 Bound: 100.0 Finishing Percentage: 77.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 77 Iterating Parameter Value: 78.0 Bound: 100.0 Finishing Percentage: 78.00%
+
+Iteration number: 77 Iterating Parameter Value: 78.0 Bound: 100.0 Finishing Percentage: 78.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 11, 7, 8]
+
+Iteration number: 78 Iterating Parameter Value: 79.0 Bound: 100.0 Finishing Percentage: 79.00%
+
+Iteration number: 78 Iterating Parameter Value: 79.0 Bound: 100.0 Finishing Percentage: 79.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 79 Iterating Parameter Value: 80.0 Bound: 100.0 Finishing Percentage: 80.00%
+
+Iteration number: 79 Iterating Parameter Value: 80.0 Bound: 100.0 Finishing Percentage: 80.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 80 Iterating Parameter Value: 81.0 Bound: 100.0 Finishing Percentage: 81.00%
+
+Iteration number: 80 Iterating Parameter Value: 81.0 Bound: 100.0 Finishing Percentage: 81.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 81 Iterating Parameter Value: 82.0 Bound: 100.0 Finishing Percentage: 82.00%
+
+Iteration number: 81 Iterating Parameter Value: 82.0 Bound: 100.0 Finishing Percentage: 82.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 82 Iterating Parameter Value: 83.0 Bound: 100.0 Finishing Percentage: 83.00%
+
+Iteration number: 82 Iterating Parameter Value: 83.0 Bound: 100.0 Finishing Percentage: 83.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 83 Iterating Parameter Value: 84.0 Bound: 100.0 Finishing Percentage: 84.00%
+
+Iteration number: 83 Iterating Parameter Value: 84.0 Bound: 100.0 Finishing Percentage: 84.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 84 Iterating Parameter Value: 85.0 Bound: 100.0 Finishing Percentage: 85.00%
+
+Iteration number: 84 Iterating Parameter Value: 85.0 Bound: 100.0 Finishing Percentage: 85.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 85 Iterating Parameter Value: 86.0 Bound: 100.0 Finishing Percentage: 86.00%
+
+Iteration number: 85 Iterating Parameter Value: 86.0 Bound: 100.0 Finishing Percentage: 86.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 18, 6, 15, 7]
+
+Iteration number: 86 Iterating Parameter Value: 87.0 Bound: 100.0 Finishing Percentage: 87.00%
+
+Iteration number: 86 Iterating Parameter Value: 87.0 Bound: 100.0 Finishing Percentage: 87.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 87 Iterating Parameter Value: 88.0 Bound: 100.0 Finishing Percentage: 88.00%
+
+Iteration number: 87 Iterating Parameter Value: 88.0 Bound: 100.0 Finishing Percentage: 88.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 88 Iterating Parameter Value: 89.0 Bound: 100.0 Finishing Percentage: 89.00%
+
+Iteration number: 88 Iterating Parameter Value: 89.0 Bound: 100.0 Finishing Percentage: 89.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 14, 2, 3, 4, 5, 6, 7, 8]
+
+Iteration number: 89 Iterating Parameter Value: 90.0 Bound: 100.0 Finishing Percentage: 90.00%
+
+Iteration number: 89 Iterating Parameter Value: 90.0 Bound: 100.0 Finishing Percentage: 90.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 90 Iterating Parameter Value: 91.0 Bound: 100.0 Finishing Percentage: 91.00%
+
+Iteration number: 90 Iterating Parameter Value: 91.0 Bound: 100.0 Finishing Percentage: 91.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 14, 7, 8]
+
+Iteration number: 91 Iterating Parameter Value: 92.0 Bound: 100.0 Finishing Percentage: 92.00%
+
+Iteration number: 91 Iterating Parameter Value: 92.0 Bound: 100.0 Finishing Percentage: 92.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 92 Iterating Parameter Value: 93.0 Bound: 100.0 Finishing Percentage: 93.00%
+
+Iteration number: 92 Iterating Parameter Value: 93.0 Bound: 100.0 Finishing Percentage: 93.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 93 Iterating Parameter Value: 94.0 Bound: 100.0 Finishing Percentage: 94.00%
+
+Iteration number: 93 Iterating Parameter Value: 94.0 Bound: 100.0 Finishing Percentage: 94.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 94 Iterating Parameter Value: 95.0 Bound: 100.0 Finishing Percentage: 95.00%
+
+Iteration number: 94 Iterating Parameter Value: 95.0 Bound: 100.0 Finishing Percentage: 95.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 95 Iterating Parameter Value: 96.0 Bound: 100.0 Finishing Percentage: 96.00%
+
+Iteration number: 95 Iterating Parameter Value: 96.0 Bound: 100.0 Finishing Percentage: 96.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 96 Iterating Parameter Value: 97.0 Bound: 100.0 Finishing Percentage: 97.00%
+
+Iteration number: 96 Iterating Parameter Value: 97.0 Bound: 100.0 Finishing Percentage: 97.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 97 Iterating Parameter Value: 98.0 Bound: 100.0 Finishing Percentage: 98.00%
+
+Iteration number: 97 Iterating Parameter Value: 98.0 Bound: 100.0 Finishing Percentage: 98.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 98 Iterating Parameter Value: 99.0 Bound: 100.0 Finishing Percentage: 99.00%
+
+Iteration number: 98 Iterating Parameter Value: 99.0 Bound: 100.0 Finishing Percentage: 99.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 99 Iterating Parameter Value: 100.0 Bound: 100.0 Finishing Percentage: 100.00%
+
+Iteration number: 99 Iterating Parameter Value: 100.0 Bound: 100.0 Finishing Percentage: 100.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Iteration number: 100 Iterating Parameter Value: 101.0 Bound: 100.0 Finishing Percentage: 101.00%
+
+Iteration number: 100 Iterating Parameter Value: 101.0 Bound: 100.0 Finishing Percentage: 101.00%
+######BEST LOCAL Cost is  10144225515920
+##### PCIe_ports : 51
+##### is_big_endian : True
+##### L3_size : 402
+##### L3_block_count : 18
+##### L2_size : 160
+##### L2_block_count : 11
+##### L1_size : 138
+##### L1_block_count : 13
+##### FPU_Units : 19
+##### ALU_Units : 36
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Algorithm Ends
+#############Final Cost:  10144225515920
+///////////////Parameter Values//////////
+###  is_big_endian  :  True
+###  L1_block_count  :  13
+###  L3_size  :  402
+###  ALU_Units  :  36
+###  L2_block_count  :  11
+###  L3_block_count  :  18
+###  L1_size  :  138
+###  PCIe_ports  :  51
+###  L2_size  :  160
+###  FPU_Units  :  19

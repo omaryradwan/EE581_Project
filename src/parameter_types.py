@@ -73,9 +73,9 @@ class Int_Parameter():
         weights = vec_len_arr(weight_arr)
         # print(weights)
         # print(assertions_set)
-        # new_val = random.choices(assertions_set, weights=weights.tolist(), k=1)[0]
-        random.seed(time.time())
-        new_val = random.choice(assertions_set)
+        new_val = random.choices(assertions_set, weights=weights.tolist(), k=1)[0]
+        # random.seed(time.time())
+        # new_val = random.choice(assertions_set)
 
         # print(new_val)
         # new_val = random.choice(assertions_set)
